@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #FDF8F0; /* Warm, inviting off-white */
             color: #4A3B31; /* Deep, earthy brown for text */
-            overflow: hidden; /* Prevent body scrolling */
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll, allow vertical for dashboard */
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
         .african-pattern-bg {
@@ -32,15 +33,16 @@
         }
 
         .top-bar {
-            background-color: rgba(212, 163, 115, 0.8); /* Semi-transparent Ochre */
+            background-color: rgba(212, 163, 115, 0.9); /* Semi-transparent Ochre */
             backdrop-filter: blur(5px);
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: relative; 
-            z-index: 1001; 
+            position: sticky; /* Make top bar sticky */
+            top: 0;
+            z-index: 1001;
         }
 
         .logo {
@@ -75,9 +77,15 @@
             background-color: #f0e6d5;
         }
 
+        .main-content-area { /* Wrapper for carousel and icon hub */
+            display: block; /* Initially visible */
+            flex-grow: 1; /* Allows content to take up available space */
+            display: flex;
+            flex-direction: column;
+        }
 
         .hero-carousel-container {
-            height: 50vh; 
+            height: 55vh; /* Adjust height as needed */
             width: 100%;
             position: relative;
         }
@@ -126,16 +134,17 @@
             text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
         }
         .cta-button {
-            background-color: #E76F51; 
+            background-color: #E76F51; /* Vibrant accent */
             color: white;
             padding: 12px 28px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
-            margin: 0 8px;
+            margin: 5px; /* Added margin for better spacing on small screens */
             font-size: 1rem;
             border: 2px solid transparent;
+            display: inline-block; /* Ensure buttons behave well in flex layouts */
         }
         .cta-button:hover {
             background-color: #D95A3F;
@@ -156,7 +165,8 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background-color: #F0EFEB; 
+            background-color: #F0EFEB; /* Light stone color, slightly different from body */
+            min-height: 35vh; /* Ensure it takes up remaining space */
         }
         .icon-grid {
             display: grid;
@@ -167,8 +177,8 @@
         }
         .icon-item {
             background-color: #FFFFFF;
-            border: 1px solid #D7CCC8; 
-            border-radius: 16px; 
+            border: 1px solid #D7CCC8; /* Light brown border */
+            border-radius: 16px; /* More rounded */
             padding: 20px 15px;
             text-align: center;
             cursor: pointer;
@@ -178,22 +188,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 140px; 
+            min-height: 140px; /* Ensure consistent height */
         }
         .icon-item:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 12px 20px rgba(0,0,0,0.1);
         }
-        .icon-item i { 
-            font-size: 2.2rem; 
+        .icon-item i { /* Font Awesome icons */
+            font-size: 2.2rem; /* Slightly smaller for balance */
             margin-bottom: 12px;
-            color: #E76F51; 
+            color: #E76F51; /* Consistent accent color */
         }
-        .icon-item-svg svg { 
+        .icon-item-svg svg { /* For custom SVGs */
              width: 38px;
              height: 38px;
              margin-bottom: 12px;
-             fill: #E76F51; 
+             fill: #E76F51; /* Consistent accent color */
         }
         .icon-item span {
             font-size: 0.9rem;
@@ -202,33 +212,32 @@
         }
         /* Modal styles */
         .modal {
-            display: none; 
+            display: none; /* Hidden by default */
             position: fixed;
-            z-index: 1000; 
+            z-index: 1050; /* Ensure modals are above other content, including top bar */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.6); 
-            display: flex; 
+            overflow: auto; /* Enable scroll if content overflows */
+            background-color: rgba(0,0,0,0.7); /* Dim background */
             align-items: center;
             justify-content: center;
-            padding: 20px; 
+            padding: 20px; /* Padding for smaller screens */
         }
 
         .modal-content {
-            background-color: #FEFDFB; 
-            margin: auto; 
+            background-color: #FEFDFB; /* Light cream background for modal */
+            margin: auto; /* Center modal horizontally */
             padding: 25px 30px;
-            border: 2px solid #D4A373; 
-            border-radius: 12px; 
-            width: 90%; 
-            max-width: 550px; 
-            max-height: 90vh; 
-            overflow-y: auto; 
+            border: 2px solid #D4A373; /* Ochre border, slightly thicker */
+            border-radius: 12px; /* Rounded corners */
+            width: 90%; /* Responsive width */
+            max-width: 550px; /* Max width for larger screens */
+            max-height: 90vh; /* Max height to prevent overflow on small screens */
+            overflow-y: auto; /* Scroll inside modal if content is too long */
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative; 
+            position: relative; /* For absolute positioning of close button */
             animation: fadeInModal 0.3s ease-out;
         }
 
@@ -249,14 +258,14 @@
         }
         .close-button:hover,
         .close-button:focus {
-            color: #4A3B31; 
+            color: #4A3B31; /* Darker brown on hover */
             text-decoration: none;
         }
 
         .modal-title {
-            color: #BF360C; 
+            color: #BF360C; /* Deep rust color for titles */
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem; 
+            font-size: 1.8rem; /* Slightly larger title */
             font-weight: 700;
             margin-bottom: 20px;
             text-align: center;
@@ -265,7 +274,7 @@
         .modal-body p, .modal-body ul li {
             margin-bottom: 12px;
             line-height: 1.7;
-            color: #5D4037; 
+            color: #5D4037; /* Slightly darker brown for body text */
             font-size: 0.95rem;
         }
 
@@ -279,16 +288,16 @@
 
         .modal-body .form-input {
             width: 100%;
-            padding: 12px 15px; 
+            padding: 12px 15px; /* Increased padding */
             margin-bottom: 15px;
-            border: 1px solid #D4A373; 
+            border: 1px solid #D4A373; /* Ochre border */
             border-radius: 8px;
             box-sizing: border-box;
             font-size: 0.95rem;
         }
         .modal-body .form-input:focus {
             outline: none;
-            border-color: #E76F51; 
+            border-color: #E76F51; /* Accent color on focus */
             box-shadow: 0 0 0 2px rgba(231, 111, 81, 0.2);
         }
 
@@ -349,7 +358,11 @@
             text-decoration: underline;
         }
         .error-message {
-            color: red;
+            color: #D32F2F; /* A standard error red */
+            background-color: #FFCDD2; /* Light red background for visibility */
+            border: 1px solid #EF5350;
+            padding: 8px;
+            border-radius: 4px;
             font-size: 0.875rem;
             margin-top: -10px;
             margin-bottom: 10px;
@@ -381,6 +394,88 @@
             fill: #E76F51;
         }
 
+        /* Dashboard Styling */
+        #dashboardPage {
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #F9F9F9; /* Light grey background for dashboard */
+            min-height: calc(100vh - 60px); /* Adjust based on top-bar height */
+        }
+        .dashboard-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 900px; /* Max width for dashboard content */
+        }
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .dashboard-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: #4A3B31;
+            font-size: 2rem;
+        }
+        .dashboard-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .dashboard-section h3 {
+            font-size: 1.25rem;
+            color: #E76F51;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .dashboard-button {
+            background-color: #4CAF50; /* Green for primary actions */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        .dashboard-button:hover {
+            background-color: #45a049;
+        }
+        .dashboard-button-secondary {
+            background-color: #007BFF; /* Blue for secondary actions */
+        }
+        .dashboard-button-secondary:hover {
+            background-color: #0056b3;
+        }
+        .role-selection-buttons button {
+            margin-bottom: 10px;
+        }
+
+        /* Styling for profile form within modal */
+        #editProfileModal .modal-body label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4A3B31;
+            font-weight: 500;
+        }
+        #editProfileModal .modal-body input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        #editProfileModal .modal-body .checkbox-group label {
+            display: inline-block;
+            margin-right: 1rem;
+            font-weight: normal;
+        }
+
     </style>
 </head>
 <body>
@@ -394,87 +489,89 @@
         </div>
     </header>
 
-    <div class="hero-carousel-container">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1589087471045-311998588959?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=1200&q=60');">
-                    <div class="slide-content">
-                        <h2>Discover the Eastern Cape</h2>
-                        <p>Experience the raw beauty and rich Xhosa heritage of the Wild Coast, Amatola Mountains, and beyond. Authentic stays await in welcoming communities.</p>
-                        <div>
-                            <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1603202662435-f5133c761416?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
-                            <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1618284210070-757277617475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZWFzdGVybiUyMGNhcGUlMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+    <div class="main-content-area">
+        <div class="hero-carousel-container">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1589087471045-311998588959?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>Discover the Eastern Cape</h2>
+                            <p>Experience the raw beauty and rich Xhosa heritage of the Wild Coast and beyond. Authentic stays await.</p>
+                            <div>
+                                <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1603202662435-f5133c761416?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1618284210070-757277617475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZWFzdGVybiUyMGNhcGUlMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586494053092-597990133996?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a3dhenVsdSUyMG5hdGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>Majestic KwaZulu-Natal</h2>
+                            <p>From the towering Drakensberg peaks to vibrant Zulu villages and sun-kissed coastlines, KZN offers unforgettable adventures.</p>
+                             <div>
+                                <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1604973573749-0669f9370415?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGt3YXp1bHUlMjBuYXRhbCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1589983950357-519208915030?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8enVsdSUyMGN1bHR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1604814469827-3cc53a008559?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGltcG9wbyUyMHNvdXRoJTIwYWZyaWNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>Ancient Limpopo</h2>
+                            <p>Land of baobabs, rich wildlife, and the mystical cultures of Venda and Tsonga. Your unique journey starts here.</p>
+                             <div>
+                                <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Limpopo', 'https://images.unsplash.com/photo-1547471080-78312f095004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFvYmFiJTIwdHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Limpopo', 'https://images.unsplash.com/photo-1623350401185-36956115a821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmVuZGElMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>eKhaya: Renting with Ubuntu</h2>
+                            <p>Connecting hearts and homes across South Africa. Your journey with us is built on trust, community, and shared prosperity.</p>
+                             <div>
+                                <a href="#" class="cta-button" onclick="openModal('ourStoryModal')">Our Story</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModal('resourceHubModal')">Get Resources</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586494053092-597990133996?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a3dhenVsdSUyMG5hdGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
-                    <div class="slide-content">
-                        <h2>Majestic KwaZulu-Natal</h2>
-                        <p>From the towering Drakensberg peaks to vibrant Zulu villages and sun-kissed coastlines, KZN offers unforgettable adventures.</p>
-                         <div>
-                            <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1604973573749-0669f9370415?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGt3YXp1bHUlMjBuYXRhbCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
-                            <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1589983950357-519208915030?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8enVsdSUyMGN1bHR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1604814469827-3cc53a008559?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGltcG9wbyUyMHNvdXRoJTIwYWZyaWNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
-                    <div class="slide-content">
-                        <h2>Ancient Limpopo</h2>
-                        <p>Land of baobabs, rich wildlife, and the mystical cultures of Venda and Tsonga. Your unique journey starts here.</p>
-                         <div>
-                            <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Limpopo', 'https://images.unsplash.com/photo-1547471080-78312f095004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFvYmFiJTIwdHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
-                            <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Limpopo', 'https://images.unsplash.com/photo-1623350401185-36956115a821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmVuZGElMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                        </div>
-                    </div>
-                </div>
-                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
-                    <div class="slide-content">
-                        <h2>eKhaya: Renting with Ubuntu</h2>
-                        <p>Connecting hearts and homes across South Africa. Your journey with us is built on trust, community, and shared prosperity.</p>
-                         <div>
-                            <a href="#" class="cta-button" onclick="openModal('ourStoryModal')">Our Story</a>
-                            <a href="#" class="cta-button cta-button-secondary" onclick="openModal('resourceHubModal')">Get Resources</a>
-                        </div>
-                    </div>
-                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
         </div>
-    </div>
 
-    <div class="icon-hub">
-        <div class="icon-grid">
-            <div class="icon-item" onclick="openModal('ourStoryModal')">
-                <div class="icon-item-svg">
-                    <svg class="svg-pattern-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L70 25 L50 45 L30 25 Z M50 55 L70 75 L50 95 L30 75 Z M25 50 L45 50 L50 45 L50 55 L45 50 Z M75 50 L55 50 L50 45 L50 55 L55 50 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="icon-hub">
+            <div class="icon-grid">
+                <div class="icon-item" onclick="openModal('ourStoryModal')">
+                    <div class="icon-item-svg">
+                        <svg class="svg-pattern-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L70 25 L50 45 L30 25 Z M50 55 L70 75 L50 95 L30 75 Z M25 50 L45 50 L50 45 L50 55 L45 50 Z M75 50 L55 50 L50 45 L50 55 L55 50 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <span>Our Story</span>
                 </div>
-                <span>Our Story</span>
-            </div>
-            <div class="icon-item" onclick="openModal('findHomeModal')">
-                <i class="fas fa-map-marked-alt"></i>
-                <span>Find Your eKhaya</span>
-            </div>
-            <div class="icon-item" onclick="openModal('shareSpaceModal')">
-                <div class="icon-item-svg">
-                    <svg class="svg-pattern-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10 90 L10 50 A40 40 0 0 1 90 50 L90 90 Z M5 50 L95 50 M30 90 L30 60 A20 10 0 0 1 50 55 A20 10 0 0 1 70 60 L70 90 M40 90 L40 70 Q50 65 60 70 L60 90 "/></svg>
+                <div class="icon-item" onclick="openModal('findHomeModal')">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Find Your eKhaya</span>
                 </div>
-                <span>Share Your Space</span>
-            </div>
-            <div class="icon-item" onclick="openModal('resourceHubModal')">
-                <i class="fas fa-book-reader"></i>
-                <span>Resource Hub</span>
-            </div>
-            <div class="icon-item" onclick="openModalWithContent('showcaseModal', 'Your Village', 'https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c291dGglMjBhZnJpY2FuJTIwdmlsbGFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">
-                <i class="fas fa-camera-retro"></i>
-                <span>Showcase Village</span>
-            </div>
-            <div class="icon-item" onclick="openModal('testimonialsModal')">
-                <div class="icon-item-svg">
-                     <svg class="svg-pattern-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="20" fill="white"/><path d="M50 20 L50 80 M20 50 L80 50 M30 30 L70 70 M30 70 L70 30" stroke="currentColor" stroke-width="5"/></svg>
+                <div class="icon-item" onclick="openModal('shareSpaceModal')">
+                    <div class="icon-item-svg">
+                        <svg class="svg-pattern-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10 90 L10 50 A40 40 0 0 1 90 50 L90 90 Z M5 50 L95 50 M30 90 L30 60 A20 10 0 0 1 50 55 A20 10 0 0 1 70 60 L70 90 M40 90 L40 70 Q50 65 60 70 L60 90 "/></svg>
+                    </div>
+                    <span>Share Your Space</span>
                 </div>
-                <span>Community Voices</span>
+                <div class="icon-item" onclick="openModal('resourceHubModal')">
+                    <i class="fas fa-book-reader"></i>
+                    <span>Resource Hub</span>
+                </div>
+                <div class="icon-item" onclick="openModalWithContent('showcaseModal', 'Your Village', 'https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c291dGglMjBhZnJpY2FuJTIwdmlsbGFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">
+                    <i class="fas fa-camera-retro"></i>
+                    <span>Showcase Village</span>
+                </div>
+                <div class="icon-item" onclick="openModal('testimonialsModal')">
+                    <div class="icon-item-svg">
+                         <svg class="svg-pattern-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="20" fill="white"/><path d="M50 20 L50 80 M20 50 L80 50 M30 30 L70 70 M30 70 L70 30" stroke="currentColor" stroke-width="5"/></svg>
+                    </div>
+                    <span>Community Voices</span>
+                </div>
             </div>
         </div>
     </div>
@@ -531,8 +628,8 @@
                 <p>Welcome, <span id="profileUserName" class="font-semibold">User</span>!</p>
                 <p>Email: <span id="profileUserEmail" class="font-mono"></span></p>
                 <p>User ID: <span id="profileUserId" class="font-mono text-sm bg-gray-100 p-1 rounded"></span></p>
-                <button class="form-button mt-6" onclick="handleLogout()">Log Out</button>
-                 <button class="form-button mt-4 bg-blue-500 hover:bg-blue-600" onclick="navigateToDashboard()">Go to My Dashboard</button>
+                <button class="form-button mt-6 bg-red-500 hover:bg-red-600" onclick="handleLogout()">Log Out</button>
+                <button class="form-button mt-4 bg-blue-500 hover:bg-blue-600" onclick="navigateToDashboard()">Go to My Dashboard</button>
             </div>
         </div>
     </div>
@@ -678,53 +775,57 @@
         </div>
     </div>
 
-    <div id="dashboardPage" class="hidden flex-col items-center justify-center h-full w-full p-8 bg-gray-100">
-        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">My eKhaya Dashboard</h2>
-            
-            <div class="mb-6 text-center">
+    <div id="dashboardPage" class="hidden flex-col items-center justify-start min-h-screen w-full p-4 md:p-8 bg-gray-100">
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow-xl w-full max-w-4xl mt-8">
+            <div class="dashboard-header">
+                <h2>My eKhaya Dashboard</h2>
                 <p class="text-lg">Welcome, <span id="dashboardUserName" class="font-semibold">User</span>!</p>
                 <p class="text-sm text-gray-600">User ID: <span id="dashboardUserId" class="font-mono"></span></p>
             </div>
 
-            <div class="mb-6">
+            <div class="dashboard-section">
                 <h3 class="text-xl font-semibold text-gray-700 mb-3">Profile Management</h3>
-                <p class="text-gray-600 mb-2">Complete your profile to get the most out of eKhaya.</p>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openModal('editProfileModal')">
-                    Edit My Profile
+                <p class="text-gray-600 mb-3">Keep your information up-to-date and manage your roles on eKhaya.</p>
+                <button class="dashboard-button bg-blue-500 hover:bg-blue-700" onclick="openModal('editProfileModal')">
+                    <i class="fas fa-user-edit mr-2"></i>Edit My Profile
                 </button>
             </div>
 
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold text-gray-700 mb-3">Role Selection</h3>
-                <p class="text-gray-600 mb-2">Are you here as a Landlord, Tenant, or both?</p>
-                <div class="flex space-x-4">
-                    <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="selectRole('landlord')">
-                        I'm a Landlord
-                    </button>
-                    <button class="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="selectRole('tenant')">
-                        I'm a Tenant
-                    </button>
+            <div class="dashboard-section">
+                <h3 class="text-xl font-semibold text-gray-700 mb-3">My Roles</h3>
+                <p class="text-gray-600 mb-3">Select how you'd like to use eKhaya. You can be both a landlord and a tenant!</p>
+                <div id="currentRolesDisplay" class="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 text-blue-700">
+                    Loading roles...
                 </div>
-                 <p class="text-xs text-gray-500 mt-2">You can always switch roles or manage both later.</p>
+                <button class="dashboard-button bg-gray-500 hover:bg-gray-600" onclick="openModal('editProfileModal')">
+                    <i class="fas fa-user-cog mr-2"></i>Change Roles
+                </button>
             </div>
 
-            <div id="landlordDashboardSection" class="hidden mt-6 p-4 border border-gray-300 rounded-lg">
-                <h4 class="text-lg font-semibold text-gray-700 mb-2">Landlord Dashboard</h4>
-                <p class="text-gray-600">Manage your properties, listings, and tenant interactions.</p>
-                <button class="mt-2 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openModal('addPropertyModal')">
-                    Add New Property
+            <div id="landlordDashboardSection" class="dashboard-section hidden">
+                <h3 class="text-xl font-semibold text-green-700 mb-3"><i class="fas fa-house-user mr-2"></i>Landlord Dashboard</h3>
+                <p class="text-gray-600 mb-3">Manage your properties, view bookings, and connect with tenants.</p>
+                <button class="dashboard-button bg-green-500 hover:bg-green-700" onclick="openModal('addPropertyModal')">
+                    <i class="fas fa-plus-circle mr-2"></i>Add New Property
+                </button>
+                <button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
+                    <i class="fas fa-list-alt mr-2"></i>View My Listings
                 </button>
                 </div>
 
-            <div id="tenantDashboardSection" class="hidden mt-6 p-4 border border-gray-300 rounded-lg">
-                <h4 class="text-lg font-semibold text-gray-700 mb-2">Tenant Dashboard</h4>
-                <p class="text-gray-600">Search for homes, manage your applications, and communicate with landlords.</p>
-                <button class="mt-2 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openModal('searchPropertiesModal')">
-                    Search Properties
+            <div id="tenantDashboardSection" class="dashboard-section hidden">
+                <h3 class="text-xl font-semibold text-indigo-700 mb-3"><i class="fas fa-bed mr-2"></i>Tenant Dashboard</h3>
+                <p class="text-gray-600 mb-3">Find your next home, manage your applications, and communicate with landlords.</p>
+                <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700" onclick="openModal('searchPropertiesModal')">
+                    <i class="fas fa-search mr-2"></i>Search Properties
+                </button>
+                <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
+                    <i class="fas fa-heart mr-2"></i>My Saved Properties
                 </button>
                 </div>
-
+             <button class="dashboard-button bg-gray-700 hover:bg-gray-800 mt-6 w-full md:w-auto" onclick="navigateToHome()">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Home
+            </button>
         </div>
     </div>
 
@@ -733,6 +834,7 @@
             <span class="close-button" onclick="closeModal('editProfileModal')">&times;</span>
             <h3 class="modal-title">Edit Your Profile</h3>
             <div class="modal-body">
+                <div id="profileUpdateError" class="error-message" style="display:none;"></div>
                 <form id="profileUpdateForm">
                     <div class="mb-4">
                         <label for="profileDisplayName" class="block text-gray-700 text-sm font-bold mb-2">Display Name:</label>
@@ -749,11 +851,11 @@
                      <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">I am a:</label>
                         <div class="flex items-center mb-2">
-                            <input type="checkbox" id="roleTenant" name="userRole" value="tenant" class="mr-2">
+                            <input type="checkbox" id="roleTenant" name="userRole" value="tenant" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
                             <label for="roleTenant" class="text-gray-700">Tenant</label>
                         </div>
                         <div class="flex items-center">
-                            <input type="checkbox" id="roleLandlord" name="userRole" value="landlord" class="mr-2">
+                            <input type="checkbox" id="roleLandlord" name="userRole" value="landlord" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
                             <label for="roleLandlord" class="text-gray-700">Landlord</label>
                         </div>
                     </div>
@@ -770,7 +872,7 @@
             <div class="modal-body">
                 <p>Property listing form will be here. This includes details like address, property type, rent, photos, amenities, etc.</p>
                 <form id="addPropertyForm">
-                    <button type="submit" class="form-button mt-4">Save Property</button>
+                    <button type="submit" class="form-button mt-4">Save Property (Coming Soon)</button>
                 </form>
             </div>
         </div>
@@ -782,7 +884,8 @@
             <h3 class="modal-title">Search for Properties</h3>
             <div class="modal-body">
                 <p>Search filters and results will be displayed here.</p>
-                </div>
+                <button class="form-button mt-4" onclick="closeModal('searchPropertiesModal')">Close</button>
+            </div>
         </div>
     </div>
 
@@ -806,7 +909,7 @@
             doc, 
             setDoc, 
             getDoc,
-            updateDoc, // Added for updating user roles
+            updateDoc, 
             serverTimestamp 
         } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
@@ -815,7 +918,7 @@
             apiKey: "YOUR_API_KEY", //  REPLACE WITH YOUR ACTUAL API KEY
             authDomain: "ekhaya-b6fdd.firebaseapp.com",
             projectId: "ekhaya-b6fdd",
-            storageBucket: "ekhaya-b6fdd.appspot.com",
+            storageBucket: "ekhaya-b6fdd.appspot.com", // Corrected from .firebaseapp.com
             messagingSenderId: "242813323857",
             appId: "1:242813323857:web:3cb499210790b034610670",
             measurementId: "G-4JK8WEQCY7"
@@ -836,12 +939,15 @@
         const profileUserNameEl = document.getElementById('profileUserName');
         const profileUserEmailEl = document.getElementById('profileUserEmail');
         const profileUserIdEl = document.getElementById('profileUserId');
+        
+        const dashboardPage = document.getElementById('dashboardPage');
+        const mainContentArea = document.querySelector('.main-content-area'); 
         const dashboardUserNameEl = document.getElementById('dashboardUserName');
         const dashboardUserIdEl = document.getElementById('dashboardUserId');
         const landlordDashboardSection = document.getElementById('landlordDashboardSection');
         const tenantDashboardSection = document.getElementById('tenantDashboardSection');
-        const mainContentArea = document.querySelector('.hero-carousel-container').parentNode; // Assuming this is the main content area
-        const dashboardPage = document.getElementById('dashboardPage');
+        const currentRolesDisplay = document.getElementById('currentRolesDisplay');
+
 
         // --- Modal Functions ---
         window.openModal = function(modalId) {
@@ -849,12 +955,15 @@
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.style.display = "flex";
-                // Clear previous error messages
                 const errorDivs = modal.querySelectorAll('.error-message');
                 errorDivs.forEach(div => {
                     div.style.display = 'none';
                     div.textContent = '';
                 });
+                // If opening editProfileModal, populate it
+                if (modalId === 'editProfileModal' && currentUser) {
+                    populateProfileForm();
+                }
             }
         }
 
@@ -869,7 +978,7 @@
             const modalTitle = document.getElementById('infoModalTitle');
             const modalBody = document.getElementById('infoModalBody');
             modalTitle.textContent = title;
-            modalBody.innerHTML = `<p class="${isError ? 'text-red-700' : 'text-green-700'}">${message}</p>
+            modalBody.innerHTML = `<p class="${isError ? 'text-red-600 font-semibold' : 'text-green-600 font-semibold'}">${message}</p>
                                    <button class="form-button mt-4" onclick="closeModal('infoModal')">OK</button>`;
             openModal('infoModal');
         }
@@ -904,7 +1013,6 @@
             openModal('genericContentModal');
         }
 
-        // Close modal if user clicks outside of it
         window.onclick = function(event) {
             const modals = document.getElementsByClassName('modal');
             for (let i = 0; i < modals.length; i++) {
@@ -915,34 +1023,32 @@
         }
 
         // --- Auth UI and State Management ---
-        function updateAuthUI(user) {
+        async function updateAuthUI(user) {
             if (user) {
                 currentUser = user;
+                await fetchUserProfile(user.uid); // Fetch profile data which includes roles
+
                 authButtonsContainer.innerHTML = `
-                    <span class="text-sm mr-3 text-white">Welcome, ${user.displayName || user.email}!</span>
+                    <span class="text-sm mr-3 text-white">Welcome, ${userProfileData?.displayName || user.displayName || user.email}!</span>
                     <button onclick="navigateToDashboard()" class="login-btn">Dashboard</button>
                     <button onclick="handleLogout()">Log Out</button>
                 `;
-                // Populate profile modal (can be enhanced later)
-                if (profileUserNameEl) profileUserNameEl.textContent = user.displayName || user.email;
+                if (profileUserNameEl) profileUserNameEl.textContent = userProfileData?.displayName || user.displayName || user.email;
                 if (profileUserEmailEl) profileUserEmailEl.textContent = user.email;
                 if (profileUserIdEl) profileUserIdEl.textContent = user.uid;
                 
-                // Populate dashboard placeholders
-                if (dashboardUserNameEl) dashboardUserNameEl.textContent = user.displayName || user.email;
+                if (dashboardUserNameEl) dashboardUserNameEl.textContent = userProfileData?.displayName || user.displayName || user.email;
                 if (dashboardUserIdEl) dashboardUserIdEl.textContent = user.uid;
-
-                // Fetch user profile data from Firestore to determine roles
-                fetchUserProfile(user.uid);
+                
+                updateDashboardBasedOnRole();
 
             } else {
                 currentUser = null;
-                userProfileData = null; // Clear profile data on logout
+                userProfileData = null;
                 authButtonsContainer.innerHTML = `
                     <button class="login-btn" onclick="openModal('loginModal')">Login</button>
                     <button onclick="openModal('registerModal')">Sign Up</button>
                 `;
-                // Hide dashboard and show homepage content if logged out
                 if (dashboardPage) dashboardPage.classList.add('hidden');
                 if (mainContentArea) mainContentArea.classList.remove('hidden');
             }
@@ -956,60 +1062,64 @@
                 if (docSnap.exists()) {
                     userProfileData = docSnap.data();
                     console.log("User profile data:", userProfileData);
-                    // Update UI based on roles (e.g., show/hide landlord/tenant sections in dashboard)
-                    updateDashboardBasedOnRole();
-                    // Pre-fill profile form if editProfileModal is open
-                    if (document.getElementById('editProfileModal').style.display === 'flex') {
-                        populateProfileForm();
-                    }
                 } else {
-                    console.log("No such user document!");
-                    // Handle case where user is authenticated but no Firestore doc (should ideally not happen with current flow)
+                    console.log("No such user document! This might be a new user.");
+                    // For a new Google sign-in, the document might not exist yet if onAuthStateChanged runs before Firestore write.
+                    // We handle user doc creation in the sign-in/register functions.
+                    userProfileData = { displayName: auth.currentUser.displayName, email: auth.currentUser.email, uid: auth.currentUser.uid, roles: ['guest'] }; // Default if not found
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
+                userProfileData = { displayName: auth.currentUser.displayName, email: auth.currentUser.email, uid: auth.currentUser.uid, roles: ['guest'] }; // Fallback
             }
         }
 
         function updateDashboardBasedOnRole() {
-            if (!userProfileData) return;
-
-            if (userProfileData.roles && userProfileData.roles.includes('landlord')) {
-                landlordDashboardSection.classList.remove('hidden');
-            } else {
-                landlordDashboardSection.classList.add('hidden');
-            }
-
-            if (userProfileData.roles && userProfileData.roles.includes('tenant')) {
-                tenantDashboardSection.classList.remove('hidden');
-            } else {
-                tenantDashboardSection.classList.add('hidden');
+            if (!userProfileData || !dashboardPage.classList.contains('hidden')) { // Only update if dashboard is visible
+                if (userProfileData && userProfileData.roles) {
+                    currentRolesDisplay.textContent = `Current Roles: ${userProfileData.roles.join(', ') || 'Guest'}`;
+                    if (userProfileData.roles.includes('landlord')) {
+                        landlordDashboardSection.classList.remove('hidden');
+                    } else {
+                        landlordDashboardSection.classList.add('hidden');
+                    }
+                    if (userProfileData.roles.includes('tenant')) {
+                        tenantDashboardSection.classList.remove('hidden');
+                    } else {
+                        tenantDashboardSection.classList.add('hidden');
+                    }
+                } else {
+                    currentRolesDisplay.textContent = "Current Roles: Guest";
+                    landlordDashboardSection.classList.add('hidden');
+                    tenantDashboardSection.classList.add('hidden');
+                }
             }
         }
         
-        window.navigateToDashboard = function() {
-            // Hide homepage content and show dashboard
-            if (mainContentArea) mainContentArea.classList.add('hidden');
-            if (dashboardPage) dashboardPage.classList.remove('hidden');
-            closeModal('profileModal'); // Close profile modal if open
-            if (currentUser) {
-                fetchUserProfile(currentUser.uid); // Ensure dashboard reflects latest roles
+        window.navigateToDashboard = async () => {
+            if (!currentUser) {
+                openModal('loginModal'); // Prompt login if not authenticated
+                return;
             }
+            if (mainContentArea) mainContentArea.style.display = 'none'; // Hide homepage content
+            if (dashboardPage) dashboardPage.style.display = 'flex'; // Show dashboard
+            
+            closeModal('profileModal'); // Close profile modal if open
+            
+            // Ensure userProfileData is fresh
+            await fetchUserProfile(currentUser.uid);
+            updateDashboardBasedOnRole(); // Update dashboard sections based on roles
         }
 
-        function navigateToHome() {
-            if (dashboardPage) dashboardPage.classList.add('hidden');
-            if (mainContentArea) mainContentArea.classList.remove('hidden');
+        window.navigateToHome = function() {
+            if (dashboardPage) dashboardPage.style.display = 'none'; // Hide dashboard
+            if (mainContentArea) mainContentArea.style.display = 'flex'; // Show homepage content
         }
 
-
-        // Listen for auth state changes
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                updateAuthUI(user);
-            } else {
-                updateAuthUI(null);
-                navigateToHome(); // If user logs out, go back to home view
+            updateAuthUI(user);
+            if (!user) { // If logged out, ensure dashboard is hidden
+                navigateToHome();
             }
         });
 
@@ -1058,21 +1168,23 @@
                     
                     await firebaseUpdateProfile(user, { displayName: name });
 
-                    await setDoc(doc(db, "users", user.uid), {
+                    // Create user document in Firestore
+                    const userDocRef = doc(db, "users", user.uid);
+                    await setDoc(userDocRef, {
                         uid: user.uid,
                         displayName: name,
                         email: user.email,
                         createdAt: serverTimestamp(),
-                        roles: ["tenant"] // Default role, can be changed in profile
+                        roles: ["tenant"] // Default role
                     });
 
                     console.log("User registered:", user);
-                    showInfoModal("Registration Successful!", `Welcome, ${name}! Your account has been created. Please complete your profile.`);
+                    showInfoModal("Registration Successful!", `Welcome, ${name}! Your account has been created. Please complete your profile on the dashboard.`);
                     closeModal('registerModal');
-                    navigateToDashboard(); // Go to dashboard to complete profile
+                    navigateToDashboard(); 
                 } catch (error) {
                     console.error("Registration error:", error);
-                    errorDiv.textContent = error.message.replace('Firebase: ', ''); // Cleaner error message
+                    errorDiv.textContent = error.message.replace('Firebase: ', '');
                     errorDiv.style.display = 'block';
                 }
             });
@@ -1095,7 +1207,7 @@
                     navigateToDashboard();
                 } catch (error) {
                     console.error("Login error:", error);
-                    errorDiv.textContent = "Invalid email or password. Please try again."; // User-friendly message
+                    errorDiv.textContent = "Invalid email or password. Please try again.";
                     errorDiv.style.display = 'block';
                 }
             });
@@ -1119,10 +1231,10 @@
                         roles: ["tenant"] // Default role
                     });
                     console.log("New Google user created in Firestore:", user);
-                    showInfoModal("Welcome to eKhaya!", `Account created for ${user.displayName}. Please complete your profile.`);
+                    showInfoModal("Welcome to eKhaya!", `Account created for ${user.displayName}. Please complete your profile on the dashboard.`);
                 } else {
                     console.log("Google Sign-In successful:", user);
-                     showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
+                    showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
                 }
                 
                 closeModal('loginModal');
@@ -1147,7 +1259,7 @@
                 console.log("User logged out");
                 showInfoModal("Logged Out", "You have been successfully logged out.");
                 closeModal('profileModal');
-                navigateToHome(); // Ensure user is redirected to home after logout
+                navigateToHome();
             } catch (error) {
                 console.error("Logout error:", error);
                 showInfoModal("Logout Error", error.message, true);
@@ -1173,67 +1285,88 @@
                 let roles = [];
                 if (isTenant) roles.push('tenant');
                 if (isLandlord) roles.push('landlord');
-                if (roles.length === 0) roles.push('guest'); // Default to guest if none selected
+                if (roles.length === 0 && userProfileData && userProfileData.roles) { // Keep existing roles if none selected
+                    roles = userProfileData.roles;
+                } else if (roles.length === 0) {
+                    roles.push('guest'); // Default to guest if no roles ever set
+                }
+
 
                 try {
                     const userDocRef = doc(db, "users", currentUser.uid);
-                    await setDoc(userDocRef, { 
-                        displayName: displayName || currentUser.displayName, // Keep existing if blank
+                    const updateData = {
+                        displayName: displayName || currentUser.displayName,
                         phoneNumber: phoneNumber || null,
                         bio: bio || null,
                         roles: roles,
                         updatedAt: serverTimestamp()
-                    }, { merge: true }); // Merge to avoid overwriting existing fields like email, createdAt
+                    };
 
-                    // Update Firebase Auth profile if display name changed
+                    await setDoc(userDocRef, updateData, { merge: true });
+
                     if (displayName && displayName !== currentUser.displayName) {
                         await firebaseUpdateProfile(currentUser, { displayName: displayName });
                     }
                     
                     showInfoModal("Profile Updated", "Your profile has been successfully updated.");
                     closeModal('editProfileModal');
-                    fetchUserProfile(currentUser.uid); // Refresh profile data and dashboard view
+                    await fetchUserProfile(currentUser.uid); // Refresh profile data
+                    updateDashboardBasedOnRole(); // Explicitly update dashboard view
                 } catch (error) {
                     console.error("Error updating profile:", error);
-                    showInfoModal("Profile Update Failed", "Could not update your profile. Please try again.", true);
+                    document.getElementById('profileUpdateError').textContent = "Error updating profile: " + error.message;
+                    document.getElementById('profileUpdateError').style.display = 'block';
                 }
             });
         }
 
         window.populateProfileForm = function() {
             if (userProfileData) {
-                document.getElementById('profileDisplayName').value = userProfileData.displayName || '';
+                document.getElementById('profileDisplayName').value = userProfileData.displayName || currentUser?.displayName || '';
                 document.getElementById('profilePhoneNumber').value = userProfileData.phoneNumber || '';
                 document.getElementById('profileBio').value = userProfileData.bio || '';
                 document.getElementById('roleTenant').checked = userProfileData.roles?.includes('tenant') || false;
                 document.getElementById('roleLandlord').checked = userProfileData.roles?.includes('landlord') || false;
+            } else if (currentUser) { // Fallback if userProfileData is not yet loaded but currentUser exists
+                 document.getElementById('profileDisplayName').value = currentUser.displayName || '';
+                 document.getElementById('profilePhoneNumber').value = '';
+                 document.getElementById('profileBio').value = '';
+                 document.getElementById('roleTenant').checked = false;
+                 document.getElementById('roleLandlord').checked = false;
             }
         }
         
-        // When opening the edit profile modal, populate it if user data is available
         const editProfileModal = document.getElementById('editProfileModal');
         const observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.attributeName === "style" && editProfileModal.style.display === "flex" && currentUser) {
-                    fetchUserProfile(currentUser.uid).then(populateProfileForm); // Fetch latest then populate
+                    // Ensure userProfileData is fetched before populating
+                    if (!userProfileData || userProfileData.uid !== currentUser.uid) {
+                        fetchUserProfile(currentUser.uid).then(() => {
+                            populateProfileForm();
+                        });
+                    } else {
+                        populateProfileForm();
+                    }
                 }
             });
         });
-        observer.observe(editProfileModal, { attributes: true });
+        if (editProfileModal) { // Check if element exists before observing
+            observer.observe(editProfileModal, { attributes: true });
+        }
 
 
-        window.selectRole = async function(role) {
+        window.selectRole = async function(role) { // This function might be redundant if roles are managed in editProfileModal
             if (!currentUser) return;
             
             let newRoles = userProfileData && userProfileData.roles ? [...userProfileData.roles] : [];
             if (!newRoles.includes(role)) {
                 newRoles.push(role);
+            } else { // Toggle behavior: if role exists, remove it
+                newRoles = newRoles.filter(r => r !== role);
             }
-            // If selecting one role, ensure 'guest' is removed if present and not the only role
-            if (newRoles.length > 1) {
-                newRoles = newRoles.filter(r => r !== 'guest');
-            }
-            if (newRoles.length === 0) newRoles.push('guest'); // Default to guest if all roles unchecked
+
+            if (newRoles.length === 0) newRoles.push('guest'); // Ensure at least 'guest' role if all are deselected
 
             try {
                 const userDocRef = doc(db, "users", currentUser.uid);
@@ -1241,17 +1374,38 @@
                     roles: newRoles,
                     updatedAt: serverTimestamp()
                 });
-                showInfoModal("Role Updated", `You are now set as a ${role}.`);
-                fetchUserProfile(currentUser.uid); // Refresh dashboard
+                showInfoModal("Role Updated", `Your roles have been updated.`);
+                await fetchUserProfile(currentUser.uid); // Re-fetch to update userProfileData
+                updateDashboardBasedOnRole(); // Refresh dashboard display
             } catch (error) {
                 console.error("Error updating role:", error);
                 showInfoModal("Error", "Could not update your role. Please try again.", true);
             }
         }
 
+        // Initialize Swiper
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+        });
 
-        // Initial UI setup
-        updateAuthUI(auth.currentUser); // Check initial auth state on load
+        // Initial UI setup - onAuthStateChanged will handle this
+        // updateAuthUI(auth.currentUser); 
 
     </script>
 </body>
