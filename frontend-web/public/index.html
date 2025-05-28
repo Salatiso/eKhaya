@@ -1,1 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eKhaya - Your Home, Our Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDF8F0; /* Warm, inviting off-white */
+            color: #4A3B31; /* Deep, earthy brown for text */
+            overflow: hidden; /* Prevent body scrolling */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .african-pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/aztec.png'); /* Subtle geometric pattern */
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .top-bar {
+            background-color: rgba(212, 163, 115, 0.8); /* Semi-transparent Ochre */
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4A3B31;
+        }
+        .logo .highlight {
+            color: #E76F51; /* Vibrant accent */
+        }
+
+        .auth-buttons button {
+            background-color: #E76F51;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+        .auth-buttons button:hover {
+            background-color: #D95A3F;
+        }
+        .auth-buttons .login-btn {
+            background-color: transparent;
+            color: #4A3B31;
+            border: 1px solid #4A3B31;
+        }
+         .auth-buttons .login-btn:hover {
+            background-color: #f0e6d5;
+        }
+
+
+        .hero-carousel-container {
+            height: 50vh; /* Adjusted for top bar and icon hub */
+            width: 100%;
+            position: relative;
+        }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .swiper-slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+        }
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 20px;
+            max-width: 80%;
+        }
+        .slide-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+        .slide-content p {
+            font-size: clamp(0.9rem, 2vw, 1.125rem);
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+        }
+        .cta-button {
+            background-color: #E76F51; /* Vibrant accent */
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 8px;
+            font-size: 1rem;
+            border: 2px solid transparent;
+        }
+        .cta-button:hover {
+            background-color: #D95A3F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .cta-button-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        .cta-button-secondary:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .icon-hub {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: #F0EFEB; /* Light stone color, slightly different from body */
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .icon-item {
+            background-color: #FFFFFF;
+            border: 1px solid #D7CCC8; /* Light brown border */
+            border-radius: 16px; /* More rounded */
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px; /* Ensure consistent height */
+        }
+        .icon-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        .icon-item i { /* Font Awesome icons */
+            font-size: 2.2rem; /* Slightly smaller for balance */
+            margin-bottom: 12px;
+            color: #E76F51; /* Consistent accent color */
+        }
+        .icon-item-svg svg { /* For custom SVGs */
+             width: 38px;
+             height: 38px;
+             margin-bottom: 12px;
+             fill: #E76F51; /* Consistent accent color */
+        }
+        .icon-item span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4A3B31;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background-color: #FEFDFB;
+            margin: auto;
+            padding: 25px 30px;
+            border: 1px solid #D4A373;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 650px;
+            max-height: 90vh; 
+            overflow-y: auto; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            animation: fadeInModal 0.3s ease-out;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #4A3B31;
+        }
+        .modal-title {
+            color: #E76F51; 
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .modal-body p, .modal-body ul li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #5D4037;
+            font-size: 0.95rem;
+        }
+        .modal-body img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .modal-body .form-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #D4A373;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .modal-body .form-button {
+            background-color: #E76F51;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .modal-body .form-button:hover {
+            background-color: #D95A3F;
+        }
+        .modal-body .google-signin-btn {
+            background-color: #4285F4;
+            color: white;
+            margin-top: 10px;
+        }
+        .modal-body .google-signin-btn:hover {
+            background-color: #357AE8;
+        }
+        .modal-body .or-divider {
+            text-align: center;
+            margin: 15px 0;
+            color: #8C7A6B;
+        }
+        .modal-body .switch-auth-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .modal-body .switch-auth-link a {
+            color: #E76F51;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .modal-body .switch-auth-link a:hover {
+            text-decoration: underline;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #E76F51 !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: #E76F51 !important;
+            --swiper-navigation-size: 30px;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            filter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+        }
+        
+        /* Custom African Pattern SVGs - simple examples */
+        .svg-pattern-1 { /* Ndebele inspired simple diamond */
+            width: 40px; height: 40px;
+            fill: none; stroke: #795548; stroke-width:2;
+        }
+         .svg-pattern-2 { /* Simple Hut/Rondavel icon */
+            width: 40px; height: 40px;
+            fill: #795548;
+        }
+        .svg-pattern-3 { /* Simple sun/community icon */
+            width: 40px; height: 40px;
+            fill: #E76F51;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="african-pattern-bg"></div>
+
+    <header class="top-bar">
+        <div class="logo">e<span class="highlight">K</span>haya</div>
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="openModal('loginModal')">Login</button>
+            <button onclick="openModal('registerModal')">Sign Up</button>
+        </div>
+    </header>
+
+    <div class="hero-carousel-container">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1589087471045-311998588959?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=1200&q=60');">
+                    <div class="slide-content">
+                        <h2>Discover the Eastern Cape</h2>
+                        <p>Experience the raw beauty and rich Xhosa heritage of the Wild Coast, Amatola Mountains, and beyond. Authentic stays await in welcoming communities.</p>
+                        <div>
+                            <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1603202662435-f5133c761416?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                            <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1618284210070-757277617475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZWFzdGVybiUyMGNhcGUlMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586494053092-597990133996?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a3dhenVsdSUyMG5hdGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                    <div class="slide-content">
+                        <h2>Majestic KwaZulu-Natal</h2>
+                        <p>From the towering Drakensberg peaks to vibrant Zulu villages and sun-kissed coastlines, KZN offers unforgettable adventures.</p>
+                         <div>
+                            <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1604973573749-0669f9370415?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGt3YXp1bHUlMjBuYXRhbCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                            <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1589983950357-519208915030?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8enVsdSUyMGN1bHR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1604814469827-3cc53a008559?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGltcG9wbyUyMHNvdXRoJTIwYWZyaWNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                    <div class="slide-content">
+                        <h2>Ancient Limpopo</h2>
+                        <p>Land of baobabs, rich wildlife, and the mystical cultures of Venda and Tsonga. Your unique journey starts here.</p>
+                         <div>
+                            <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Limpopo', 'https://images.unsplash.com/photo-1547471080-78312f095004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFvYmFiJTIwdHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                            <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Limpopo', 'https://images.unsplash.com/photo-1623350401185-36956115a821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmVuZGElMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                    <div class="slide-content">
+                        <h2>eKhaya: Renting with Ubuntu</h2>
+                        <p>Connecting hearts and homes across South Africa. Your journey with us is built on trust, community, and shared prosperity.</p>
+                         <div>
+                            <a href="#" class="cta-button" onclick="openModal('ourStoryModal')">Our Story</a>
+                            <a href="#" class="cta-button cta-button-secondary" onclick="openModal('resourceHubModal')">Get Resources</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <div class="icon-hub">
+        <div class="icon-grid">
+            <div class="icon-item" onclick="openModal('ourStoryModal')">
+                <div class="tile-svg">
+                    <svg class="svg-pattern-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L70 25 L50 45 L30 25 Z M50 55 L70 75 L50 95 L30 75 Z M25 50 L45 50 L50 45 L50 55 L45 50 Z M75 50 L55 50 L50 45 L50 55 L55 50 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <span>Our Story</span>
+            </div>
+            <div class="icon-item" onclick="openModal('findHomeModal')">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Find Your eKhaya</span>
+            </div>
+            <div class="icon-item" onclick="openModal('shareSpaceModal')">
+                <div class="tile-svg">
+                    <svg class="svg-pattern-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10 90 L10 50 A40 40 0 0 1 90 50 L90 90 Z M5 50 L95 50 M30 90 L30 60 A20 10 0 0 1 50 55 A20 10 0 0 1 70 60 L70 90 M40 90 L40 70 Q50 65 60 70 L60 90 "/></svg>
+                </div>
+                <span>Share Your Space</span>
+            </div>
+            <div class="icon-item" onclick="openModal('resourceHubModal')">
+                <i class="fas fa-book-reader"></i>
+                <span>Resource Hub</span>
+            </div>
+            <div class="icon-item" onclick="openModalWithContent('showcaseModal', 'Your Village', 'https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c291dGglMjBhZnJpY2FuJTIwdmlsbGFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">
+                <i class="fas fa-camera-retro"></i>
+                <span>Showcase Village</span>
+            </div>
+            <div class="icon-item" onclick="openModal('testimonialsModal')">
+                <div class="tile-svg">
+                     <svg class="svg-pattern-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="20" fill="white"/><path d="M50 20 L50 80 M20 50 L80 50 M30 30 L70 70 M30 70 L70 30" stroke="currentColor" stroke-width="5"/></svg>
+                </div>
+                <span>Community Voices</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('registerModal')">&times;</span>
+            <h3 class="modal-title">Create Your eKhaya Account</h3>
+            <div class="modal-body">
+                <p>Join our community to find or list unique spaces across South Africa.</p>
+                <form id="registerForm">
+                    <input type="text" id="registerName" placeholder="Full Name" class="form-input" required>
+                    <input type="email" id="registerEmail" placeholder="Email Address" class="form-input" required>
+                    <input type="password" id="registerPassword" placeholder="Password" class="form-input" required>
+                    <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" class="form-input" required>
+                    <button type="submit" class="form-button">Register with Email</button>
+                </form>
+                <div class="or-divider">OR</div>
+                <button class="form-button google-signin-btn" onclick="handleGoogleSignUp()">
+                    <i class="fab fa-google mr-2"></i> Sign Up with Google
+                </button>
+                <p class="switch-auth-link mt-4">Already have an account? <a href="#" onclick="switchToLogin()">Log In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('loginModal')">&times;</span>
+            <h3 class="modal-title">Welcome Back to eKhaya</h3>
+            <div class="modal-body">
+                <p>Log in to access your profile, listings, and messages.</p>
+                <form id="loginForm">
+                    <input type="email" id="loginEmail" placeholder="Email Address" class="form-input" required>
+                    <input type="password" id="loginPassword" placeholder="Password" class="form-input" required>
+                    <button type="submit" class="form-button">Log In with Email</button>
+                </form>
+                <div class="or-divider">OR</div>
+                <button class="form-button google-signin-btn" onclick="handleGoogleSignIn()">
+                    <i class="fab fa-google mr-2"></i> Sign In with Google
+                </button>
+                <p class="switch-auth-link mt-4">Don't have an account? <a href="#" onclick="switchToRegister()">Create Account</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('profileModal')">&times;</span>
+            <h3 class="modal-title">My eKhaya Profile</h3>
+            <div class="modal-body">
+                <p>Welcome, <span id="profileUserName">User</span>!</p>
+                <p>This is where your profile information will be displayed and can be edited.</p>
+                <p>Your User ID (for Firestore): <span id="profileUserId" class="font-mono bg-gray-200 p-1 rounded"></span></p>
+                <button class="form-button mt-4" onclick="handleLogout()">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ourStoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('ourStoryModal')">&times;</span>
+            <h3 class="modal-title">The eKhaya Philosophy</h3>
+            <img src="https://images.unsplash.com/photo-1531300900929-673afa703570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWZyaWNhbiUyMGNvbW11bml0eXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Community Hands" class="mx-auto mb-4 rounded-lg shadow-lg">
+            <p>eKhaya is more than a platform; it's a movement rooted in the ancient African philosophy of 'Ubuntu' – "I am because we are." We are inspired by the timeless tradition of community, where every person is valued, and hospitality is a sacred duty. In many of our villages, if a traveller was stranded, they were given shelter, food, and sent safely on their way the next morning, not for money, but for the good of all. </p>
+            <p>We aim to translate this spirit into the digital age, fostering connections between those who have space and those who seek it. Our focus is on empowering rural and informal property owners, showcasing the beauty and warmth of their communities, and ensuring that both landlords and tenants are treated with fairness and respect. This is about building bridges, not just renting spaces.</p>
+        </div>
+    </div>
+
+    <div id="findHomeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('findHomeModal')">&times;</span>
+            <h3 class="modal-title">Discover Your Next eKhaya</h3>
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBhcnRtZW50JTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Cozy Home Interior" class="mx-auto mb-4 rounded-lg shadow-lg">
+            <p>Embark on a journey to find your perfect home or a unique getaway. Our search tools (coming soon!) will help you explore diverse listings across South Africa, with a special emphasis on authentic rural experiences and welcoming small-town properties.</p>
+            <p>Whether you're looking for a long-term rental or a short, memorable stay, eKhaya connects you with hosts who embody the spirit of Ubuntu.</p>
+            <div class="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                <h4 class="font-semibold text-orange-700">Coming Soon!</h4>
+                <p class="text-sm text-orange-600">Our advanced search and filtering options are under development. Soon you'll be able to find your ideal eKhaya with ease!</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="shareSpaceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('shareSpaceModal')">&times;</span>
+            <h3 class="modal-title">Share Your Welcoming Space</h3>
+            <img src="https://images.unsplash.com/photo-1582694144915-52197b1f501d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFmcmljYW4lMjBob3NwaXRhbGl0eXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Welcoming Hands" class="mx-auto mb-4 rounded-lg shadow-lg">
+            <p>Do you have an extra room, a traditional hut, a garden cottage, or a unique space in your rural homestead or town? Open your doors and share the warmth of your eKhaya with travellers and tenants from near and far.</p>
+            <p>We provide the tools and support to make listing simple and secure, connecting you with respectful individuals seeking authentic experiences. Be part of a community that celebrates hospitality and mutual benefit.</p>
+             <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <h4 class="font-semibold text-green-700">Get Ready to Host!</h4>
+                <p class="text-sm text-green-600">Our landlord dashboard and listing tools are being crafted with care. Soon you'll be able to showcase your space to the world!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="resourceHubModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('resourceHubModal')">&times;</span>
+            <h3 class="modal-title">eKhaya Knowledge Hub</h3>
+            <p class="text-center mb-6">Empowering you with information. Our Resource Hub offers guides, templates, and advice for a smooth rental journey.</p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-orange-200">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-balance-scale text-3xl text-orange-500 mr-4"></i>
+                        <h4 class="font-semibold text-xl text-gray-700">Legal Ease</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Simplified guides to South African rental laws, your rights as a tenant or landlord, and fair practices. Understand leases, deposits, and eviction processes.</p>
+                </div>
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-green-200">
+                     <div class="flex items-center mb-3">
+                        <i class="fas fa-piggy-bank text-3xl text-green-500 mr-4"></i>
+                        <h4 class="font-semibold text-xl text-gray-700">Financial Fitness</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Tips for budgeting for rent, managing rental income, understanding costs, and planning for a secure financial future.</p>
+                </div>
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-blue-200">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-tools text-3xl text-blue-500 mr-4"></i> 
+                        <h4 class="font-semibold text-xl text-gray-700">Happy Homes</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Advice on property care, essential maintenance, creating welcoming spaces, and tips for harmonious co-living.</p>
+                </div>
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-users-cog text-3xl text-purple-500 mr-4"></i>
+                        <h4 class="font-semibold text-xl text-gray-700">Ubuntu Connect</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Learn about dispute resolution, community best practices, and how the spirit of Ubuntu can strengthen landlord-tenant relationships.</p>
+                </div>
+            </div>
+            <p class="text-center mt-6 text-sm text-gray-500">More resources and interactive tools coming soon!</p>
+        </div>
+    </div>
+
+    <div id="testimonialsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('testimonialsModal')">&times;</span>
+            <h3 class="modal-title">Voices from Our eKhaya</h3>
+            <p class="text-center mb-6">Real stories from our growing community:</p>
+            <div class="space-y-6">
+                <div class="p-5 bg-white rounded-lg shadow-md border border-gray-200">
+                    <div class="flex items-start mb-2">
+                        <img src="https://placehold.co/50x50/D4A373/4A3B31?text=ZM" alt="Zola M." class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Zola M. - Host, Transkei</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic text-gray-600">"eKhaya helped me share my traditional Xhosa homestay. It's wonderful to welcome guests and share our culture, just like my grandmother taught me. The platform feels like it truly understands our way of life."</p>
+                </div>
+                <div class="p-5 bg-white rounded-lg shadow-md border border-gray-200">
+                     <div class="flex items-start mb-2">
+                        <img src="https://placehold.co/50x50/A8D5BA/4A3B31?text=TN" alt="Thabo N." class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Thabo N. - Tenant, Gauteng Outskirts</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic text-gray-600">"Finding a room with a kind landlord was a blessing. The eKhaya resources on tenant rights were so helpful and easy to understand. I feel much more confident now."</p>
+                </div>
+                 <div class="p-5 bg-white rounded-lg shadow-md border border-gray-200">
+                     <div class="flex items-start mb-2">
+                        <img src="https://placehold.co/50x50/E76F51/FFFFFF?text=LS" alt="Lerato S." class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Lerato S. - Guest, Limpopo Village</h4>
+                             <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic text-gray-600">"My stay in a Limpopo village, arranged through a local host who learned about eKhaya, was incredible. It's more than just a bed; it's about connection. This platform has so much potential!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="genericContentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('genericContentModal')">&times;</span>
+            <h3 id="genericModalTitle" class="modal-title">Modal Title</h3>
+            <div id="genericModalBody" class="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase SDK and Config (Replace with your actual config)
+        // For this PoC, we'll simulate Firebase interactions as backend is not yet built.
+        // In a real app, you would import and initialize Firebase here.
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        // import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        // import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+        // const firebaseConfig = { /* YOUR FIREBASE CONFIG HERE */ };
+        // const app = initializeApp(firebaseConfig);
+        // const auth = getAuth(app);
+        // const db = getFirestore(app);
+        // const provider = new GoogleAuthProvider();
+
+        // --- Mock Firebase Functionality for PoC ---
+        let currentUser = null; // Simulate a logged-in user
+
+        async function mockSignInWithPopup() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const mockUser = {
+                        uid: "mockGoogleUser" + Date.now(),
+                        displayName: "Google User " + Math.floor(Math.random() * 1000),
+                        email: "googleuser" + Math.floor(Math.random() * 1000) + "@example.com"
+                    };
+                    resolve({ user: mockUser });
+                }, 500);
+            });
+        }
+
+        async function mockCreateUserWithEmailAndPassword(email, password) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (password.length < 6) {
+                        reject({ code: "auth/weak-password", message: "Password should be at least 6 characters." });
+                        return;
+                    }
+                    const mockUser = {
+                        uid: "mockEmailUser" + Date.now(),
+                        displayName: email.split('@')[0],
+                        email: email
+                    };
+                    resolve({ user: mockUser });
+                }, 500);
+            });
+        }
+        
+        async function mockSignInWithEmailAndPassword(email, password) {
+             return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Simple check for demo; real app would verify against stored credentials
+                    if (email.includes("test") && password === "password") {
+                         const mockUser = {
+                            uid: "mockLoggedInUser" + Date.now(),
+                            displayName: email.split('@')[0],
+                            email: email
+                        };
+                        resolve({ user: mockUser });
+                    } else {
+                        reject({ code: "auth/wrong-password", message: "Invalid email or password." });
+                    }
+                }, 500);
+            });
+        }
+
+        async function mockSignOut() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();
+                }, 200);
+            });
+        }
+        
+        // Simulate onAuthStateChanged
+        function mockOnAuthStateChanged(callback) {
+            // For PoC, call it once with null (logged out)
+            setTimeout(() => callback(currentUser), 100); 
+            // In a real app, this would be an actual listener
+        }
+
+        // --- End Mock Firebase Functionality ---
+
+
+        // Initialize Swiper
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 6000, // Slower transition for better readability
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade', // Added fade effect
+            fadeEffect: {
+                crossFade: true
+            },
+        });
+
+        window.openModal = function(modalId) {
+            // Close any other open modals first
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "flex";
+            }
+        }
+
+        window.closeModal = function(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        window.openModalWithContent = function(modalType, topic, imageUrl) {
+            const modal = document.getElementById('genericContentModal');
+            const titleEl = document.getElementById('genericModalTitle');
+            const bodyEl = document.getElementById('genericModalBody');
+            let title = '';
+            let bodyContent = '';
+
+            if (modalType === 'exploreModal') {
+                title = `Explore Beautiful ${topic}`;
+                bodyContent = `
+                    <img src="${imageUrl || 'https://placehold.co/550x300/777/FFF?text=Exploring...'}" alt="Explore ${topic}" class="mx-auto mb-4 rounded-lg shadow-md">
+                    <p>Dive into the unique charm of ${topic}. Discover breathtaking landscapes, rich culture, and warm hospitality.</p>
+                    <p>Our platform will soon feature detailed listings and travel guides for ${topic}. Imagine finding your perfect rural retreat or authentic homestay here!</p>
+                    <button class="mt-4 bg-E76F51 text-white py-2 px-4 rounded-lg hover:bg-opacity-80 transition w-full">See ${topic} Stays (Coming Soon)</button>
+                `;
+            } else if (modalType === 'showcaseModal') {
+                title = `Help Us Showcase ${topic}`;
+                 bodyContent = `
+                    <img src="${imageUrl || 'https://placehold.co/550x300/888/FFF?text=Showcasing...'}" alt="Showcase ${topic}" class="mx-auto mb-4 rounded-lg shadow-md">
+                    <p>Do you have stories, photos, or insights about ${topic} that the world should know? We invite you to contribute to our community showcase!</p>
+                    <p>Share what makes your village, town, or region special – from hidden gems and local traditions to community projects and natural wonders. Let's celebrate the diversity of South Africa together.</p>
+                    <button class="mt-4 bg-E76F51 text-white py-2 px-4 rounded-lg hover:bg-opacity-80 transition w-full">Contribute to ${topic} Showcase</button>
+                `;
+            }
+
+            titleEl.textContent = title;
+            bodyEl.innerHTML = bodyContent;
+            openModal('genericContentModal');
+        }
+
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = "none";
+                }
+            }
+        }
+
+        // Auth functions
+        window.switchToRegister = function() {
+            closeModal('loginModal');
+            openModal('registerModal');
+        }
+
+        window.switchToLogin = function() {
+            closeModal('registerModal');
+            openModal('loginModal');
+        }
+
+        function updateAuthUI(user) {
+            const authButtons = document.querySelector('.auth-buttons');
+            if (user) {
+                authButtons.innerHTML = `
+                    <span class="text-sm mr-3">Welcome, ${user.displayName || user.email}!</span>
+                    <button onclick="openModal('profileModal')" class="login-btn">Profile</button>
+                    <button onclick="handleLogout()">Log Out</button>
+                `;
+                document.getElementById('profileUserName').textContent = user.displayName || user.email;
+                document.getElementById('profileUserId').textContent = user.uid; // Display mock UID
+            } else {
+                authButtons.innerHTML = `
+                    <button class="login-btn" onclick="openModal('loginModal')">Login</button>
+                    <button onclick="openModal('registerModal')">Sign Up</button>
+                `;
+            }
+        }
+        
+        // Mock onAuthStateChanged listener
+        mockOnAuthStateChanged((user) => {
+            currentUser = user;
+            updateAuthUI(user);
+        });
+
+
+        // Handle Registration
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match!"); // Replace with a nicer modal alert later
+                    return;
+                }
+
+                try {
+                    // In a real app: const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const userCredential = await mockCreateUserWithEmailAndPassword(email, password);
+                    currentUser = userCredential.user;
+                    // In a real app: await setDoc(doc(db, "users", currentUser.uid), { name: name, email: email, createdAt: new Date() });
+                    console.log("User registered (mock):", currentUser);
+                    alert(`Registration successful for ${currentUser.email}! You can now log in.`); // Replace alert
+                    updateAuthUI(currentUser);
+                    closeModal('registerModal');
+                    // For PoC, directly show profile modal or a success message
+                    // openModal('profileModal'); // Or a welcome message modal
+                } catch (error) {
+                    console.error("Registration error (mock):", error);
+                    alert("Registration failed: " + error.message); // Replace alert
+                }
+            });
+        }
+
+        // Handle Login
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                try {
+                    // In a real app: const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const userCredential = await mockSignInWithEmailAndPassword(email, password);
+                    currentUser = userCredential.user;
+                    console.log("User logged in (mock):", currentUser);
+                    alert(`Welcome back, ${currentUser.displayName || currentUser.email}!`); // Replace alert
+                    updateAuthUI(currentUser);
+                    closeModal('loginModal');
+                    openModal('profileModal'); // Show profile after login
+                } catch (error) {
+                    console.error("Login error (mock):", error);
+                    alert("Login failed: " + error.message); // Replace alert
+                }
+            });
+        }
+        
+        // Handle Google Sign In/Up
+        window.handleGoogleSignIn = async function() {
+            try {
+                // In a real app: const result = await signInWithPopup(auth, provider);
+                const result = await mockSignInWithPopup();
+                currentUser = result.user;
+                // In a real app: const userDoc = await getDoc(doc(db, "users", currentUser.uid)); if (!userDoc.exists()) { await setDoc(doc(db, "users", currentUser.uid), { name: currentUser.displayName, email: currentUser.email, createdAt: new Date() }); }
+                console.log("Google Sign-In successful (mock):", currentUser);
+                alert(`Signed in with Google as ${currentUser.displayName}!`); // Replace alert
+                updateAuthUI(currentUser);
+                closeModal('loginModal');
+                closeModal('registerModal');
+                openModal('profileModal');
+            } catch (error) {
+                console.error("Google Sign-In error (mock):", error);
+                alert("Google Sign-In failed: " + error.message); // Replace alert
+            }
+        }
+        window.handleGoogleSignUp = window.handleGoogleSignIn; // Same function for sign-up for PoC
+
+        // Handle Logout
+        window.handleLogout = async function() {
+            try {
+                // In a real app: await signOut(auth);
+                await mockSignOut();
+                currentUser = null;
+                console.log("User logged out (mock)");
+                alert("You have been logged out."); // Replace alert
+                updateAuthUI(null);
+                closeModal('profileModal');
+            } catch (error) {
+                console.error("Logout error (mock):", error);
+                alert("Logout failed: " + error.message); // Replace alert
+            }
+        }
+
+    </script>
+</body>
+</html>
 
