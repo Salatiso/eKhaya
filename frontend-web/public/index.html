@@ -39,6 +39,8 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative; /* For z-index to be effective */
+            z-index: 1001; /* Ensure top bar is above modals */
         }
 
         .logo {
@@ -75,7 +77,7 @@
 
 
         .hero-carousel-container {
-            height: 50vh; /* Adjusted for top bar and icon hub */
+            height: 50vh; /* Adjust height as needed */
             width: 100%;
             position: relative;
         }
@@ -112,7 +114,7 @@
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
         }
         .slide-content p {
@@ -187,7 +189,7 @@
             margin-bottom: 12px;
             color: #E76F51; /* Consistent accent color */
         }
-        .icon-item-svg svg { /* For custom SVGs */
+        .icon-item-svg svg { /* Custom SVGs */
              width: 38px;
              height: 38px;
              margin-bottom: 12px;
@@ -200,37 +202,41 @@
         }
         /* Modal styles */
         .modal {
-            display: none;
+            display: none; /* Hidden by default */
             position: fixed;
-            z-index: 1000;
+            z-index: 1000; /* Ensure modals are above other content */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7);
+            overflow: auto; /* Enable scroll if content overflows */
+            background-color: rgba(0,0,0,0.6); /* Dim background */
+            display: flex; /* Used with align-items and justify-content to center modal */
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 20px; /* Padding for smaller screens */
         }
+
         .modal-content {
-            background-color: #FEFDFB;
-            margin: auto;
+            background-color: #FEFDFB; /* Light cream background for modal */
+            margin: auto; /* Center modal horizontally */
             padding: 25px 30px;
-            border: 1px solid #D4A373;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 650px;
-            max-height: 90vh; 
-            overflow-y: auto; 
+            border: 2px solid #D4A373; /* Ochre border, slightly thicker */
+            border-radius: 12px; /* Rounded corners */
+            width: 90%; /* Responsive width */
+            max-width: 550px; /* Max width for larger screens */
+            max-height: 90vh; /* Max height to prevent overflow on small screens */
+            overflow-y: auto; /* Scroll inside modal if content is too long */
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
+            position: relative; /* For absolute positioning of close button */
             animation: fadeInModal 0.3s ease-out;
         }
+
         @keyframes fadeInModal {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
+
         .close-button {
             color: #aaa;
             position: absolute;
@@ -243,22 +249,26 @@
         }
         .close-button:hover,
         .close-button:focus {
-            color: #4A3B31;
+            color: #4A3B31; /* Darker brown on hover */
+            text-decoration: none;
         }
+
         .modal-title {
-            color: #E76F51; 
+            color: #BF360C; /* Deep rust color for titles */
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.8rem; /* Slightly larger title */
             font-weight: 700;
             margin-bottom: 20px;
             text-align: center;
         }
+
         .modal-body p, .modal-body ul li {
             margin-bottom: 12px;
             line-height: 1.7;
-            color: #5D4037;
+            color: #5D4037; /* Slightly darker brown for body text */
             font-size: 0.95rem;
         }
+
         .modal-body img {
             max-width: 100%;
             border-radius: 8px;
@@ -266,14 +276,22 @@
             display: block;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+
         .modal-body .form-input {
             width: 100%;
-            padding: 10px;
+            padding: 12px 15px; /* Increased padding */
             margin-bottom: 15px;
-            border: 1px solid #D4A373;
+            border: 1px solid #D4A373; /* Ochre border */
             border-radius: 8px;
             box-sizing: border-box;
+            font-size: 0.95rem;
         }
+        .modal-body .form-input:focus {
+            outline: none;
+            border-color: #E76F51; /* Accent color on focus */
+            box-shadow: 0 0 0 2px rgba(231, 111, 81, 0.2);
+        }
+
         .modal-body .form-button {
             background-color: #E76F51;
             color: white;
@@ -284,26 +302,43 @@
             font-weight: 600;
             transition: background-color 0.3s;
             width: 100%;
+            font-size: 1rem;
         }
         .modal-body .form-button:hover {
-            background-color: #D95A3F;
+            background-color: #D95A3F; /* Darker shade on hover */
         }
         .modal-body .google-signin-btn {
-            background-color: #4285F4;
+            background-color: #4285F4; /* Google blue */
             color: white;
             margin-top: 10px;
         }
         .modal-body .google-signin-btn:hover {
-            background-color: #357AE8;
+            background-color: #357AE8; /* Darker Google blue */
         }
         .modal-body .or-divider {
             text-align: center;
-            margin: 15px 0;
-            color: #8C7A6B;
+            margin: 20px 0;
+            color: #8C7A6B; /* Earthy grey */
+            font-size: 0.9rem;
+            position: relative;
         }
+        .modal-body .or-divider::before,
+        .modal-body .or-divider::after {
+            content: "";
+            display: block;
+            width: 40%;
+            height: 1px;
+            background-color: #D7CCC8; /* Light brown */
+            position: absolute;
+            top: 50%;
+        }
+        .modal-body .or-divider::before { left: 0; }
+        .modal-body .or-divider::after { right: 0; }
+
         .modal-body .switch-auth-link {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
         }
         .modal-body .switch-auth-link a {
             color: #E76F51;
@@ -312,6 +347,13 @@
         }
         .modal-body .switch-auth-link a:hover {
             text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            text-align: center;
         }
 
         .swiper-pagination-bullet-active {
@@ -405,7 +447,7 @@
     <div class="icon-hub">
         <div class="icon-grid">
             <div class="icon-item" onclick="openModal('ourStoryModal')">
-                <div class="tile-svg">
+                <div class="icon-item-svg">
                     <svg class="svg-pattern-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L70 25 L50 45 L30 25 Z M50 55 L70 75 L50 95 L30 75 Z M25 50 L45 50 L50 45 L50 55 L45 50 Z M75 50 L55 50 L50 45 L50 55 L55 50 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
                 <span>Our Story</span>
@@ -415,7 +457,7 @@
                 <span>Find Your eKhaya</span>
             </div>
             <div class="icon-item" onclick="openModal('shareSpaceModal')">
-                <div class="tile-svg">
+                <div class="icon-item-svg">
                     <svg class="svg-pattern-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10 90 L10 50 A40 40 0 0 1 90 50 L90 90 Z M5 50 L95 50 M30 90 L30 60 A20 10 0 0 1 50 55 A20 10 0 0 1 70 60 L70 90 M40 90 L40 70 Q50 65 60 70 L60 90 "/></svg>
                 </div>
                 <span>Share Your Space</span>
@@ -429,7 +471,7 @@
                 <span>Showcase Village</span>
             </div>
             <div class="icon-item" onclick="openModal('testimonialsModal')">
-                <div class="tile-svg">
+                <div class="icon-item-svg">
                      <svg class="svg-pattern-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="20" fill="white"/><path d="M50 20 L50 80 M20 50 L80 50 M30 30 L70 70 M30 70 L70 30" stroke="currentColor" stroke-width="5"/></svg>
                 </div>
                 <span>Community Voices</span>
@@ -443,10 +485,11 @@
             <h3 class="modal-title">Create Your eKhaya Account</h3>
             <div class="modal-body">
                 <p>Join our community to find or list unique spaces across South Africa.</p>
+                <div id="registerError" class="error-message" style="display:none;"></div>
                 <form id="registerForm">
                     <input type="text" id="registerName" placeholder="Full Name" class="form-input" required>
                     <input type="email" id="registerEmail" placeholder="Email Address" class="form-input" required>
-                    <input type="password" id="registerPassword" placeholder="Password" class="form-input" required>
+                    <input type="password" id="registerPassword" placeholder="Password (min. 6 characters)" class="form-input" required>
                     <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" class="form-input" required>
                     <button type="submit" class="form-button">Register with Email</button>
                 </form>
@@ -465,6 +508,7 @@
             <h3 class="modal-title">Welcome Back to eKhaya</h3>
             <div class="modal-body">
                 <p>Log in to access your profile, listings, and messages.</p>
+                <div id="loginError" class="error-message" style="display:none;"></div>
                 <form id="loginForm">
                     <input type="email" id="loginEmail" placeholder="Email Address" class="form-input" required>
                     <input type="password" id="loginPassword" placeholder="Password" class="form-input" required>
@@ -484,11 +528,20 @@
             <span class="close-button" onclick="closeModal('profileModal')">&times;</span>
             <h3 class="modal-title">My eKhaya Profile</h3>
             <div class="modal-body">
-                <p>Welcome, <span id="profileUserName">User</span>!</p>
-                <p>This is where your profile information will be displayed and can be edited.</p>
-                <p>Your User ID (for Firestore): <span id="profileUserId" class="font-mono bg-gray-200 p-1 rounded"></span></p>
-                <button class="form-button mt-4" onclick="handleLogout()">Log Out</button>
+                <p>Welcome, <span id="profileUserName" class="font-semibold">User</span>!</p>
+                <p>Email: <span id="profileUserEmail" class="font-mono"></span></p>
+                <p>User ID: <span id="profileUserId" class="font-mono text-sm bg-gray-100 p-1 rounded"></span></p>
+                <button class="form-button mt-6" onclick="handleLogout()">Log Out</button>
             </div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('infoModal')">&times;</span>
+            <h3 id="infoModalTitle" class="modal-title">Notification</h3>
+            <div id="infoModalBody" class="modal-body text-center">
+                </div>
         </div>
     </div>
 
@@ -625,93 +678,228 @@
     </div>
 
     <script type="module">
-        // Firebase SDK and Config (Replace with your actual config)
-        // For this PoC, we'll simulate Firebase interactions as backend is not yet built.
-        // In a real app, you would import and initialize Firebase here.
-        // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-        // import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        // import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+        import { 
+            getAuth, 
+            GoogleAuthProvider, 
+            signInWithPopup, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged,
+            updateProfile
+        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            setDoc, 
+            getDoc,
+            serverTimestamp // For createdAt field
+        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-        // const firebaseConfig = { /* YOUR FIREBASE CONFIG HERE */ };
-        // const app = initializeApp(firebaseConfig);
-        // const auth = getAuth(app);
-        // const db = getFirestore(app);
-        // const provider = new GoogleAuthProvider();
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY", // Replace with your actual API key
+            authDomain: "ekhaya-b6fdd.firebaseapp.com",
+            projectId: "ekhaya-b6fdd",
+            storageBucket: "ekhaya-b6fdd.appspot.com",
+            messagingSenderId: "242813323857",
+            appId: "1:242813323857:web:3cb499210790b034610670",
+            measurementId: "G-4JK8WEQCY7"
+        };
 
-        // --- Mock Firebase Functionality for PoC ---
-        let currentUser = null; // Simulate a logged-in user
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const googleProvider = new GoogleAuthProvider();
 
-        async function mockSignInWithPopup() {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    const mockUser = {
-                        uid: "mockGoogleUser" + Date.now(),
-                        displayName: "Google User " + Math.floor(Math.random() * 1000),
-                        email: "googleuser" + Math.floor(Math.random() * 1000) + "@example.com"
-                    };
-                    resolve({ user: mockUser });
-                }, 500);
+        let currentUser = null; 
+
+        // Function to show a generic info/error message modal
+        function showInfoModal(title, message, isError = false) {
+            const modalTitle = document.getElementById('infoModalTitle');
+            const modalBody = document.getElementById('infoModalBody');
+            modalTitle.textContent = title;
+            modalBody.innerHTML = `<p class="${isError ? 'text-red-500' : 'text-green-600'}">${message}</p>`;
+            openModal('infoModal');
+        }
+
+        // Update UI based on auth state
+        function updateAuthUI(user) {
+            const authButtons = document.querySelector('.auth-buttons');
+            if (user) {
+                currentUser = user; // Store the current user object
+                authButtons.innerHTML = `
+                    <span class="text-sm mr-3">Welcome, ${user.displayName || user.email}!</span>
+                    <button onclick="openModal('profileModal')" class="login-btn">Profile</button>
+                    <button onclick="handleLogout()">Log Out</button>
+                `;
+                document.getElementById('profileUserName').textContent = user.displayName || user.email;
+                document.getElementById('profileUserEmail').textContent = user.email;
+                document.getElementById('profileUserId').textContent = user.uid;
+            } else {
+                currentUser = null;
+                authButtons.innerHTML = `
+                    <button class="login-btn" onclick="openModal('loginModal')">Login</button>
+                    <button onclick="openModal('registerModal')">Sign Up</button>
+                `;
+            }
+        }
+        
+        // Listen for auth state changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in
+                console.log("User signed in: ", user);
+                updateAuthUI(user);
+            } else {
+                // User is signed out
+                console.log("User signed out");
+                updateAuthUI(null);
+            }
+        });
+
+        // Handle Email Registration
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value.trim();
+                const email = document.getElementById('registerEmail').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                const errorDiv = document.getElementById('registerError');
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
+
+                if (password !== confirmPassword) {
+                    errorDiv.textContent = "Passwords do not match!";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+                if (password.length < 6) {
+                    errorDiv.textContent = "Password should be at least 6 characters.";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    
+                    // Update profile with display name
+                    await updateProfile(user, { displayName: name });
+
+                    // Create user document in Firestore
+                    await setDoc(doc(db, "users", user.uid), {
+                        uid: user.uid,
+                        displayName: name,
+                        email: user.email,
+                        createdAt: serverTimestamp(),
+                        profileType: "tenant" // Default profile type, can be updated later
+                    });
+
+                    console.log("User registered:", user);
+                    showInfoModal("Registration Successful!", `Welcome, ${name}! Your account has been created.`);
+                    closeModal('registerModal');
+                    // updateAuthUI will be called by onAuthStateChanged
+                } catch (error) {
+                    console.error("Registration error:", error);
+                    errorDiv.textContent = error.message;
+                    errorDiv.style.display = 'block';
+                }
             });
         }
 
-        async function mockCreateUserWithEmailAndPassword(email, password) {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    if (password.length < 6) {
-                        reject({ code: "auth/weak-password", message: "Password should be at least 6 characters." });
-                        return;
-                    }
-                    const mockUser = {
-                        uid: "mockEmailUser" + Date.now(),
-                        displayName: email.split('@')[0],
-                        email: email
-                    };
-                    resolve({ user: mockUser });
-                }, 500);
+        // Handle Email Login
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                const errorDiv = document.getElementById('loginError');
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
+
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    currentUser = userCredential.user;
+                    console.log("User logged in:", currentUser);
+                    showInfoModal("Login Successful!", `Welcome back, ${currentUser.displayName || currentUser.email}!`);
+                    closeModal('loginModal');
+                    // updateAuthUI will be called by onAuthStateChanged
+                    // Optionally, directly open profile modal if desired: openModal('profileModal');
+                } catch (error) {
+                    console.error("Login error:", error);
+                    errorDiv.textContent = error.message;
+                    errorDiv.style.display = 'block';
+                }
             });
         }
         
-        async function mockSignInWithEmailAndPassword(email, password) {
-             return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    // Simple check for demo; real app would verify against stored credentials
-                    if (email.includes("test") && password === "password") {
-                         const mockUser = {
-                            uid: "mockLoggedInUser" + Date.now(),
-                            displayName: email.split('@')[0],
-                            email: email
-                        };
-                        resolve({ user: mockUser });
-                    } else {
-                        reject({ code: "auth/wrong-password", message: "Invalid email or password." });
-                    }
-                }, 500);
-            });
-        }
+        // Handle Google Sign In/Up
+        window.handleGoogleSignIn = async function() {
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                currentUser = user;
 
-        async function mockSignOut() {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    resolve();
-                }, 200);
-            });
-        }
-        
-        // Simulate onAuthStateChanged
-        function mockOnAuthStateChanged(callback) {
-            // For PoC, call it once with null (logged out)
-            setTimeout(() => callback(currentUser), 100); 
-            // In a real app, this would be an actual listener
-        }
+                // Check if user exists in Firestore, if not, create a new document
+                const userDocRef = doc(db, "users", user.uid);
+                const userDocSnap = await getDoc(userDocRef);
 
-        // --- End Mock Firebase Functionality ---
+                if (!userDocSnap.exists()) {
+                    await setDoc(userDocRef, {
+                        uid: user.uid,
+                        displayName: user.displayName,
+                        email: user.email,
+                        photoURL: user.photoURL,
+                        createdAt: serverTimestamp(),
+                        profileType: "tenant" // Default profile type
+                    });
+                    console.log("New Google user created in Firestore:", user);
+                    showInfoModal("Welcome to eKhaya!", `Account created for ${user.displayName}.`);
+                } else {
+                    console.log("Google Sign-In successful:", user);
+                    showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
+                }
+                
+                updateAuthUI(user);
+                closeModal('loginModal');
+                closeModal('registerModal');
+                // Optionally, directly open profile modal: openModal('profileModal');
+            } catch (error) {
+                console.error("Google Sign-In error:", error);
+                showInfoModal("Google Sign-In Error", error.message, true);
+            }
+        }
+        window.handleGoogleSignUp = window.handleGoogleSignIn; // Using the same function for simplicity
 
+        // Handle Logout
+        window.handleLogout = async function() {
+            try {
+                await signOut(auth);
+                currentUser = null; // Clear current user
+                console.log("User logged out");
+                showInfoModal("Logged Out", "You have been successfully logged out.");
+                closeModal('profileModal');
+                // updateAuthUI will be called by onAuthStateChanged
+            } catch (error) {
+                console.error("Logout error:", error);
+                showInfoModal("Logout Error", error.message, true);
+            }
+        }
 
         // Initialize Swiper
         var swiper = new Swiper('.swiper-container', {
             loop: true,
             autoplay: {
-                delay: 6000, // Slower transition for better readability
+                delay: 6000,
                 disableOnInteraction: false,
             },
             pagination: {
@@ -722,18 +910,25 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            effect: 'fade', // Added fade effect
+            effect: 'fade',
             fadeEffect: {
                 crossFade: true
             },
         });
 
         window.openModal = function(modalId) {
-            // Close any other open modals first
-            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); // Close other modals
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.style.display = "flex";
+                // Clear previous error messages when opening auth modals
+                if (modalId === 'loginModal') {
+                    document.getElementById('loginError').style.display = 'none';
+                    document.getElementById('loginError').textContent = '';
+                } else if (modalId === 'registerModal') {
+                    document.getElementById('registerError').style.display = 'none';
+                    document.getElementById('registerError').textContent = '';
+                }
             }
         }
 
@@ -783,137 +978,6 @@
                 }
             }
         }
-
-        // Auth functions
-        window.switchToRegister = function() {
-            closeModal('loginModal');
-            openModal('registerModal');
-        }
-
-        window.switchToLogin = function() {
-            closeModal('registerModal');
-            openModal('loginModal');
-        }
-
-        function updateAuthUI(user) {
-            const authButtons = document.querySelector('.auth-buttons');
-            if (user) {
-                authButtons.innerHTML = `
-                    <span class="text-sm mr-3">Welcome, ${user.displayName || user.email}!</span>
-                    <button onclick="openModal('profileModal')" class="login-btn">Profile</button>
-                    <button onclick="handleLogout()">Log Out</button>
-                `;
-                document.getElementById('profileUserName').textContent = user.displayName || user.email;
-                document.getElementById('profileUserId').textContent = user.uid; // Display mock UID
-            } else {
-                authButtons.innerHTML = `
-                    <button class="login-btn" onclick="openModal('loginModal')">Login</button>
-                    <button onclick="openModal('registerModal')">Sign Up</button>
-                `;
-            }
-        }
-        
-        // Mock onAuthStateChanged listener
-        mockOnAuthStateChanged((user) => {
-            currentUser = user;
-            updateAuthUI(user);
-        });
-
-
-        // Handle Registration
-        const registerForm = document.getElementById('registerForm');
-        if (registerForm) {
-            registerForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const name = document.getElementById('registerName').value;
-                const email = document.getElementById('registerEmail').value;
-                const password = document.getElementById('registerPassword').value;
-                const confirmPassword = document.getElementById('registerConfirmPassword').value;
-
-                if (password !== confirmPassword) {
-                    alert("Passwords do not match!"); // Replace with a nicer modal alert later
-                    return;
-                }
-
-                try {
-                    // In a real app: const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    const userCredential = await mockCreateUserWithEmailAndPassword(email, password);
-                    currentUser = userCredential.user;
-                    // In a real app: await setDoc(doc(db, "users", currentUser.uid), { name: name, email: email, createdAt: new Date() });
-                    console.log("User registered (mock):", currentUser);
-                    alert(`Registration successful for ${currentUser.email}! You can now log in.`); // Replace alert
-                    updateAuthUI(currentUser);
-                    closeModal('registerModal');
-                    // For PoC, directly show profile modal or a success message
-                    // openModal('profileModal'); // Or a welcome message modal
-                } catch (error) {
-                    console.error("Registration error (mock):", error);
-                    alert("Registration failed: " + error.message); // Replace alert
-                }
-            });
-        }
-
-        // Handle Login
-        const loginForm = document.getElementById('loginForm');
-        if (loginForm) {
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-
-                try {
-                    // In a real app: const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                    const userCredential = await mockSignInWithEmailAndPassword(email, password);
-                    currentUser = userCredential.user;
-                    console.log("User logged in (mock):", currentUser);
-                    alert(`Welcome back, ${currentUser.displayName || currentUser.email}!`); // Replace alert
-                    updateAuthUI(currentUser);
-                    closeModal('loginModal');
-                    openModal('profileModal'); // Show profile after login
-                } catch (error) {
-                    console.error("Login error (mock):", error);
-                    alert("Login failed: " + error.message); // Replace alert
-                }
-            });
-        }
-        
-        // Handle Google Sign In/Up
-        window.handleGoogleSignIn = async function() {
-            try {
-                // In a real app: const result = await signInWithPopup(auth, provider);
-                const result = await mockSignInWithPopup();
-                currentUser = result.user;
-                // In a real app: const userDoc = await getDoc(doc(db, "users", currentUser.uid)); if (!userDoc.exists()) { await setDoc(doc(db, "users", currentUser.uid), { name: currentUser.displayName, email: currentUser.email, createdAt: new Date() }); }
-                console.log("Google Sign-In successful (mock):", currentUser);
-                alert(`Signed in with Google as ${currentUser.displayName}!`); // Replace alert
-                updateAuthUI(currentUser);
-                closeModal('loginModal');
-                closeModal('registerModal');
-                openModal('profileModal');
-            } catch (error) {
-                console.error("Google Sign-In error (mock):", error);
-                alert("Google Sign-In failed: " + error.message); // Replace alert
-            }
-        }
-        window.handleGoogleSignUp = window.handleGoogleSignIn; // Same function for sign-up for PoC
-
-        // Handle Logout
-        window.handleLogout = async function() {
-            try {
-                // In a real app: await signOut(auth);
-                await mockSignOut();
-                currentUser = null;
-                console.log("User logged out (mock)");
-                alert("You have been logged out."); // Replace alert
-                updateAuthUI(null);
-                closeModal('profileModal');
-            } catch (error) {
-                console.error("Logout error (mock):", error);
-                alert("Logout failed: " + error.message); // Replace alert
-            }
-        }
-
     </script>
 </body>
 </html>
-
