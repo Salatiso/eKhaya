@@ -39,8 +39,8 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: relative; /* For z-index to be effective */
-            z-index: 1001; /* Ensure top bar is above modals */
+            position: relative; 
+            z-index: 1001; 
         }
 
         .logo {
@@ -77,7 +77,7 @@
 
 
         .hero-carousel-container {
-            height: 50vh; /* Adjust height as needed */
+            height: 50vh; 
             width: 100%;
             position: relative;
         }
@@ -126,7 +126,7 @@
             text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
         }
         .cta-button {
-            background-color: #E76F51; /* Vibrant accent */
+            background-color: #E76F51; 
             color: white;
             padding: 12px 28px;
             border-radius: 25px;
@@ -156,7 +156,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background-color: #F0EFEB; /* Light stone color, slightly different from body */
+            background-color: #F0EFEB; 
         }
         .icon-grid {
             display: grid;
@@ -167,33 +167,33 @@
         }
         .icon-item {
             background-color: #FFFFFF;
-            border: 1px solid #D7CCC8; /* Light brown border */
-            border-radius: 16px; /* More rounded */
+            border: 1px solid #D7CCC8; 
+            border-radius: 16px; 
             padding: 20px 15px;
             text-align: center;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.07);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 140px; /* Ensure consistent height */
+            min-height: 140px; 
         }
         .icon-item:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 12px 20px rgba(0,0,0,0.1);
         }
-        .icon-item i { /* Font Awesome icons */
-            font-size: 2.2rem; /* Slightly smaller for balance */
+        .icon-item i { 
+            font-size: 2.2rem; 
             margin-bottom: 12px;
-            color: #E76F51; /* Consistent accent color */
+            color: #E76F51; 
         }
-        .icon-item-svg svg { /* Custom SVGs */
+        .icon-item-svg svg { 
              width: 38px;
              height: 38px;
              margin-bottom: 12px;
-             fill: #E76F51; /* Consistent accent color */
+             fill: #E76F51; 
         }
         .icon-item span {
             font-size: 0.9rem;
@@ -202,33 +202,33 @@
         }
         /* Modal styles */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
-            z-index: 1000; /* Ensure modals are above other content */
+            z-index: 1000; 
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; /* Enable scroll if content overflows */
-            background-color: rgba(0,0,0,0.6); /* Dim background */
-            display: flex; /* Used with align-items and justify-content to center modal */
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.6); 
+            display: flex; 
             align-items: center;
             justify-content: center;
-            padding: 20px; /* Padding for smaller screens */
+            padding: 20px; 
         }
 
         .modal-content {
-            background-color: #FEFDFB; /* Light cream background for modal */
-            margin: auto; /* Center modal horizontally */
+            background-color: #FEFDFB; 
+            margin: auto; 
             padding: 25px 30px;
-            border: 2px solid #D4A373; /* Ochre border, slightly thicker */
-            border-radius: 12px; /* Rounded corners */
-            width: 90%; /* Responsive width */
-            max-width: 550px; /* Max width for larger screens */
-            max-height: 90vh; /* Max height to prevent overflow on small screens */
-            overflow-y: auto; /* Scroll inside modal if content is too long */
+            border: 2px solid #D4A373; 
+            border-radius: 12px; 
+            width: 90%; 
+            max-width: 550px; 
+            max-height: 90vh; 
+            overflow-y: auto; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative; /* For absolute positioning of close button */
+            position: relative; 
             animation: fadeInModal 0.3s ease-out;
         }
 
@@ -249,14 +249,14 @@
         }
         .close-button:hover,
         .close-button:focus {
-            color: #4A3B31; /* Darker brown on hover */
+            color: #4A3B31; 
             text-decoration: none;
         }
 
         .modal-title {
-            color: #BF360C; /* Deep rust color for titles */
+            color: #BF360C; 
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem; /* Slightly larger title */
+            font-size: 1.8rem; 
             font-weight: 700;
             margin-bottom: 20px;
             text-align: center;
@@ -265,7 +265,7 @@
         .modal-body p, .modal-body ul li {
             margin-bottom: 12px;
             line-height: 1.7;
-            color: #5D4037; /* Slightly darker brown for body text */
+            color: #5D4037; 
             font-size: 0.95rem;
         }
 
@@ -279,16 +279,16 @@
 
         .modal-body .form-input {
             width: 100%;
-            padding: 12px 15px; /* Increased padding */
+            padding: 12px 15px; 
             margin-bottom: 15px;
-            border: 1px solid #D4A373; /* Ochre border */
+            border: 1px solid #D4A373; 
             border-radius: 8px;
             box-sizing: border-box;
             font-size: 0.95rem;
         }
         .modal-body .form-input:focus {
             outline: none;
-            border-color: #E76F51; /* Accent color on focus */
+            border-color: #E76F51; 
             box-shadow: 0 0 0 2px rgba(231, 111, 81, 0.2);
         }
 
@@ -532,6 +532,7 @@
                 <p>Email: <span id="profileUserEmail" class="font-mono"></span></p>
                 <p>User ID: <span id="profileUserId" class="font-mono text-sm bg-gray-100 p-1 rounded"></span></p>
                 <button class="form-button mt-6" onclick="handleLogout()">Log Out</button>
+                 <button class="form-button mt-4 bg-blue-500 hover:bg-blue-600" onclick="navigateToDashboard()">Go to My Dashboard</button>
             </div>
         </div>
     </div>
@@ -671,11 +672,120 @@
     <div id="genericContentModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('genericContentModal')">&times;</span>
-            <h3 id="genericModalTitle" class="modal-title">Modal Title</h3>
+            <h3 id="genericModalTitle" class="modal-title">Dynamic Title</h3>
             <div id="genericModalBody" class="modal-body">
                 </div>
         </div>
     </div>
+
+    <div id="dashboardPage" class="hidden flex-col items-center justify-center h-full w-full p-8 bg-gray-100">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">My eKhaya Dashboard</h2>
+            
+            <div class="mb-6 text-center">
+                <p class="text-lg">Welcome, <span id="dashboardUserName" class="font-semibold">User</span>!</p>
+                <p class="text-sm text-gray-600">User ID: <span id="dashboardUserId" class="font-mono"></span></p>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-700 mb-3">Profile Management</h3>
+                <p class="text-gray-600 mb-2">Complete your profile to get the most out of eKhaya.</p>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openModal('editProfileModal')">
+                    Edit My Profile
+                </button>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-700 mb-3">Role Selection</h3>
+                <p class="text-gray-600 mb-2">Are you here as a Landlord, Tenant, or both?</p>
+                <div class="flex space-x-4">
+                    <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="selectRole('landlord')">
+                        I'm a Landlord
+                    </button>
+                    <button class="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="selectRole('tenant')">
+                        I'm a Tenant
+                    </button>
+                </div>
+                 <p class="text-xs text-gray-500 mt-2">You can always switch roles or manage both later.</p>
+            </div>
+
+            <div id="landlordDashboardSection" class="hidden mt-6 p-4 border border-gray-300 rounded-lg">
+                <h4 class="text-lg font-semibold text-gray-700 mb-2">Landlord Dashboard</h4>
+                <p class="text-gray-600">Manage your properties, listings, and tenant interactions.</p>
+                <button class="mt-2 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openModal('addPropertyModal')">
+                    Add New Property
+                </button>
+                </div>
+
+            <div id="tenantDashboardSection" class="hidden mt-6 p-4 border border-gray-300 rounded-lg">
+                <h4 class="text-lg font-semibold text-gray-700 mb-2">Tenant Dashboard</h4>
+                <p class="text-gray-600">Search for homes, manage your applications, and communicate with landlords.</p>
+                <button class="mt-2 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="openModal('searchPropertiesModal')">
+                    Search Properties
+                </button>
+                </div>
+
+        </div>
+    </div>
+
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('editProfileModal')">&times;</span>
+            <h3 class="modal-title">Edit Your Profile</h3>
+            <div class="modal-body">
+                <form id="profileUpdateForm">
+                    <div class="mb-4">
+                        <label for="profileDisplayName" class="block text-gray-700 text-sm font-bold mb-2">Display Name:</label>
+                        <input type="text" id="profileDisplayName" class="form-input" placeholder="Your Name">
+                    </div>
+                    <div class="mb-4">
+                        <label for="profilePhoneNumber" class="block text-gray-700 text-sm font-bold mb-2">Phone Number (Optional):</label>
+                        <input type="tel" id="profilePhoneNumber" class="form-input" placeholder="e.g., 0821234567">
+                    </div>
+                    <div class="mb-4">
+                        <label for="profileBio" class="block text-gray-700 text-sm font-bold mb-2">Short Bio (Optional):</label>
+                        <textarea id="profileBio" class="form-input" rows="3" placeholder="Tell us a bit about yourself..."></textarea>
+                    </div>
+                     <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">I am a:</label>
+                        <div class="flex items-center mb-2">
+                            <input type="checkbox" id="roleTenant" name="userRole" value="tenant" class="mr-2">
+                            <label for="roleTenant" class="text-gray-700">Tenant</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="roleLandlord" name="userRole" value="landlord" class="mr-2">
+                            <label for="roleLandlord" class="text-gray-700">Landlord</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-button">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="addPropertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('addPropertyModal')">&times;</span>
+            <h3 class="modal-title">Add New Property</h3>
+            <div class="modal-body">
+                <p>Property listing form will be here. This includes details like address, property type, rent, photos, amenities, etc.</p>
+                <form id="addPropertyForm">
+                    <button type="submit" class="form-button mt-4">Save Property</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchPropertiesModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('searchPropertiesModal')">&times;</span>
+            <h3 class="modal-title">Search for Properties</h3>
+            <div class="modal-body">
+                <p>Search filters and results will be displayed here.</p>
+                </div>
+        </div>
+    </div>
+
 
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -689,19 +799,20 @@
             signInWithEmailAndPassword, 
             signOut, 
             onAuthStateChanged,
-            updateProfile
+            updateProfile as firebaseUpdateProfile // Renamed to avoid conflict
         } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
         import { 
             getFirestore, 
             doc, 
             setDoc, 
             getDoc,
-            serverTimestamp // For createdAt field
+            updateDoc, // Added for updating user roles
+            serverTimestamp 
         } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY", // Replace with your actual API key
+            apiKey: "YOUR_API_KEY", //  REPLACE WITH YOUR ACTUAL API KEY
             authDomain: "ekhaya-b6fdd.firebaseapp.com",
             projectId: "ekhaya-b6fdd",
             storageBucket: "ekhaya-b6fdd.appspot.com",
@@ -718,217 +829,32 @@
         const googleProvider = new GoogleAuthProvider();
 
         let currentUser = null; 
+        let userProfileData = null; // To store user data from Firestore
 
-        // Function to show a generic info/error message modal
-        function showInfoModal(title, message, isError = false) {
-            const modalTitle = document.getElementById('infoModalTitle');
-            const modalBody = document.getElementById('infoModalBody');
-            modalTitle.textContent = title;
-            modalBody.innerHTML = `<p class="${isError ? 'text-red-500' : 'text-green-600'}">${message}</p>`;
-            openModal('infoModal');
-        }
+        // --- UI Elements ---
+        const authButtonsContainer = document.querySelector('.auth-buttons');
+        const profileUserNameEl = document.getElementById('profileUserName');
+        const profileUserEmailEl = document.getElementById('profileUserEmail');
+        const profileUserIdEl = document.getElementById('profileUserId');
+        const dashboardUserNameEl = document.getElementById('dashboardUserName');
+        const dashboardUserIdEl = document.getElementById('dashboardUserId');
+        const landlordDashboardSection = document.getElementById('landlordDashboardSection');
+        const tenantDashboardSection = document.getElementById('tenantDashboardSection');
+        const mainContentArea = document.querySelector('.hero-carousel-container').parentNode; // Assuming this is the main content area
+        const dashboardPage = document.getElementById('dashboardPage');
 
-        // Update UI based on auth state
-        function updateAuthUI(user) {
-            const authButtons = document.querySelector('.auth-buttons');
-            if (user) {
-                currentUser = user; // Store the current user object
-                authButtons.innerHTML = `
-                    <span class="text-sm mr-3">Welcome, ${user.displayName || user.email}!</span>
-                    <button onclick="openModal('profileModal')" class="login-btn">Profile</button>
-                    <button onclick="handleLogout()">Log Out</button>
-                `;
-                document.getElementById('profileUserName').textContent = user.displayName || user.email;
-                document.getElementById('profileUserEmail').textContent = user.email;
-                document.getElementById('profileUserId').textContent = user.uid;
-            } else {
-                currentUser = null;
-                authButtons.innerHTML = `
-                    <button class="login-btn" onclick="openModal('loginModal')">Login</button>
-                    <button onclick="openModal('registerModal')">Sign Up</button>
-                `;
-            }
-        }
-        
-        // Listen for auth state changes
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in
-                console.log("User signed in: ", user);
-                updateAuthUI(user);
-            } else {
-                // User is signed out
-                console.log("User signed out");
-                updateAuthUI(null);
-            }
-        });
-
-        // Handle Email Registration
-        const registerForm = document.getElementById('registerForm');
-        if (registerForm) {
-            registerForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const name = document.getElementById('registerName').value.trim();
-                const email = document.getElementById('registerEmail').value.trim();
-                const password = document.getElementById('registerPassword').value;
-                const confirmPassword = document.getElementById('registerConfirmPassword').value;
-                const errorDiv = document.getElementById('registerError');
-                errorDiv.style.display = 'none';
-                errorDiv.textContent = '';
-
-                if (password !== confirmPassword) {
-                    errorDiv.textContent = "Passwords do not match!";
-                    errorDiv.style.display = 'block';
-                    return;
-                }
-                if (password.length < 6) {
-                    errorDiv.textContent = "Password should be at least 6 characters.";
-                    errorDiv.style.display = 'block';
-                    return;
-                }
-
-                try {
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    const user = userCredential.user;
-                    
-                    // Update profile with display name
-                    await updateProfile(user, { displayName: name });
-
-                    // Create user document in Firestore
-                    await setDoc(doc(db, "users", user.uid), {
-                        uid: user.uid,
-                        displayName: name,
-                        email: user.email,
-                        createdAt: serverTimestamp(),
-                        profileType: "tenant" // Default profile type, can be updated later
-                    });
-
-                    console.log("User registered:", user);
-                    showInfoModal("Registration Successful!", `Welcome, ${name}! Your account has been created.`);
-                    closeModal('registerModal');
-                    // updateAuthUI will be called by onAuthStateChanged
-                } catch (error) {
-                    console.error("Registration error:", error);
-                    errorDiv.textContent = error.message;
-                    errorDiv.style.display = 'block';
-                }
-            });
-        }
-
-        // Handle Email Login
-        const loginForm = document.getElementById('loginForm');
-        if (loginForm) {
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('loginEmail').value.trim();
-                const password = document.getElementById('loginPassword').value;
-                const errorDiv = document.getElementById('loginError');
-                errorDiv.style.display = 'none';
-                errorDiv.textContent = '';
-
-                try {
-                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                    currentUser = userCredential.user;
-                    console.log("User logged in:", currentUser);
-                    showInfoModal("Login Successful!", `Welcome back, ${currentUser.displayName || currentUser.email}!`);
-                    closeModal('loginModal');
-                    // updateAuthUI will be called by onAuthStateChanged
-                    // Optionally, directly open profile modal if desired: openModal('profileModal');
-                } catch (error) {
-                    console.error("Login error:", error);
-                    errorDiv.textContent = error.message;
-                    errorDiv.style.display = 'block';
-                }
-            });
-        }
-        
-        // Handle Google Sign In/Up
-        window.handleGoogleSignIn = async function() {
-            try {
-                const result = await signInWithPopup(auth, googleProvider);
-                const user = result.user;
-                currentUser = user;
-
-                // Check if user exists in Firestore, if not, create a new document
-                const userDocRef = doc(db, "users", user.uid);
-                const userDocSnap = await getDoc(userDocRef);
-
-                if (!userDocSnap.exists()) {
-                    await setDoc(userDocRef, {
-                        uid: user.uid,
-                        displayName: user.displayName,
-                        email: user.email,
-                        photoURL: user.photoURL,
-                        createdAt: serverTimestamp(),
-                        profileType: "tenant" // Default profile type
-                    });
-                    console.log("New Google user created in Firestore:", user);
-                    showInfoModal("Welcome to eKhaya!", `Account created for ${user.displayName}.`);
-                } else {
-                    console.log("Google Sign-In successful:", user);
-                    showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
-                }
-                
-                updateAuthUI(user);
-                closeModal('loginModal');
-                closeModal('registerModal');
-                // Optionally, directly open profile modal: openModal('profileModal');
-            } catch (error) {
-                console.error("Google Sign-In error:", error);
-                showInfoModal("Google Sign-In Error", error.message, true);
-            }
-        }
-        window.handleGoogleSignUp = window.handleGoogleSignIn; // Using the same function for simplicity
-
-        // Handle Logout
-        window.handleLogout = async function() {
-            try {
-                await signOut(auth);
-                currentUser = null; // Clear current user
-                console.log("User logged out");
-                showInfoModal("Logged Out", "You have been successfully logged out.");
-                closeModal('profileModal');
-                // updateAuthUI will be called by onAuthStateChanged
-            } catch (error) {
-                console.error("Logout error:", error);
-                showInfoModal("Logout Error", error.message, true);
-            }
-        }
-
-        // Initialize Swiper
-        var swiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: {
-                delay: 6000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
-        });
-
+        // --- Modal Functions ---
         window.openModal = function(modalId) {
-            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); // Close other modals
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.style.display = "flex";
-                // Clear previous error messages when opening auth modals
-                if (modalId === 'loginModal') {
-                    document.getElementById('loginError').style.display = 'none';
-                    document.getElementById('loginError').textContent = '';
-                } else if (modalId === 'registerModal') {
-                    document.getElementById('registerError').style.display = 'none';
-                    document.getElementById('registerError').textContent = '';
-                }
+                // Clear previous error messages
+                const errorDivs = modal.querySelectorAll('.error-message');
+                errorDivs.forEach(div => {
+                    div.style.display = 'none';
+                    div.textContent = '';
+                });
             }
         }
 
@@ -937,6 +863,15 @@
             if (modal) {
                 modal.style.display = "none";
             }
+        }
+
+        window.showInfoModal = function(title, message, isError = false) {
+            const modalTitle = document.getElementById('infoModalTitle');
+            const modalBody = document.getElementById('infoModalBody');
+            modalTitle.textContent = title;
+            modalBody.innerHTML = `<p class="${isError ? 'text-red-700' : 'text-green-700'}">${message}</p>
+                                   <button class="form-button mt-4" onclick="closeModal('infoModal')">OK</button>`;
+            openModal('infoModal');
         }
         
         window.openModalWithContent = function(modalType, topic, imageUrl) {
@@ -952,15 +887,15 @@
                     <img src="${imageUrl || 'https://placehold.co/550x300/777/FFF?text=Exploring...'}" alt="Explore ${topic}" class="mx-auto mb-4 rounded-lg shadow-md">
                     <p>Dive into the unique charm of ${topic}. Discover breathtaking landscapes, rich culture, and warm hospitality.</p>
                     <p>Our platform will soon feature detailed listings and travel guides for ${topic}. Imagine finding your perfect rural retreat or authentic homestay here!</p>
-                    <button class="mt-4 bg-E76F51 text-white py-2 px-4 rounded-lg hover:bg-opacity-80 transition w-full">See ${topic} Stays (Coming Soon)</button>
+                    <button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="closeModal('genericContentModal')">Explore Listings (Coming Soon)</button>
                 `;
             } else if (modalType === 'showcaseModal') {
                 title = `Help Us Showcase ${topic}`;
                  bodyContent = `
                     <img src="${imageUrl || 'https://placehold.co/550x300/888/FFF?text=Showcasing...'}" alt="Showcase ${topic}" class="mx-auto mb-4 rounded-lg shadow-md">
                     <p>Do you have stories, photos, or insights about ${topic} that the world should know? We invite you to contribute to our community showcase!</p>
-                    <p>Share what makes your village, town, or region special – from hidden gems and local traditions to community projects and natural wonders. Let's celebrate the diversity of South Africa together.</p>
-                    <button class="mt-4 bg-E76F51 text-white py-2 px-4 rounded-lg hover:bg-opacity-80 transition w-full">Contribute to ${topic} Showcase</button>
+                    <p>Share what makes your village, town, or region special – from hidden gems, local traditions, to community projects and natural wonders. Let's celebrate the diversity of South Africa together.</p>
+                    <button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="closeModal('genericContentModal')">Contribute (Coming Soon)</button>
                 `;
             }
 
@@ -978,6 +913,346 @@
                 }
             }
         }
+
+        // --- Auth UI and State Management ---
+        function updateAuthUI(user) {
+            if (user) {
+                currentUser = user;
+                authButtonsContainer.innerHTML = `
+                    <span class="text-sm mr-3 text-white">Welcome, ${user.displayName || user.email}!</span>
+                    <button onclick="navigateToDashboard()" class="login-btn">Dashboard</button>
+                    <button onclick="handleLogout()">Log Out</button>
+                `;
+                // Populate profile modal (can be enhanced later)
+                if (profileUserNameEl) profileUserNameEl.textContent = user.displayName || user.email;
+                if (profileUserEmailEl) profileUserEmailEl.textContent = user.email;
+                if (profileUserIdEl) profileUserIdEl.textContent = user.uid;
+                
+                // Populate dashboard placeholders
+                if (dashboardUserNameEl) dashboardUserNameEl.textContent = user.displayName || user.email;
+                if (dashboardUserIdEl) dashboardUserIdEl.textContent = user.uid;
+
+                // Fetch user profile data from Firestore to determine roles
+                fetchUserProfile(user.uid);
+
+            } else {
+                currentUser = null;
+                userProfileData = null; // Clear profile data on logout
+                authButtonsContainer.innerHTML = `
+                    <button class="login-btn" onclick="openModal('loginModal')">Login</button>
+                    <button onclick="openModal('registerModal')">Sign Up</button>
+                `;
+                // Hide dashboard and show homepage content if logged out
+                if (dashboardPage) dashboardPage.classList.add('hidden');
+                if (mainContentArea) mainContentArea.classList.remove('hidden');
+            }
+        }
+        
+        async function fetchUserProfile(uid) {
+            if (!uid) return;
+            try {
+                const userDocRef = doc(db, "users", uid);
+                const docSnap = await getDoc(userDocRef);
+                if (docSnap.exists()) {
+                    userProfileData = docSnap.data();
+                    console.log("User profile data:", userProfileData);
+                    // Update UI based on roles (e.g., show/hide landlord/tenant sections in dashboard)
+                    updateDashboardBasedOnRole();
+                    // Pre-fill profile form if editProfileModal is open
+                    if (document.getElementById('editProfileModal').style.display === 'flex') {
+                        populateProfileForm();
+                    }
+                } else {
+                    console.log("No such user document!");
+                    // Handle case where user is authenticated but no Firestore doc (should ideally not happen with current flow)
+                }
+            } catch (error) {
+                console.error("Error fetching user profile:", error);
+            }
+        }
+
+        function updateDashboardBasedOnRole() {
+            if (!userProfileData) return;
+
+            if (userProfileData.roles && userProfileData.roles.includes('landlord')) {
+                landlordDashboardSection.classList.remove('hidden');
+            } else {
+                landlordDashboardSection.classList.add('hidden');
+            }
+
+            if (userProfileData.roles && userProfileData.roles.includes('tenant')) {
+                tenantDashboardSection.classList.remove('hidden');
+            } else {
+                tenantDashboardSection.classList.add('hidden');
+            }
+        }
+        
+        window.navigateToDashboard = function() {
+            // Hide homepage content and show dashboard
+            if (mainContentArea) mainContentArea.classList.add('hidden');
+            if (dashboardPage) dashboardPage.classList.remove('hidden');
+            closeModal('profileModal'); // Close profile modal if open
+            if (currentUser) {
+                fetchUserProfile(currentUser.uid); // Ensure dashboard reflects latest roles
+            }
+        }
+
+        function navigateToHome() {
+            if (dashboardPage) dashboardPage.classList.add('hidden');
+            if (mainContentArea) mainContentArea.classList.remove('hidden');
+        }
+
+
+        // Listen for auth state changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                updateAuthUI(user);
+            } else {
+                updateAuthUI(null);
+                navigateToHome(); // If user logs out, go back to home view
+            }
+        });
+
+        // --- Authentication Functions ---
+        window.switchToRegister = function() {
+            closeModal('loginModal');
+            openModal('registerModal');
+        }
+
+        window.switchToLogin = function() {
+            closeModal('registerModal');
+            openModal('loginModal');
+        }
+
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value.trim();
+                const email = document.getElementById('registerEmail').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                const errorDiv = document.getElementById('registerError');
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
+
+                if (!name) {
+                    errorDiv.textContent = "Please enter your full name.";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    errorDiv.textContent = "Passwords do not match!";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+                if (password.length < 6) {
+                    errorDiv.textContent = "Password should be at least 6 characters.";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    
+                    await firebaseUpdateProfile(user, { displayName: name });
+
+                    await setDoc(doc(db, "users", user.uid), {
+                        uid: user.uid,
+                        displayName: name,
+                        email: user.email,
+                        createdAt: serverTimestamp(),
+                        roles: ["tenant"] // Default role, can be changed in profile
+                    });
+
+                    console.log("User registered:", user);
+                    showInfoModal("Registration Successful!", `Welcome, ${name}! Your account has been created. Please complete your profile.`);
+                    closeModal('registerModal');
+                    navigateToDashboard(); // Go to dashboard to complete profile
+                } catch (error) {
+                    console.error("Registration error:", error);
+                    errorDiv.textContent = error.message.replace('Firebase: ', ''); // Cleaner error message
+                    errorDiv.style.display = 'block';
+                }
+            });
+        }
+
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                const errorDiv = document.getElementById('loginError');
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
+
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    console.log("User logged in:", userCredential.user);
+                    closeModal('loginModal');
+                    navigateToDashboard();
+                } catch (error) {
+                    console.error("Login error:", error);
+                    errorDiv.textContent = "Invalid email or password. Please try again."; // User-friendly message
+                    errorDiv.style.display = 'block';
+                }
+            });
+        }
+        
+        window.handleGoogleSignIn = async function() {
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                
+                const userDocRef = doc(db, "users", user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (!userDocSnap.exists()) {
+                    await setDoc(userDocRef, {
+                        uid: user.uid,
+                        displayName: user.displayName,
+                        email: user.email,
+                        photoURL: user.photoURL || null,
+                        createdAt: serverTimestamp(),
+                        roles: ["tenant"] // Default role
+                    });
+                    console.log("New Google user created in Firestore:", user);
+                    showInfoModal("Welcome to eKhaya!", `Account created for ${user.displayName}. Please complete your profile.`);
+                } else {
+                    console.log("Google Sign-In successful:", user);
+                     showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
+                }
+                
+                closeModal('loginModal');
+                closeModal('registerModal');
+                navigateToDashboard();
+            } catch (error) {
+                console.error("Google Sign-In error:", error);
+                let errorMessage = "Google Sign-In failed. Please try again.";
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorMessage = "Google Sign-In cancelled.";
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = "Network error. Please check your connection and try again.";
+                }
+                showInfoModal("Google Sign-In Error", errorMessage, true);
+            }
+        }
+        window.handleGoogleSignUp = window.handleGoogleSignIn;
+
+        window.handleLogout = async function() {
+            try {
+                await signOut(auth);
+                console.log("User logged out");
+                showInfoModal("Logged Out", "You have been successfully logged out.");
+                closeModal('profileModal');
+                navigateToHome(); // Ensure user is redirected to home after logout
+            } catch (error) {
+                console.error("Logout error:", error);
+                showInfoModal("Logout Error", error.message, true);
+            }
+        }
+
+        // --- Profile Management ---
+        const profileUpdateForm = document.getElementById('profileUpdateForm');
+        if (profileUpdateForm) {
+            profileUpdateForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!currentUser) {
+                    showInfoModal("Error", "You must be logged in to update your profile.", true);
+                    return;
+                }
+
+                const displayName = document.getElementById('profileDisplayName').value.trim();
+                const phoneNumber = document.getElementById('profilePhoneNumber').value.trim();
+                const bio = document.getElementById('profileBio').value.trim();
+                const isTenant = document.getElementById('roleTenant').checked;
+                const isLandlord = document.getElementById('roleLandlord').checked;
+                
+                let roles = [];
+                if (isTenant) roles.push('tenant');
+                if (isLandlord) roles.push('landlord');
+                if (roles.length === 0) roles.push('guest'); // Default to guest if none selected
+
+                try {
+                    const userDocRef = doc(db, "users", currentUser.uid);
+                    await setDoc(userDocRef, { 
+                        displayName: displayName || currentUser.displayName, // Keep existing if blank
+                        phoneNumber: phoneNumber || null,
+                        bio: bio || null,
+                        roles: roles,
+                        updatedAt: serverTimestamp()
+                    }, { merge: true }); // Merge to avoid overwriting existing fields like email, createdAt
+
+                    // Update Firebase Auth profile if display name changed
+                    if (displayName && displayName !== currentUser.displayName) {
+                        await firebaseUpdateProfile(currentUser, { displayName: displayName });
+                    }
+                    
+                    showInfoModal("Profile Updated", "Your profile has been successfully updated.");
+                    closeModal('editProfileModal');
+                    fetchUserProfile(currentUser.uid); // Refresh profile data and dashboard view
+                } catch (error) {
+                    console.error("Error updating profile:", error);
+                    showInfoModal("Profile Update Failed", "Could not update your profile. Please try again.", true);
+                }
+            });
+        }
+
+        window.populateProfileForm = function() {
+            if (userProfileData) {
+                document.getElementById('profileDisplayName').value = userProfileData.displayName || '';
+                document.getElementById('profilePhoneNumber').value = userProfileData.phoneNumber || '';
+                document.getElementById('profileBio').value = userProfileData.bio || '';
+                document.getElementById('roleTenant').checked = userProfileData.roles?.includes('tenant') || false;
+                document.getElementById('roleLandlord').checked = userProfileData.roles?.includes('landlord') || false;
+            }
+        }
+        
+        // When opening the edit profile modal, populate it if user data is available
+        const editProfileModal = document.getElementById('editProfileModal');
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === "style" && editProfileModal.style.display === "flex" && currentUser) {
+                    fetchUserProfile(currentUser.uid).then(populateProfileForm); // Fetch latest then populate
+                }
+            });
+        });
+        observer.observe(editProfileModal, { attributes: true });
+
+
+        window.selectRole = async function(role) {
+            if (!currentUser) return;
+            
+            let newRoles = userProfileData && userProfileData.roles ? [...userProfileData.roles] : [];
+            if (!newRoles.includes(role)) {
+                newRoles.push(role);
+            }
+            // If selecting one role, ensure 'guest' is removed if present and not the only role
+            if (newRoles.length > 1) {
+                newRoles = newRoles.filter(r => r !== 'guest');
+            }
+            if (newRoles.length === 0) newRoles.push('guest'); // Default to guest if all roles unchecked
+
+            try {
+                const userDocRef = doc(db, "users", currentUser.uid);
+                await updateDoc(userDocRef, {
+                    roles: newRoles,
+                    updatedAt: serverTimestamp()
+                });
+                showInfoModal("Role Updated", `You are now set as a ${role}.`);
+                fetchUserProfile(currentUser.uid); // Refresh dashboard
+            } catch (error) {
+                console.error("Error updating role:", error);
+                showInfoModal("Error", "Could not update your role. Please try again.", true);
+            }
+        }
+
+
+        // Initial UI setup
+        updateAuthUI(auth.currentUser); // Check initial auth state on load
+
     </script>
 </body>
 </html>
