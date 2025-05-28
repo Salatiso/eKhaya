@@ -78,10 +78,9 @@
         }
 
         .main-content-area { /* Wrapper for carousel and icon hub */
-            display: block; /* Initially visible */
-            flex-grow: 1; /* Allows content to take up available space */
-            display: flex;
+            display: flex; /* Use flex to manage visibility */
             flex-direction: column;
+            flex-grow: 1; 
         }
 
         .hero-carousel-container {
@@ -402,6 +401,7 @@
             padding: 20px;
             background-color: #F9F9F9; /* Light grey background for dashboard */
             min-height: calc(100vh - 60px); /* Adjust based on top-bar height */
+            width: 100%; /* Ensure it takes full width when visible */
         }
         .dashboard-container {
             background-color: white;
@@ -446,6 +446,7 @@
             font-weight: 500;
             transition: background-color 0.3s;
             margin-right: 10px;
+            margin-bottom: 10px; /* Add margin for stacking on small screens */
         }
         .dashboard-button:hover {
             background-color: #45a049;
@@ -474,6 +475,12 @@
             display: inline-block;
             margin-right: 1rem;
             font-weight: normal;
+        }
+
+        /* Ensure content below header is visible */
+        .content-wrapper {
+            flex-grow: 1; /* Allows this div to take up remaining space */
+            overflow-y: auto; /* Allows scrolling within this area if needed */
         }
 
     </style>
@@ -776,7 +783,7 @@
     </div>
 
     <div id="dashboardPage" class="hidden flex-col items-center justify-start min-h-screen w-full p-4 md:p-8 bg-gray-100">
-        <div class="bg-white p-6 md:p-8 rounded-lg shadow-xl w-full max-w-4xl mt-8">
+        <div class="dashboard-container">
             <div class="dashboard-header">
                 <h2>My eKhaya Dashboard</h2>
                 <p class="text-lg">Welcome, <span id="dashboardUserName" class="font-semibold">User</span>!</p>
@@ -784,7 +791,7 @@
             </div>
 
             <div class="dashboard-section">
-                <h3 class="text-xl font-semibold text-gray-700 mb-3">Profile Management</h3>
+                <h3 >Profile Management</h3>
                 <p class="text-gray-600 mb-3">Keep your information up-to-date and manage your roles on eKhaya.</p>
                 <button class="dashboard-button bg-blue-500 hover:bg-blue-700" onclick="openModal('editProfileModal')">
                     <i class="fas fa-user-edit mr-2"></i>Edit My Profile
@@ -792,37 +799,34 @@
             </div>
 
             <div class="dashboard-section">
-                <h3 class="text-xl font-semibold text-gray-700 mb-3">My Roles</h3>
-                <p class="text-gray-600 mb-3">Select how you'd like to use eKhaya. You can be both a landlord and a tenant!</p>
-                <div id="currentRolesDisplay" class="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 text-blue-700">
+                <h3>My Roles</h3>
+                <p class="text-gray-600 mb-3">Your current active roles. You can change these in your profile settings.</p>
+                <div id="currentRolesDisplay" class="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 text-blue-700 rounded">
                     Loading roles...
                 </div>
-                <button class="dashboard-button bg-gray-500 hover:bg-gray-600" onclick="openModal('editProfileModal')">
-                    <i class="fas fa-user-cog mr-2"></i>Change Roles
-                </button>
             </div>
 
             <div id="landlordDashboardSection" class="dashboard-section hidden">
-                <h3 class="text-xl font-semibold text-green-700 mb-3"><i class="fas fa-house-user mr-2"></i>Landlord Dashboard</h3>
+                <h3><i class="fas fa-house-user mr-2"></i>Landlord Dashboard</h3>
                 <p class="text-gray-600 mb-3">Manage your properties, view bookings, and connect with tenants.</p>
                 <button class="dashboard-button bg-green-500 hover:bg-green-700" onclick="openModal('addPropertyModal')">
                     <i class="fas fa-plus-circle mr-2"></i>Add New Property
                 </button>
                 <button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
-                    <i class="fas fa-list-alt mr-2"></i>View My Listings
+                    <i class="fas fa-list-alt mr-2"></i>View My Listings (Coming Soon)
                 </button>
-                </div>
+            </div>
 
             <div id="tenantDashboardSection" class="dashboard-section hidden">
-                <h3 class="text-xl font-semibold text-indigo-700 mb-3"><i class="fas fa-bed mr-2"></i>Tenant Dashboard</h3>
+                <h3><i class="fas fa-bed mr-2"></i>Tenant Dashboard</h3>
                 <p class="text-gray-600 mb-3">Find your next home, manage your applications, and communicate with landlords.</p>
                 <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700" onclick="openModal('searchPropertiesModal')">
-                    <i class="fas fa-search mr-2"></i>Search Properties
+                    <i class="fas fa-search mr-2"></i>Search Properties (Coming Soon)
                 </button>
                 <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
-                    <i class="fas fa-heart mr-2"></i>My Saved Properties
+                    <i class="fas fa-heart mr-2"></i>My Saved Properties (Coming Soon)
                 </button>
-                </div>
+            </div>
              <button class="dashboard-button bg-gray-700 hover:bg-gray-800 mt-6 w-full md:w-auto" onclick="navigateToHome()">
                 <i class="fas fa-arrow-left mr-2"></i>Back to Home
             </button>
@@ -850,11 +854,11 @@
                     </div>
                      <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">I am a:</label>
-                        <div class="flex items-center mb-2">
+                        <div class="flex items-center mb-2 checkbox-group">
                             <input type="checkbox" id="roleTenant" name="userRole" value="tenant" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
                             <label for="roleTenant" class="text-gray-700">Tenant</label>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center checkbox-group">
                             <input type="checkbox" id="roleLandlord" name="userRole" value="landlord" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
                             <label for="roleLandlord" class="text-gray-700">Landlord</label>
                         </div>
@@ -915,10 +919,10 @@
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY", //  REPLACE WITH YOUR ACTUAL API KEY
+            apiKey: "AIzaSyC_lv9ljxwjWTYZ0E94FTaoIljPKpRssto", // YOUR PROVIDED API KEY
             authDomain: "ekhaya-b6fdd.firebaseapp.com",
             projectId: "ekhaya-b6fdd",
-            storageBucket: "ekhaya-b6fdd.appspot.com", // Corrected from .firebaseapp.com
+            storageBucket: "ekhaya-b6fdd.appspot.com", // Corrected this line
             messagingSenderId: "242813323857",
             appId: "1:242813323857:web:3cb499210790b034610670",
             measurementId: "G-4JK8WEQCY7"
@@ -931,7 +935,7 @@
         const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
 
-        let currentUser = null; 
+        let currentAuthUser = null; // Renamed to avoid confusion with userProfileData
         let userProfileData = null; // To store user data from Firestore
 
         // --- UI Elements ---
@@ -960,8 +964,7 @@
                     div.style.display = 'none';
                     div.textContent = '';
                 });
-                // If opening editProfileModal, populate it
-                if (modalId === 'editProfileModal' && currentUser) {
+                if (modalId === 'editProfileModal' && currentAuthUser) {
                     populateProfileForm();
                 }
             }
@@ -1025,7 +1028,7 @@
         // --- Auth UI and State Management ---
         async function updateAuthUI(user) {
             if (user) {
-                currentUser = user;
+                currentAuthUser = user; // Store the Firebase auth user object
                 await fetchUserProfile(user.uid); // Fetch profile data which includes roles
 
                 authButtonsContainer.innerHTML = `
@@ -1043,14 +1046,14 @@
                 updateDashboardBasedOnRole();
 
             } else {
-                currentUser = null;
+                currentAuthUser = null;
                 userProfileData = null;
                 authButtonsContainer.innerHTML = `
                     <button class="login-btn" onclick="openModal('loginModal')">Login</button>
                     <button onclick="openModal('registerModal')">Sign Up</button>
                 `;
-                if (dashboardPage) dashboardPage.classList.add('hidden');
-                if (mainContentArea) mainContentArea.classList.remove('hidden');
+                if (dashboardPage) dashboardPage.style.display = 'none'; // Hide dashboard
+                if (mainContentArea) mainContentArea.style.display = 'flex'; // Show homepage content
             }
         }
         
@@ -1063,41 +1066,62 @@
                     userProfileData = docSnap.data();
                     console.log("User profile data:", userProfileData);
                 } else {
-                    console.log("No such user document! This might be a new user.");
+                    console.log("No such user document! This might be a new user or data not yet synced.");
                     // For a new Google sign-in, the document might not exist yet if onAuthStateChanged runs before Firestore write.
                     // We handle user doc creation in the sign-in/register functions.
-                    userProfileData = { displayName: auth.currentUser.displayName, email: auth.currentUser.email, uid: auth.currentUser.uid, roles: ['guest'] }; // Default if not found
+                    // If auth.currentUser exists, use its details as a temporary fallback
+                    if(auth.currentUser) {
+                        userProfileData = { 
+                            displayName: auth.currentUser.displayName, 
+                            email: auth.currentUser.email, 
+                            uid: auth.currentUser.uid, 
+                            roles: ['guest'] // Default if not found, or could be an empty array
+                        };
+                    } else {
+                        userProfileData = null; // No user, no profile data
+                    }
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
-                userProfileData = { displayName: auth.currentUser.displayName, email: auth.currentUser.email, uid: auth.currentUser.uid, roles: ['guest'] }; // Fallback
+                if(auth.currentUser) {
+                    userProfileData = { 
+                        displayName: auth.currentUser.displayName, 
+                        email: auth.currentUser.email, 
+                        uid: auth.currentUser.uid, 
+                        roles: ['guest'] 
+                    }; // Fallback on error
+                } else {
+                    userProfileData = null;
+                }
             }
         }
 
         function updateDashboardBasedOnRole() {
-            if (!userProfileData || !dashboardPage.classList.contains('hidden')) { // Only update if dashboard is visible
-                if (userProfileData && userProfileData.roles) {
-                    currentRolesDisplay.textContent = `Current Roles: ${userProfileData.roles.join(', ') || 'Guest'}`;
-                    if (userProfileData.roles.includes('landlord')) {
-                        landlordDashboardSection.classList.remove('hidden');
-                    } else {
-                        landlordDashboardSection.classList.add('hidden');
-                    }
-                    if (userProfileData.roles.includes('tenant')) {
-                        tenantDashboardSection.classList.remove('hidden');
-                    } else {
-                        tenantDashboardSection.classList.add('hidden');
-                    }
-                } else {
-                    currentRolesDisplay.textContent = "Current Roles: Guest";
-                    landlordDashboardSection.classList.add('hidden');
-                    tenantDashboardSection.classList.add('hidden');
-                }
+            if (!userProfileData) {
+                currentRolesDisplay.textContent = "Roles: Not available";
+                landlordDashboardSection.classList.add('hidden');
+                tenantDashboardSection.classList.add('hidden');
+                return;
+            }
+
+            const roles = userProfileData.roles || ['guest']; // Default to guest if roles undefined
+            currentRolesDisplay.textContent = `Current Roles: ${roles.join(', ')}`;
+
+            if (roles.includes('landlord')) {
+                landlordDashboardSection.classList.remove('hidden');
+            } else {
+                landlordDashboardSection.classList.add('hidden');
+            }
+
+            if (roles.includes('tenant')) {
+                tenantDashboardSection.classList.remove('hidden');
+            } else {
+                tenantDashboardSection.classList.add('hidden');
             }
         }
         
         window.navigateToDashboard = async () => {
-            if (!currentUser) {
+            if (!currentAuthUser) {
                 openModal('loginModal'); // Prompt login if not authenticated
                 return;
             }
@@ -1106,8 +1130,7 @@
             
             closeModal('profileModal'); // Close profile modal if open
             
-            // Ensure userProfileData is fresh
-            await fetchUserProfile(currentUser.uid);
+            await fetchUserProfile(currentAuthUser.uid); // Ensure userProfileData is fresh
             updateDashboardBasedOnRole(); // Update dashboard sections based on roles
         }
 
@@ -1116,10 +1139,12 @@
             if (mainContentArea) mainContentArea.style.display = 'flex'; // Show homepage content
         }
 
-        onAuthStateChanged(auth, (user) => {
-            updateAuthUI(user);
-            if (!user) { // If logged out, ensure dashboard is hidden
-                navigateToHome();
+        onAuthStateChanged(auth, async (user) => { // Made async to await fetchUserProfile
+            if (user) {
+                await updateAuthUI(user); // Ensure profile data is loaded before UI updates fully
+            } else {
+                updateAuthUI(null);
+                navigateToHome(); 
             }
         });
 
@@ -1168,20 +1193,19 @@
                     
                     await firebaseUpdateProfile(user, { displayName: name });
 
-                    // Create user document in Firestore
                     const userDocRef = doc(db, "users", user.uid);
                     await setDoc(userDocRef, {
                         uid: user.uid,
                         displayName: name,
                         email: user.email,
                         createdAt: serverTimestamp(),
-                        roles: ["tenant"] // Default role
+                        roles: ["guest"] // Start as guest, can update profile later
                     });
 
                     console.log("User registered:", user);
                     showInfoModal("Registration Successful!", `Welcome, ${name}! Your account has been created. Please complete your profile on the dashboard.`);
                     closeModal('registerModal');
-                    navigateToDashboard(); 
+                    // onAuthStateChanged will handle UI update and navigation
                 } catch (error) {
                     console.error("Registration error:", error);
                     errorDiv.textContent = error.message.replace('Firebase: ', '');
@@ -1204,7 +1228,7 @@
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
                     console.log("User logged in:", userCredential.user);
                     closeModal('loginModal');
-                    navigateToDashboard();
+                    // onAuthStateChanged will handle UI update and navigation
                 } catch (error) {
                     console.error("Login error:", error);
                     errorDiv.textContent = "Invalid email or password. Please try again.";
@@ -1228,18 +1252,18 @@
                         email: user.email,
                         photoURL: user.photoURL || null,
                         createdAt: serverTimestamp(),
-                        roles: ["tenant"] // Default role
+                        roles: ["guest"] // Default role
                     });
                     console.log("New Google user created in Firestore:", user);
                     showInfoModal("Welcome to eKhaya!", `Account created for ${user.displayName}. Please complete your profile on the dashboard.`);
                 } else {
                     console.log("Google Sign-In successful:", user);
-                    showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
+                     showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
                 }
                 
                 closeModal('loginModal');
                 closeModal('registerModal');
-                navigateToDashboard();
+                // onAuthStateChanged will handle UI update and navigation
             } catch (error) {
                 console.error("Google Sign-In error:", error);
                 let errorMessage = "Google Sign-In failed. Please try again.";
@@ -1259,7 +1283,7 @@
                 console.log("User logged out");
                 showInfoModal("Logged Out", "You have been successfully logged out.");
                 closeModal('profileModal');
-                navigateToHome();
+                // onAuthStateChanged will handle UI update and navigation to home
             } catch (error) {
                 console.error("Logout error:", error);
                 showInfoModal("Logout Error", error.message, true);
@@ -1275,6 +1299,9 @@
                     showInfoModal("Error", "You must be logged in to update your profile.", true);
                     return;
                 }
+                const errorDiv = document.getElementById('profileUpdateError');
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
 
                 const displayName = document.getElementById('profileDisplayName').value.trim();
                 const phoneNumber = document.getElementById('profilePhoneNumber').value.trim();
@@ -1285,25 +1312,24 @@
                 let roles = [];
                 if (isTenant) roles.push('tenant');
                 if (isLandlord) roles.push('landlord');
-                if (roles.length === 0 && userProfileData && userProfileData.roles) { // Keep existing roles if none selected
-                    roles = userProfileData.roles;
-                } else if (roles.length === 0) {
-                    roles.push('guest'); // Default to guest if no roles ever set
+                if (roles.length === 0) { // If no role is selected, keep existing or default to guest
+                    roles = userProfileData && userProfileData.roles && userProfileData.roles.length > 0 ? userProfileData.roles : ['guest'];
                 }
 
 
                 try {
                     const userDocRef = doc(db, "users", currentUser.uid);
                     const updateData = {
-                        displayName: displayName || currentUser.displayName,
+                        displayName: displayName || currentUser.displayName, // Keep existing if blank
                         phoneNumber: phoneNumber || null,
                         bio: bio || null,
                         roles: roles,
                         updatedAt: serverTimestamp()
                     };
 
-                    await setDoc(userDocRef, updateData, { merge: true });
+                    await setDoc(userDocRef, updateData, { merge: true }); 
 
+                    // Update Firebase Auth profile if display name changed
                     if (displayName && displayName !== currentUser.displayName) {
                         await firebaseUpdateProfile(currentUser, { displayName: displayName });
                     }
@@ -1311,11 +1337,12 @@
                     showInfoModal("Profile Updated", "Your profile has been successfully updated.");
                     closeModal('editProfileModal');
                     await fetchUserProfile(currentUser.uid); // Refresh profile data
+                    updateAuthUI(currentUser); // Re-render auth UI elements like welcome message
                     updateDashboardBasedOnRole(); // Explicitly update dashboard view
                 } catch (error) {
                     console.error("Error updating profile:", error);
-                    document.getElementById('profileUpdateError').textContent = "Error updating profile: " + error.message;
-                    document.getElementById('profileUpdateError').style.display = 'block';
+                    errorDiv.textContent = "Error updating profile: " + error.message;
+                    errorDiv.style.display = 'block';
                 }
             });
         }
@@ -1327,61 +1354,33 @@
                 document.getElementById('profileBio').value = userProfileData.bio || '';
                 document.getElementById('roleTenant').checked = userProfileData.roles?.includes('tenant') || false;
                 document.getElementById('roleLandlord').checked = userProfileData.roles?.includes('landlord') || false;
-            } else if (currentUser) { // Fallback if userProfileData is not yet loaded but currentUser exists
+            } else if (currentUser) { 
                  document.getElementById('profileDisplayName').value = currentUser.displayName || '';
                  document.getElementById('profilePhoneNumber').value = '';
                  document.getElementById('profileBio').value = '';
-                 document.getElementById('roleTenant').checked = false;
+                 document.getElementById('roleTenant').checked = true; // Default to tenant if no profile data
                  document.getElementById('roleLandlord').checked = false;
             }
         }
         
         const editProfileModal = document.getElementById('editProfileModal');
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.attributeName === "style" && editProfileModal.style.display === "flex" && currentUser) {
-                    // Ensure userProfileData is fetched before populating
-                    if (!userProfileData || userProfileData.uid !== currentUser.uid) {
-                        fetchUserProfile(currentUser.uid).then(() => {
+        if (editProfileModal) { // Ensure the element exists
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.attributeName === "style" && editProfileModal.style.display === "flex" && currentUser) {
+                        if (!userProfileData || userProfileData.uid !== currentUser.uid) {
+                            fetchUserProfile(currentUser.uid).then(() => {
+                                populateProfileForm();
+                            });
+                        } else {
                             populateProfileForm();
-                        });
-                    } else {
-                        populateProfileForm();
+                        }
                     }
-                }
+                });
             });
-        });
-        if (editProfileModal) { // Check if element exists before observing
             observer.observe(editProfileModal, { attributes: true });
         }
 
-
-        window.selectRole = async function(role) { // This function might be redundant if roles are managed in editProfileModal
-            if (!currentUser) return;
-            
-            let newRoles = userProfileData && userProfileData.roles ? [...userProfileData.roles] : [];
-            if (!newRoles.includes(role)) {
-                newRoles.push(role);
-            } else { // Toggle behavior: if role exists, remove it
-                newRoles = newRoles.filter(r => r !== role);
-            }
-
-            if (newRoles.length === 0) newRoles.push('guest'); // Ensure at least 'guest' role if all are deselected
-
-            try {
-                const userDocRef = doc(db, "users", currentUser.uid);
-                await updateDoc(userDocRef, {
-                    roles: newRoles,
-                    updatedAt: serverTimestamp()
-                });
-                showInfoModal("Role Updated", `Your roles have been updated.`);
-                await fetchUserProfile(currentUser.uid); // Re-fetch to update userProfileData
-                updateDashboardBasedOnRole(); // Refresh dashboard display
-            } catch (error) {
-                console.error("Error updating role:", error);
-                showInfoModal("Error", "Could not update your role. Please try again.", true);
-            }
-        }
 
         // Initialize Swiper
         var swiper = new Swiper('.swiper-container', {
@@ -1403,10 +1402,7 @@
                 crossFade: true
             },
         });
-
-        // Initial UI setup - onAuthStateChanged will handle this
-        // updateAuthUI(auth.currentUser); 
-
     </script>
 </body>
 </html>
+```
