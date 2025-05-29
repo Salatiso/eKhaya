@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eKhaya - Your Home, Our Community</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛖</text></svg>">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>eKhaya - Your Home, Our Community</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🛖&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #FDF8F0; /* Warm, inviting off-white */
@@ -141,553 +142,524 @@
         .hidden { display: none !important; }
         .flex-container { display: flex; flex-direction: column; min-height: 100vh; }
     </style>
-</head>
+</link></head>
 <body class="flex-container">
-    <div class="african-pattern-bg"></div>
-
-    <header class="top-bar">
-        <div class="logo" onclick="navigateToHome()">e<span class="highlight">K</span>haya</div>
-        <div class="auth-buttons">
-            <button class="login-btn" onclick="openModal('loginModal')">Login</button>
-            <button onclick="openModal('registerModal')">Sign Up</button>
-        </div>
-    </header>
-
-    <div class="main-content-area">
-        <div class="homepage-content">
-            <div class="hero-carousel-container">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1589087471045-311998588959?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"> <div class="slide-content">
-                                <h2>Discover the Eastern Cape</h2>
-                                <p>Experience the raw beauty and rich Xhosa heritage of the Wild Coast, Amatola Mountains, and beyond. Authentic stays await in welcoming communities.</p>
-                                <div>
-                                    <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1603202662435-f5133c761416?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1618284210070-757277617475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZWFzdGVybiUyMGNhcGUlMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586494053092-597990133996?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a3dhenVsdSUyMG5hdGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');"> <div class="slide-content">
-                                <h2>Majestic KwaZulu-Natal</h2>
-                                <p>From the towering Drakensberg peaks to vibrant Zulu villages and sun-kissed coastlines, KZN offers unforgettable adventures.</p>
-                                 <div>
-                                    <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1604973573749-0669f9370415?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGt3YXp1bHUlMjBuYXRhbCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore KZN Stays</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1589983950357-519208915030?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8enVsdSUyMGN1bHR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1604814469827-3cc53a008559?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGltcG9wbyUyMHNvdXRoJTIwYWZyaWNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');"> <div class="slide-content">
-                                <h2>Ancient Limpopo</h2>
-                                <p>Land of baobabs, rich wildlife, and the mystical cultures of Venda and Tsonga. Your unique journey starts here.</p>
-                                 <div>
-                                    <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Limpopo', 'https://images.unsplash.com/photo-1547471080-78312f095004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFvYmFiJTIwdHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Limpopo</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Limpopo', 'https://images.unsplash.com/photo-1623350401185-36956115a821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmVuZGElMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');"> <div class="slide-content">
-                                <h2>eKhaya: Renting with Ubuntu</h2>
-                                <p>Connecting hearts and homes across South Africa. Your journey with us is built on trust, community, and shared prosperity.</p>
-                                 <div>
-                                    <a href="#" class="cta-button" onclick="openModal('ourStoryModal')">Our Story</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModal('resourceHubModal')">Get Resources</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
-
-            <div class="icon-hub">
-                <div class="icon-grid">
-                    <div class="icon-item" onclick="openModal('ourStoryModal')">
-                        <i class="fas fa-users"></i>
-                        <span>Our eKhaya Story</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('findHomeModal')">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <span>Find Your eKhaya</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('shareSpaceModal')">
-                        <i class="fas fa-home"></i>
-                        <span>Share Your Space</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('resourceHubModal')">
-                        <i class="fas fa-book-reader"></i>
-                        <span>Knowledge Hub</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('whyEkhayaModal')">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Why Choose eKhaya?</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('membershipPerksModal')">
-                        <i class="fas fa-medal"></i>
-                        <span>Membership Perks</span>
-                    </div>
-                </div>
-            </div>
-        </div> <div id="dashboardPage" class="dashboard-page-container">
-            <div class="dashboard-container">
-                <div class="dashboard-header">
-                    <h2>My eKhaya Dashboard</h2>
-                    <p class="text-lg">Welcome, <span id="dashboardUserName" class="font-semibold">User</span>!</p>
-                    <p class="text-sm text-gray-600">User ID: <span id="dashboardUserId" class="font-mono"></span></p>
-                </div>
-
-                <div class="dashboard-section">
-                    <h3><i class="fas fa-user-circle mr-2"></i>Profile Management</h3>
-                    <p class="text-gray-600 mb-3">Keep your information up-to-date to make the most of eKhaya. Your profile helps build trust within our community.</p>
-                    <button class="dashboard-button bg-blue-500 hover:bg-blue-700 text-white" onclick="openModal('editProfileModal')">
-                        <i class="fas fa-user-edit mr-2"></i>Edit My Profile
+<div class="african-pattern-bg"></div>
+<header class="top-bar">
+<div class="logo" onclick="navigateToHome()">e<span class="highlight">K</span>haya</div>
+<div class="auth-buttons">
+<button class="login-btn" onclick="openModal('loginModal')">Login</button>
+<button onclick="openModal('registerModal')">Sign Up</button>
+</div>
+</header>
+<div class="main-content-area">
+<div class="homepage-content">
+<div class="hero-carousel-container">
+<div class="swiper-container">
+<div class="swiper-wrapper">
+<div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1589087471045-311998588959?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1200&amp;q=80');"> <div class="slide-content">
+<h2>Discover the Eastern Cape</h2>
+<p>Experience the raw beauty and rich Xhosa heritage of the Wild Coast, Amatola Mountains, and beyond. Authentic stays await in welcoming communities.</p>
+<div>
+<a class="cta-button" href="#" onclick="openModalWithContent('exploreModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1603202662435-f5133c761416?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60')">Explore Stays</a>
+<a class="cta-button cta-button-secondary" href="#" onclick="openModalWithContent('showcaseModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1618284210070-757277617475?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZWFzdGVybiUyMGNhcGUlMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60')">Showcase This Region</a>
+</div>
+</div>
+</div>
+<div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586494053092-597990133996?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a3dhenVsdSUyMG5hdGFsfGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1200&amp;q=60');"> <div class="slide-content">
+<h2>Majestic KwaZulu-Natal</h2>
+<p>From the towering Drakensberg peaks to vibrant Zulu villages and sun-kissed coastlines, KZN offers unforgettable adventures.</p>
+<div>
+<a class="cta-button" href="#" onclick="openModalWithContent('exploreModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1604973573749-0669f9370415?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGt3YXp1bHUlMjBuYXRhbCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60')">Explore KZN Stays</a>
+<a class="cta-button cta-button-secondary" href="#" onclick="openModalWithContent('showcaseModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1589983950357-519208915030?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8enVsdSUyMGN1bHR1cmV8ZW58MHx8MHx8&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60')">Showcase This Region</a>
+</div>
+</div>
+</div>
+<div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1604814469827-3cc53a008559?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGltcG9wbyUyMHNvdXRoJTIwYWZyaWNlfGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1200&amp;q=60');"> <div class="slide-content">
+<h2>Ancient Limpopo</h2>
+<p>Land of baobabs, rich wildlife, and the mystical cultures of Venda and Tsonga. Your unique journey starts here.</p>
+<div>
+<a class="cta-button" href="#" onclick="openModalWithContent('exploreModal', 'Limpopo', 'https://images.unsplash.com/photo-1547471080-78312f095004?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFvYmFiJTIwdHJlZXxlbnwwfHwwfHw%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60')">Explore Limpopo</a>
+<a class="cta-button cta-button-secondary" href="#" onclick="openModalWithContent('showcaseModal', 'Limpopo', 'https://images.unsplash.com/photo-1623350401185-36956115a821?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmVuZGElMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60')">Showcase This Region</a>
+</div>
+</div>
+</div>
+<div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8fDB8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1200&amp;q=60');"> <div class="slide-content">
+<h2>eKhaya: Renting with Ubuntu</h2>
+<p>Connecting hearts and homes across South Africa. Your journey with us is built on trust, community, and shared prosperity.</p>
+<div>
+<a class="cta-button" href="#" onclick="openModal('ourStoryModal')">Our Story</a>
+<a class="cta-button cta-button-secondary" href="#" onclick="openModal('resourceHubModal')">Get Resources</a>
+</div>
+</div>
+</div>
+</div>
+<div class="swiper-pagination"></div>
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+</div>
+</div>
+<div class="icon-hub">
+<div class="icon-grid">
+<div class="icon-item" onclick="openModal('ourStoryModal')">
+<i class="fas fa-users"></i>
+<span>Our eKhaya Story</span>
+</div>
+<div class="icon-item" onclick="openModal('findHomeModal')">
+<i class="fas fa-map-marked-alt"></i>
+<span>Find Your eKhaya</span>
+</div>
+<div class="icon-item" onclick="openModal('shareSpaceModal')">
+<i class="fas fa-home"></i>
+<span>Share Your Space</span>
+</div>
+<div class="icon-item" onclick="openModal('resourceHubModal')">
+<i class="fas fa-book-reader"></i>
+<span>Knowledge Hub</span>
+</div>
+<div class="icon-item" onclick="openModal('whyEkhayaModal')">
+<i class="fas fa-question-circle"></i>
+<span>Why Choose eKhaya?</span>
+</div>
+<div class="icon-item" onclick="openModal('membershipPerksModal')">
+<i class="fas fa-medal"></i>
+<span>Membership Perks</span>
+</div>
+</div>
+</div>
+</div> <div class="dashboard-page-container" id="dashboardPage">
+<div class="dashboard-container">
+<div class="dashboard-header">
+<h2>My eKhaya Dashboard</h2>
+<p class="text-lg">Welcome, <span class="font-semibold" id="dashboardUserName">User</span>!</p>
+<p class="text-sm text-gray-600">User ID: <span class="font-mono" id="dashboardUserId"></span></p>
+</div>
+<div class="dashboard-section">
+<h3><i class="fas fa-user-circle mr-2"></i>Profile Management</h3>
+<p class="text-gray-600 mb-3">Keep your information up-to-date to make the most of eKhaya. Your profile helps build trust within our community.</p>
+<button class="dashboard-button bg-blue-500 hover:bg-blue-700 text-white" onclick="openModal('editProfileModal')">
+<i class="fas fa-user-edit mr-2"></i>Edit My Profile
                     </button>
-                </div>
-
-                <div class="dashboard-section">
-                    <h3><i class="fas fa-id-badge mr-2"></i>My Roles on eKhaya</h3>
-                    <p class="text-gray-600 mb-3">Your current active roles determine the tools and features available to you. You can update these in your profile.</p>
-                    <div id="currentRolesDisplay" class="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 text-blue-700 rounded-md">
+</div>
+<div class="dashboard-section">
+<h3><i class="fas fa-id-badge mr-2"></i>My Roles on eKhaya</h3>
+<p class="text-gray-600 mb-3">Your current active roles determine the tools and features available to you. You can update these in your profile.</p>
+<div class="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 text-blue-700 rounded-md" id="currentRolesDisplay">
                         Loading roles...
                     </div>
-                </div>
-
-                <div id="landlordDashboardSection" class="dashboard-section hidden">
-                    <h3><i class="fas fa-house-user mr-2"></i>Landlord Space (Umamkeli)</h3>
-                    <p class="text-gray-600 mb-3">Manage your properties, connect with Abahlali (Tenants) & Bandwendwe (Guests), and access landlord-specific resources.</p>
-                    <button class="dashboard-button bg-green-500 hover:bg-green-700" onclick="openModal('addPropertyModal')">
-                        <i class="fas fa-plus-circle mr-2"></i>List a New Property
+</div>
+<div class="dashboard-section hidden" id="landlordDashboardSection">
+<h3><i class="fas fa-house-user mr-2"></i>Landlord Space (Umamkeli)</h3>
+<p class="text-gray-600 mb-3">Manage your properties, connect with Abahlali (Tenants) &amp; Bandwendwe (Guests), and access landlord-specific resources.</p>
+<button class="dashboard-button bg-green-500 hover:bg-green-700" onclick="openModal('addPropertyModal')">
+<i class="fas fa-plus-circle mr-2"></i>List a New Property
                     </button>
-                    <button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
-                        <i class="fas fa-list-alt mr-2"></i>View My Listings (Coming Soon)
+<button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
+<i class="fas fa-list-alt mr-2"></i>View My Listings (Coming Soon)
                     </button>
-                    <button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
-                        <i class="fas fa-comments mr-2"></i>My Messages (Coming Soon)
+<button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
+<i class="fas fa-comments mr-2"></i>My Messages (Coming Soon)
                     </button>
-                </div>
-
-                <div id="tenantDashboardSection" class="dashboard-section hidden">
-                    <h3><i class="fas fa-key mr-2"></i>Tenant Space (Umhlali)</h3>
-                    <p class="text-gray-600 mb-3">Find your next home, manage your rental applications, and communicate with Abanikazi Beendawo (Landlords).</p>
-                    <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700" onclick="openModal('searchPropertiesModal')">
-                        <i class="fas fa-search mr-2"></i>Search Properties (Coming Soon)
+</div>
+<div class="dashboard-section hidden" id="tenantDashboardSection">
+<h3><i class="fas fa-key mr-2"></i>Tenant Space (Umhlali)</h3>
+<p class="text-gray-600 mb-3">Find your next home, manage your rental applications, and communicate with Abanikazi Beendawo (Landlords).</p>
+<button class="dashboard-button bg-indigo-500 hover:bg-indigo-700" onclick="openModal('searchPropertiesModal')">
+<i class="fas fa-search mr-2"></i>Search Properties (Coming Soon)
                     </button>
-                    <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
-                        <i class="fas fa-heart mr-2"></i>My Saved Properties (Coming Soon)
+<button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
+<i class="fas fa-heart mr-2"></i>My Saved Properties (Coming Soon)
                     </button>
-                     <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
-                        <i class="fas fa-file-alt mr-2"></i>My Applications (Coming Soon)
+<button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
+<i class="fas fa-file-alt mr-2"></i>My Applications (Coming Soon)
                     </button>
-                </div>
-                 <button class="dashboard-button bg-gray-700 hover:bg-gray-800 mt-6 w-full md:w-auto" onclick="navigateToHome()">
-                    <i class="fas fa-arrow-left mr-2"></i>Back to Homepage
+</div>
+<button class="dashboard-button bg-gray-700 hover:bg-gray-800 mt-6 w-full md:w-auto" onclick="navigateToHome()">
+<i class="fas fa-arrow-left mr-2"></i>Back to Homepage
                 </button>
-            </div>
-        </div>
-    </div> <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('registerModal')">&times;</span>
-            <h3 class="modal-title">Create Your eKhaya Account</h3>
-            <div class="modal-body">
-                <p>Join our community to find or list unique spaces across South Africa.</p>
-                <div id="registerError" class="error-message" style="display:none;"></div>
-                <form id="registerForm">
-                    <input type="text" id="registerName" placeholder="Full Name" class="form-input" required>
-                    <input type="email" id="registerEmail" placeholder="Email Address" class="form-input" required>
-                    <input type="password" id="registerPassword" placeholder="Password (min. 6 characters)" class="form-input" required>
-                    <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" class="form-input" required>
-                    <button type="submit" class="form-button">Register with Email</button>
-                </form>
-                <div class="or-divider">OR</div>
-                <button class="form-button google-signin-btn" onclick="handleGoogleSignUp()">
-                    <i class="fab fa-google mr-2"></i> Sign Up with Google
+</div>
+</div>
+</div> <div class="modal" id="registerModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('registerModal')">×</span>
+<h3 class="modal-title">Create Your eKhaya Account</h3>
+<div class="modal-body">
+<p>Join our community to find or list unique spaces across South Africa.</p>
+<div class="error-message" id="registerError" style="display:none;"></div>
+<form id="registerForm">
+<input class="form-input" id="registerName" placeholder="Full Name" required="" type="text"/>
+<input class="form-input" id="registerEmail" placeholder="Email Address" required="" type="email"/>
+<input class="form-input" id="registerPassword" placeholder="Password (min. 6 characters)" required="" type="password"/>
+<input class="form-input" id="registerConfirmPassword" placeholder="Confirm Password" required="" type="password"/>
+<button class="form-button" type="submit">Register with Email</button>
+</form>
+<div class="or-divider">OR</div>
+<button class="form-button google-signin-btn" onclick="handleGoogleSignUp()">
+<i class="fab fa-google mr-2"></i> Sign Up with Google
                 </button>
-                <p class="switch-auth-link mt-4">Already have an account? <a href="#" onclick="switchToLogin()">Log In</a></p>
-            </div>
-        </div>
-    </div>
-
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('loginModal')">&times;</span>
-            <h3 class="modal-title">Welcome Back to eKhaya!</h3>
-            <div class="modal-body">
-                <p>Log in to access your dashboard, manage your profile, and continue your eKhaya journey.</p>
-                <div id="loginError" class="error-message" style="display:none;"></div>
-                <form id="loginForm">
-                    <input type="email" id="loginEmail" placeholder="Email Address" class="form-input" required>
-                    <input type="password" id="loginPassword" placeholder="Password" class="form-input" required>
-                    <button type="submit" class="form-button">Log In with Email</button>
-                </form>
-                <div class="or-divider">OR</div>
-                <button class="form-button google-signin-btn" onclick="handleGoogleSignIn()">
-                    <i class="fab fa-google mr-2"></i> Sign In with Google
+<p class="switch-auth-link mt-4">Already have an account? <a href="#" onclick="switchToLogin()">Log In</a></p>
+</div>
+</div>
+</div>
+<div class="modal" id="loginModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('loginModal')">×</span>
+<h3 class="modal-title">Welcome Back to eKhaya!</h3>
+<div class="modal-body">
+<p>Log in to access your dashboard, manage your profile, and continue your eKhaya journey.</p>
+<div class="error-message" id="loginError" style="display:none;"></div>
+<form id="loginForm">
+<input class="form-input" id="loginEmail" placeholder="Email Address" required="" type="email"/>
+<input class="form-input" id="loginPassword" placeholder="Password" required="" type="password"/>
+<button class="form-button" type="submit">Log In with Email</button>
+</form>
+<div class="or-divider">OR</div>
+<button class="form-button google-signin-btn" onclick="handleGoogleSignIn()">
+<i class="fab fa-google mr-2"></i> Sign In with Google
                 </button>
-                <p class="switch-auth-link mt-4">Don't have an account? <a href="#" onclick="switchToRegister()">Create Account</a></p>
-            </div>
-        </div>
-    </div>
-    
-    <div id="editProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('editProfileModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-user-edit mr-2"></i>Edit Your Profile</h3>
-            <div class="modal-body">
-                <p class="text-sm text-gray-600 mb-4">The more complete your profile, the better eKhaya can serve you and build trust within the community.</p>
-                <div id="profileUpdateError" class="error-message" style="display:none;"></div>
-                <form id="profileUpdateForm">
-                    <div class="mb-4">
-                        <label for="profileDisplayName" class="block text-gray-700 text-sm font-bold mb-1">Display Name:</label>
-                        <input type="text" id="profileDisplayName" class="form-input" placeholder="Your Name">
-                    </div>
-                    <div class="mb-4">
-                        <label for="profilePhoneNumber" class="block text-gray-700 text-sm font-bold mb-1">Phone Number (Optional):</label>
-                        <input type="tel" id="profilePhoneNumber" class="form-input" placeholder="e.g., 0821234567">
-                    </div>
-                    <div class="mb-4">
-                        <label for="profileBio" class="block text-gray-700 text-sm font-bold mb-1">Short Bio (Optional):</label>
-                        <textarea id="profileBio" class="form-input" rows="3" placeholder="Tell us a bit about yourself, your interests, or what you're looking for..."></textarea>
-                    </div>
-                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">I am a:</label>
-                        <div class="checkbox-group flex items-center mb-2">
-                            <input type="checkbox" id="roleTenant" name="userRole" value="tenant" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
-                            <label for="roleTenant" class="text-gray-700">Tenant / Umhlali (Looking for a place)</label>
-                        </div>
-                        <div class="checkbox-group flex items-center">
-                            <input type="checkbox" id="roleLandlord" name="userRole" value="landlord" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
-                            <label for="roleLandlord" class="text-gray-700">Landlord / Umamkeli (Sharing a space)</label>
-                        </div>
-                    </div>
-
-                    <div id="landlordSpecificFields" class="hidden mt-4 border-t pt-4">
-                        <h4 class="text-md font-semibold text-gray-700 mb-2">Landlord / Umamkeli Details:</h4>
-                        <div class="mb-3">
-                            <label for="landlordPropertiesCount" class="block text-gray-700 text-sm font-bold mb-1">Number of Properties/Units/Rooms you manage:</label>
-                            <input type="number" id="landlordPropertiesCount" class="form-input" min="0" placeholder="e.g., 1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="landlordExperienceYears" class="block text-gray-700 text-sm font-bold mb-1">Years of experience as a Landlord/Umamkeli:</label>
-                            <input type="number" id="landlordExperienceYears" class="form-input" min="0" placeholder="e.g., 5">
-                        </div>
-                         <div class="mb-3">
-                            <label for="landlordHostingStyle" class="block text-gray-700 text-sm font-bold mb-1">Describe your hosting/landlord style (Optional):</label>
-                            <textarea id="landlordHostingStyle" class="form-input" rows="2" placeholder="e.g., Friendly and hands-on, respectful of privacy..."></textarea>
-                        </div>
-                    </div>
-
-                    <div id="tenantSpecificFields" class="hidden mt-4 border-t pt-4">
-                        <h4 class="text-md font-semibold text-gray-700 mb-2">Tenant / Umhlali Details:</h4>
-                        <div class="mb-3">
-                            <label for="tenantLookingFor" class="block text-gray-700 text-sm font-bold mb-1">Type of place you're looking for:</label>
-                            <select id="tenantLookingFor" class="form-input">
-                                <option value="">Select type</option>
-                                <option value="Room">Room</option>
-                                <option value="Cottage / Back Room">Cottage / Back Room</option>
-                                <option value="Flat / Apartment">Flat / Apartment</option>
-                                <option value="House">House</option>
-                                <option value="Traditional Home / Rondavel">Traditional Home / Rondavel</option>
-                                <option value="Farm Stay">Farm Stay</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tenantBedrooms" class="block text-gray-700 text-sm font-bold mb-1">Preferred number of bedrooms:</label>
-                            <input type="number" id="tenantBedrooms" class="form-input" min="0" placeholder="e.g., 1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="tenantIdealSituation" class="block text-gray-700 text-sm font-bold mb-1">Describe your ideal rental situation (Optional):</label>
-                            <textarea id="tenantIdealSituation" class="form-input" rows="2" placeholder="e.g., Quiet, close to transport, pet-friendly..."></textarea>
-                        </div>
-                         <div class="mb-3">
-                            <label for="tenantRentalHistory" class="block text-gray-700 text-sm font-bold mb-1">Brief Rental History / Reason for Moving (Optional):</label>
-                            <textarea id="tenantRentalHistory" class="form-input" rows="2" placeholder="e.g., Relocating for work, seeking larger space..."></textarea>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-3 mb-3">You can always update these details later. Your privacy is important to us; you'll control what's shared.</p>
-                    <button type="submit" class="form-button">Save Profile Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('infoModal')">&times;</span>
-            <h3 id="infoModalTitle" class="modal-title">Notification</h3>
-            <div id="infoModalBody" class="modal-body text-center">
-                </div>
-        </div>
-    </div>
-
-    <div id="ourStoryModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('ourStoryModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-heartbeat mr-2 text-red-500"></i>Our eKhaya Story: Rooted in Ubuntu</h3>
-            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c291dGglMjBhZnJpY2FuJTIwY29tbXVuaXR5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Diverse community hands together" class="modal-image">
-            <p>Welcome to eKhaya, which means "home" in isiXhosa and isiZulu. We're more than just a platform; we're building a community inspired by the profound African philosophy of <strong>Ubuntu</strong>: <em>"Umntu ngumntu ngabantu" – I am because you are.</em> This spirit of interconnectedness, compassion, and shared humanity is the heart of eKhaya.</p>
-            <p>In many South African communities, especially in our vibrant rural areas, the tradition of welcoming an Undwendwe (visitor) with an open heart, offering shelter and sustenance, is a cherished value. It’s about paying it forward, fostering a sense of belonging for everyone.</p>
-            <h4>Our Vision:</h4>
-            <p>eKhaya aims to weave this spirit into the digital age, creating a rental experience that is:</p>
-            <ul>
-                <li><i class="fas fa-users mr-2 text-green-600"></i> <strong>Empowering:</strong> Providing tools and knowledge, especially for those in informal settlements and rural areas, to confidently navigate the rental market.</li>
-                <li><i class="fas fa-handshake mr-2 text-blue-600"></i> <strong>Connecting:</strong> Building bridges of understanding and trust between Abamkeli (Hosts/Landlords) and Abahlali (Tenants) or Bandwendwe (Guests).</li>
-                <li><i class="fas fa-leaf mr-2 text-teal-600"></i> <strong>Showcasing:</strong> Celebrating the unique beauty, culture, and hospitality of South Africa's diverse heartlands, particularly those often overlooked.</li>
-                <li><i class="fas fa-balance-scale mr-2 text-purple-600"></i> <strong>Simplifying:</strong> Making the rental process straightforward with accessible resources, clear guidance, and user-friendly technology.</li>
-            </ul>
-            <p>Join us in creating a rental ecosystem where everyone feels valued, respected, and truly at home. Siyanamukela eKhaya – Welcome to eKhaya!</p>
-        </div>
-    </div>
-
-    <div id="findHomeModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('findHomeModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-map-signs mr-2 text-blue-500"></i>Find Your eKhaya: A Place to Belong</h3>
-            <img src="https://images.unsplash.com/photo-1588392382834-a891154bca4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cnVyYWwlMjBsYW5kc2NhcGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Serene rural landscape" class="modal-image">
-            <p>Embark on a journey to find your perfect home or a unique getaway. eKhaya is your trusted companion for discovering diverse properties across South Africa, with a special focus on the authentic charm and warmth of our rural communities and vibrant townships.</p>
-            <h4>Discover with eKhaya:</h4>
-            <ul>
-                <li><i class="fas fa-search-location mr-2 text-green-600"></i> <strong>Tailored Search (Coming Soon):</strong> Our intuitive search tools will soon help you find listings that match your exact needs – whether it's a cozy room with a view, a family home in a quiet village, or a unique cultural stay.</li>
-                <li><i class="fas fa-home mr-2 text-orange-500"></i> <strong>Authentic Experiences:</strong> We champion listings that offer a genuine taste of South African life, connecting you with real communities and their stories.</li>
-                <li><i class="fas fa-shield-alt mr-2 text-purple-500"></i> <strong>Informed Choices:</strong> Access clear, reliable information about properties and connect with Abamkeli (hosts/landlords) who are part of our value-driven community.</li>
-                <li><i class="fas fa-users mr-2 text-teal-500"></i> <strong>More Than a Bed:</strong> Find a place where you feel you belong, supported by a platform that cares about your well-being.</li>
-            </ul>
-            <p>Whether you're an Umhlali (tenant) seeking a long-term haven or an Undwendwe (traveller) looking for a memorable adventure, your journey to finding the perfect eKhaya starts here. Our full search and booking features are being built with care and will be available soon!</p>
-        </div>
-    </div>
-    
-    <div id="shareSpaceModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('shareSpaceModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-hands-helping mr-2 text-green-500"></i>Share Your Space: Become an Umamkeli</h3>
-            <img src="https://images.unsplash.com/photo-1560440021-33f9b867899d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHJ1cmFsJTIwaG91c2UlMjBzb3V0aCUyMGFmcmljYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="A welcoming rural home in South Africa" class="modal-image">
-            <p>Do you have an extra room, a charming garden cottage, a traditional rondavel, or a unique space in your rural homestead or town? eKhaya empowers you, the Umamkeli (Host/Landlord), to share your space with Abahlali (Tenants) and Bandwendwe (Guests) seeking authentic South African experiences.</p>
-            <h4>Why Share Your Space with eKhaya?</h4>
-            <ul>
-                <li><i class="fas fa-bullhorn mr-2 text-orange-500"></i> **Reach a Caring Audience:** Connect with respectful individuals who value community and are looking for genuine places like yours, especially those interested in rural and unique stays.</li>
-                <li><i class="fas fa-tools mr-2 text-blue-500"></i> **Simple & Supportive Listing Tools (Coming Soon):** We're building easy-to-use tools to help you create attractive listings, manage inquiries, and handle bookings with confidence and clarity.</li>
-                <li><i class="fas fa-shield-alt mr-2 text-purple-500"></i> **Guidance & Resources:** Access our Knowledge Hub for practical advice on being a great Umamkeli, understanding your rights and responsibilities, and navigating the rental process smoothly.</li>
-                <li><i class="fas fa-coins mr-2 text-green-500"></i> **Economic Empowerment & Community Growth:** Generate income from your property while contributing to the vitality and upliftment of your local community.</li>
-                <li><i class="fas fa-users mr-2 text-teal-500"></i> **Be Part of a Movement:** Join a platform that values fairness, transparency, and the spirit of Ubuntu in every interaction.</li>
-            </ul>
-            <p>Become an Umamkeli on eKhaya and open your doors to a world of opportunity. We're here to support you in creating positive and rewarding hosting experiences. Our full listing and management tools are being developed with you in mind!</p>
-        </div>
-    </div>
-
-    <div id="resourceHubModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('resourceHubModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-book-open mr-2 text-purple-500"></i>eKhaya Knowledge Hub</h3>
-            <p class="text-center mb-6">Knowledge is power. Our comprehensive Resource Hub is designed to empower Abamkeli (Landlords/Hosts), Abahlali (Tenants), and Bandwendwe (Guests) with essential information, practical tools, and clear guidance for a smoother, fairer, and more informed rental journey in South Africa.</p>
-            
-            <h4><i class="fas fa-balance-scale text-orange-500 mr-2"></i>Legal Ease & Your Rights</h4>
-            <p>Navigate the legal landscape with confidence. We simplify complex regulations:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>Understanding the Rental Housing Act (RHA): Key rights and obligations for both landlords and tenants.</li>
-                <li>Lease Agreements: Why they're important, what to include, and access to simple templates.</li>
-                <li>Deposits: Rules for handling security deposits, interest, and lawful deductions.</li>
-                <li>Eviction Process: Understanding lawful procedures and tenant protections under the PIE Act.</li>
-                <li>Consumer Protection Act (CPA): How it applies to rental agreements.</li>
-                <li>Dispute Resolution: Information on Rental Housing Tribunals (RHTs) and other mediation options.</li>
-            </ul>
-
-            <h4><i class="fas fa-piggy-bank text-green-500 mr-2"></i>Financial Fitness & Management</h4>
-            <p>Manage your rental finances effectively:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>For Abahlali (Tenants): Budgeting for rent and utilities, understanding affordability, saving for a deposit.</li>
-                <li>For Abamkeli (Landlords): Basic income/expense tracking, understanding rental income, tips for managing finances.</li>
-                <li>Avoiding Rental Scams: Red flags and protective measures for everyone.</li>
-            </ul>
-
-            <h4><i class="fas fa-tools text-blue-500 mr-2"></i>Happy Homes & Property Care</h4>
-            <p>Creating and maintaining a positive living environment:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>Tenant responsibilities: Keeping the property clean and reporting issues promptly.</li>
-                <li>Landlord responsibilities: Ensuring the property is habitable and undertaking necessary repairs.</li>
-                <li>Move-in/Move-out Checklists: Templates and guidance for fair inspections.</li>
-                <li>Tips for creating a welcoming and safe eKhaya.</li>
-            </ul>
-
-            <h4><i class="fas fa-users-cog text-teal-500 mr-2"></i>Ubuntu Connect: Building Positive Relationships</h4>
-            <p>Fostering understanding and respect in the rental space:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>Effective and respectful communication strategies.</li>
-                <li>Tips for conflict resolution and mediation.
+<p class="switch-auth-link mt-4">Don't have an account? <a href="#" onclick="switchToRegister()">Create Account</a></p>
+</div>
+</div>
+</div>
+<div class="modal" id="editProfileModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('editProfileModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-user-edit mr-2"></i>Edit Your Profile</h3>
+<div class="modal-body">
+<p class="text-sm text-gray-600 mb-4">The more complete your profile, the better eKhaya can serve you and build trust within the community.</p>
+<div class="error-message" id="profileUpdateError" style="display:none;"></div>
+<form id="profileUpdateForm">
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="profileDisplayName">Display Name:</label>
+<input class="form-input" id="profileDisplayName" placeholder="Your Name" type="text"/>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="profilePhoneNumber">Phone Number (Optional):</label>
+<input class="form-input" id="profilePhoneNumber" placeholder="e.g., 0821234567" type="tel"/>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="profileBio">Short Bio (Optional):</label>
+<textarea class="form-input" id="profileBio" placeholder="Tell us a bit about yourself, your interests, or what you're looking for..." rows="3"></textarea>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-2">I am a:</label>
+<div class="checkbox-group flex items-center mb-2">
+<input class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500" id="roleTenant" name="userRole" type="checkbox" value="tenant"/>
+<label class="text-gray-700" for="roleTenant">Tenant / Umhlali (Looking for a place)</label>
+</div>
+<div class="checkbox-group flex items-center">
+<input class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500" id="roleLandlord" name="userRole" type="checkbox" value="landlord"/>
+<label class="text-gray-700" for="roleLandlord">Landlord / Umamkeli (Sharing a space)</label>
+</div>
+</div>
+<div class="hidden mt-4 border-t pt-4" id="landlordSpecificFields">
+<h4 class="text-md font-semibold text-gray-700 mb-2">Landlord / Umamkeli Details:</h4>
+<div class="mb-3">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="landlordPropertiesCount">Number of Properties/Units/Rooms you manage:</label>
+<input class="form-input" id="landlordPropertiesCount" min="0" placeholder="e.g., 1" type="number"/>
+</div>
+<div class="mb-3">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="landlordExperienceYears">Years of experience as a Landlord/Umamkeli:</label>
+<input class="form-input" id="landlordExperienceYears" min="0" placeholder="e.g., 5" type="number"/>
+</div>
+<div class="mb-3">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="landlordHostingStyle">Describe your hosting/landlord style (Optional):</label>
+<textarea class="form-input" id="landlordHostingStyle" placeholder="e.g., Friendly and hands-on, respectful of privacy..." rows="2"></textarea>
+</div>
+</div>
+<div class="hidden mt-4 border-t pt-4" id="tenantSpecificFields">
+<h4 class="text-md font-semibold text-gray-700 mb-2">Tenant / Umhlali Details:</h4>
+<div class="mb-3">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="tenantLookingFor">Type of place you're looking for:</label>
+<select class="form-input" id="tenantLookingFor">
+<option value="">Select type</option>
+<option value="Room">Room</option>
+<option value="Cottage / Back Room">Cottage / Back Room</option>
+<option value="Flat / Apartment">Flat / Apartment</option>
+<option value="House">House</option>
+<option value="Traditional Home / Rondavel">Traditional Home / Rondavel</option>
+<option value="Farm Stay">Farm Stay</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div class="mb-3">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="tenantBedrooms">Preferred number of bedrooms:</label>
+<input class="form-input" id="tenantBedrooms" min="0" placeholder="e.g., 1" type="number"/>
+</div>
+<div class="mb-3">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="tenantIdealSituation">Describe your ideal rental situation (Optional):</label>
+<textarea class="form-input" id="tenantIdealSituation" placeholder="e.g., Quiet, close to transport, pet-friendly..." rows="2"></textarea>
+</div>
+<div class="mb-3">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="tenantRentalHistory">Brief Rental History / Reason for Moving (Optional):</label>
+<textarea class="form-input" id="tenantRentalHistory" placeholder="e.g., Relocating for work, seeking larger space..." rows="2"></textarea>
+</div>
+</div>
+<p class="text-xs text-gray-500 mt-3 mb-3">You can always update these details later. Your privacy is important to us; you'll control what's shared.</p>
+<button class="form-button" type="submit">Save Profile Changes</button>
+</form>
+</div>
+</div>
+</div>
+<div class="modal" id="infoModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('infoModal')">×</span>
+<h3 class="modal-title" id="infoModalTitle">Notification</h3>
+<div class="modal-body text-center" id="infoModalBody">
+</div>
+</div>
+</div>
+<div class="modal" id="ourStoryModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('ourStoryModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-heartbeat mr-2 text-red-500"></i>Our eKhaya Story: Rooted in Ubuntu</h3>
+<img alt="Diverse community hands together" class="modal-image" src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c291dGglMjBhZnJpY2FuJTIwY29tbXVuaXR5fGVufDB8fDB8fHww&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"/>
+<p>Welcome to eKhaya, which means "home" in isiXhosa and isiZulu. We're more than just a platform; we're building a community inspired by the profound African philosophy of <strong>Ubuntu</strong>: <em>"Umntu ngumntu ngabantu" – I am because you are.</em> This spirit of interconnectedness, compassion, and shared humanity is the heart of eKhaya.</p>
+<p>In many South African communities, especially in our vibrant rural areas, the tradition of welcoming an Undwendwe (visitor) with an open heart, offering shelter and sustenance, is a cherished value. It’s about paying it forward, fostering a sense of belonging for everyone.</p>
+<h4>Our Vision:</h4>
+<p>eKhaya aims to weave this spirit into the digital age, creating a rental experience that is:</p>
+<ul>
+<li><i class="fas fa-users mr-2 text-green-600"></i> <strong>Empowering:</strong> Providing tools and knowledge, especially for those in informal settlements and rural areas, to confidently navigate the rental market.</li>
+<li><i class="fas fa-handshake mr-2 text-blue-600"></i> <strong>Connecting:</strong> Building bridges of understanding and trust between Abamkeli (Hosts/Landlords) and Abahlali (Tenants) or Bandwendwe (Guests).</li>
+<li><i class="fas fa-leaf mr-2 text-teal-600"></i> <strong>Showcasing:</strong> Celebrating the unique beauty, culture, and hospitality of South Africa's diverse heartlands, particularly those often overlooked.</li>
+<li><i class="fas fa-balance-scale mr-2 text-purple-600"></i> <strong>Simplifying:</strong> Making the rental process straightforward with accessible resources, clear guidance, and user-friendly technology.</li>
+</ul>
+<p>Join us in creating a rental ecosystem where everyone feels valued, respected, and truly at home. Siyanamukela eKhaya – Welcome to eKhaya!</p>
+</div>
+</div>
+<div class="modal" id="findHomeModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('findHomeModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-map-signs mr-2 text-blue-500"></i>Find Your eKhaya: A Place to Belong</h3>
+<img alt="Serene rural landscape" class="modal-image" src="https://images.unsplash.com/photo-1588392382834-a891154bca4d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cnVyYWwlMjBsYW5kc2NhcGV8ZW58MHx8MHx8fDA%3D&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"/>
+<p>Embark on a journey to find your perfect home or a unique getaway. eKhaya is your trusted companion for discovering diverse properties across South Africa, with a special focus on the authentic charm and warmth of our rural communities and vibrant townships.</p>
+<h4>Discover with eKhaya:</h4>
+<ul>
+<li><i class="fas fa-search-location mr-2 text-green-600"></i> <strong>Tailored Search (Coming Soon):</strong> Our intuitive search tools will soon help you find listings that match your exact needs – whether it's a cozy room with a view, a family home in a quiet village, or a unique cultural stay.</li>
+<li><i class="fas fa-home mr-2 text-orange-500"></i> <strong>Authentic Experiences:</strong> We champion listings that offer a genuine taste of South African life, connecting you with real communities and their stories.</li>
+<li><i class="fas fa-shield-alt mr-2 text-purple-500"></i> <strong>Informed Choices:</strong> Access clear, reliable information about properties and connect with Abamkeli (hosts/landlords) who are part of our value-driven community.</li>
+<li><i class="fas fa-users mr-2 text-teal-500"></i> <strong>More Than a Bed:</strong> Find a place where you feel you belong, supported by a platform that cares about your well-being.</li>
+</ul>
+<p>Whether you're an Umhlali (tenant) seeking a long-term haven or an Undwendwe (traveller) looking for a memorable adventure, your journey to finding the perfect eKhaya starts here. Our full search and booking features are being built with care and will be available soon!</p>
+</div>
+</div>
+<div class="modal" id="shareSpaceModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('shareSpaceModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-hands-helping mr-2 text-green-500"></i>Share Your Space: Become an Umamkeli</h3>
+<img alt="A welcoming rural home in South Africa" class="modal-image" src="https://images.unsplash.com/photo-1560440021-33f9b867899d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHJ1cmFsJTIwaG91c2UlMjBzb3V0aCUyMGFmcmljYXxlbnwwfHwwfHx8MA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"/>
+<p>Do you have an extra room, a charming garden cottage, a traditional rondavel, or a unique space in your rural homestead or town? eKhaya empowers you, the Umamkeli (Host/Landlord), to share your space with Abahlali (Tenants) and Bandwendwe (Guests) seeking authentic South African experiences.</p>
+<h4>Why Share Your Space with eKhaya?</h4>
+<ul>
+<li><i class="fas fa-bullhorn mr-2 text-orange-500"></i> **Reach a Caring Audience:** Connect with respectful individuals who value community and are looking for genuine places like yours, especially those interested in rural and unique stays.</li>
+<li><i class="fas fa-tools mr-2 text-blue-500"></i> **Simple &amp; Supportive Listing Tools (Coming Soon):** We're building easy-to-use tools to help you create attractive listings, manage inquiries, and handle bookings with confidence and clarity.</li>
+<li><i class="fas fa-shield-alt mr-2 text-purple-500"></i> **Guidance &amp; Resources:** Access our Knowledge Hub for practical advice on being a great Umamkeli, understanding your rights and responsibilities, and navigating the rental process smoothly.</li>
+<li><i class="fas fa-coins mr-2 text-green-500"></i> **Economic Empowerment &amp; Community Growth:** Generate income from your property while contributing to the vitality and upliftment of your local community.</li>
+<li><i class="fas fa-users mr-2 text-teal-500"></i> **Be Part of a Movement:** Join a platform that values fairness, transparency, and the spirit of Ubuntu in every interaction.</li>
+</ul>
+<p>Become an Umamkeli on eKhaya and open your doors to a world of opportunity. We're here to support you in creating positive and rewarding hosting experiences. Our full listing and management tools are being developed with you in mind!</p>
+</div>
+</div>
+<div class="modal" id="resourceHubModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('resourceHubModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-book-open mr-2 text-purple-500"></i>eKhaya Knowledge Hub</h3>
+<p class="text-center mb-6">Knowledge is power. Our comprehensive Resource Hub is designed to empower Abamkeli (Landlords/Hosts), Abahlali (Tenants), and Bandwendwe (Guests) with essential information, practical tools, and clear guidance for a smoother, fairer, and more informed rental journey in South Africa.</p>
+<h4><i class="fas fa-balance-scale text-orange-500 mr-2"></i>Legal Ease &amp; Your Rights</h4>
+<p>Navigate the legal landscape with confidence. We simplify complex regulations:</p>
+<ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+<li>Understanding the Rental Housing Act (RHA): Key rights and obligations for both landlords and tenants.</li>
+<li>Lease Agreements: Why they're important, what to include, and access to simple templates.</li>
+<li>Deposits: Rules for handling security deposits, interest, and lawful deductions.</li>
+<li>Eviction Process: Understanding lawful procedures and tenant protections under the PIE Act.</li>
+<li>Consumer Protection Act (CPA): How it applies to rental agreements.</li>
+<li>Dispute Resolution: Information on Rental Housing Tribunals (RHTs) and other mediation options.</li>
+</ul>
+<h4><i class="fas fa-piggy-bank text-green-500 mr-2"></i>Financial Fitness &amp; Management</h4>
+<p>Manage your rental finances effectively:</p>
+<ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+<li>For Abahlali (Tenants): Budgeting for rent and utilities, understanding affordability, saving for a deposit.</li>
+<li>For Abamkeli (Landlords): Basic income/expense tracking, understanding rental income, tips for managing finances.</li>
+<li>Avoiding Rental Scams: Red flags and protective measures for everyone.</li>
+</ul>
+<h4><i class="fas fa-tools text-blue-500 mr-2"></i>Happy Homes &amp; Property Care</h4>
+<p>Creating and maintaining a positive living environment:</p>
+<ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+<li>Tenant responsibilities: Keeping the property clean and reporting issues promptly.</li>
+<li>Landlord responsibilities: Ensuring the property is habitable and undertaking necessary repairs.</li>
+<li>Move-in/Move-out Checklists: Templates and guidance for fair inspections.</li>
+<li>Tips for creating a welcoming and safe eKhaya.</li>
+</ul>
+<h4><i class="fas fa-users-cog text-teal-500 mr-2"></i>Ubuntu Connect: Building Positive Relationships</h4>
+<p>Fostering understanding and respect in the rental space:</p>
+<ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+<li>Effective and respectful communication strategies.</li>
+<li>Tips for conflict resolution and mediation.
                 <li>Understanding different cultural perspectives in housing.</li>
-                <li>Building a strong, positive landlord-tenant or host-guest relationship.</li>
-            </ul>
-            <p class="text-center mt-6 text-sm text-gray-500">Our Knowledge Hub is a living resource, continually updated to serve you better. Registered members will gain access to even more detailed guides and tools!</p>
-        </div>
-    </div>
-    
-    <div id="whyEkhayaModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('whyEkhayaModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-question-circle mr-2 text-orange-500"></i>Why Choose eKhaya?</h3>
-            <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tbXVuaXR5JTIwc3VwcG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Community support and connection" class="modal-image">
-            <p>eKhaya is more than just a platform for finding or listing a room or home. We are building a trusted space where the values of community, respect, and mutual support – the essence of <strong>Ubuntu</strong> – are at the forefront of every interaction. We are especially dedicated to uplifting and providing opportunities within South Africa's vibrant rural and informal housing sectors.</p>
-            <h4>What Makes eKhaya Different?</h4>
-            <ul>
-                <li><i class="fas fa-hand-holding-heart text-red-500 mr-2"></i> <strong>Ubuntu-Driven:</strong> We prioritize human connection and fairness, aiming to reduce conflict and build positive relationships between Abamkeli (Landlords/Hosts) and Abahlali/Bandwendwe (Tenants/Guests).</li>
-                <li><i class="fas fa-graduation-cap text-blue-500 mr-2"></i> <strong>Empowerment Through Knowledge:</strong> Our free and comprehensive Resource Hub provides clear, practical information on rights, responsibilities, and best practices for everyone.</li>
-                <li><i class="fas fa-map-marked-alt text-green-500 mr-2"></i> <strong>Focus on Underserved Communities:</strong> We are passionate about showcasing the unique charm and potential of rural and informal areas, helping local economies grow and providing diverse housing options.</li>
-                <li><i class="fas fa-tools text-purple-500 mr-2"></i> <strong>Simplified & Accessible Tools:</strong> We are committed to making the rental process easier and more transparent with user-friendly tools for listing, searching, communication, and (in the future) lease management.</li>
-                <li><i class="fas fa-shield-alt text-teal-500 mr-2"></i> **Building a Trusted Network:** Through verified profiles (coming soon) and a fair review system, we aim to create a secure and reliable environment for all users.</li>
-            </ul>
-            <p>Join eKhaya to be part of a platform that values you, supports your journey, and believes in the power of community to create better housing experiences for all South Africans.</p>
-        </div>
-    </div>
-
-    <div id="membershipPerksModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('membershipPerksModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-medal mr-2 text-yellow-400"></i>Unlock More with eKhaya</h3>
-            <p class="text-center mb-6">eKhaya offers value at every level. See how you can benefit:</p>
-
-            <div class="mb-6 p-4 border rounded-lg bg-gray-50 shadow-sm">
-                <h4 class="font-semibold text-lg text-gray-700 mb-2"><i class="fas fa-eye mr-2 text-gray-500"></i>Guest (No Registration Needed)</h4>
-                <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                    <li><i class="fas fa-book-open text-gray-400 mr-2"></i>Access our extensive **Knowledge Hub**: Learn about rental rights, responsibilities, and best practices in South Africa.</li>
-                    <li><i class="fas fa-search-location text-gray-400 mr-2"></i>Browse publicly showcased properties and discover unique stays.</li>
-                    <li><i class="fas fa-users text-gray-400 mr-2"></i>Understand the eKhaya community values and our commitment to Ubuntu.</li>
-                </ul>
-            </div>
-
-            <div class="mb-6 p-4 border rounded-lg bg-blue-50 shadow-sm">
-                <h4 class="font-semibold text-lg text-blue-700 mb-2"><i class="fas fa-user-plus mr-2"></i>Registered eKhaya Member (Free)</h4>
-                <ul class="list-disc list-inside text-sm text-blue-600 space-y-1">
-                    <li>All Guest benefits, PLUS:</li>
-                    <li><i class="fas fa-id-card text-blue-400 mr-2"></i>Create and manage your eKhaya Profile (choose Tenant, Landlord/Umamkeli, or both).</li>
-                    <li><i class="fas fa-home text-blue-400 mr-2"></i>**Landlords/Abamkeli:** List one property for free to showcase your space. Control its visibility (public, members-only, or private).</li>
-                    <li><i class="fas fa-user-check text-blue-400 mr-2"></i>**Tenants/Abahlali:** Create a basic tenant profile to present to potential landlords (with your consent).</li>
-                    <li><i class="fas fa-heart text-blue-400 mr-2"></i>Save property searches and favorite listings (feature coming soon).</li>
-                    <li><i class="fas fa-comments text-blue-400 mr-2"></i>Basic in-platform communication tools (feature coming soon).</li>
-                    <li><i class="fas fa-file-alt text-blue-400 mr-2"></i>Access to additional member-only resources and downloadable templates.</li>
-                    <li><i class="fas fa-envelope text-blue-400 mr-2"></i>Receive eKhaya community updates and helpful tips.</li>
-                    <li><strong class="text-orange-500"><i class="fas fa-gift mr-1"></i>Special Launch Offer:</strong> Enjoy a trial of all Subscriber features for the first 30 days after registration!</li>
-                </ul>
-            </div>
-
-            <div class="p-4 border rounded-lg bg-orange-50 shadow-sm">
-                <h4 class="font-semibold text-lg text-orange-700 mb-2"><i class="fas fa-crown mr-2"></i>eKhaya Subscriber (Premium - Future)</h4>
-                <ul class="list-disc list-inside text-sm text-orange-600 space-y-1">
-                    <li>All Registered Member benefits, PLUS:</li>
-                    <li><i class="fas fa-layer-group text-orange-400 mr-2"></i>**Landlords/Abamkeli:** List multiple properties, get enhanced listing visibility, access advanced property management tools (e.g., lease generation, simplified invoicing).</li>
-                    <li><i class="fas fa-filter text-orange-400 mr-2"></i>**Tenants/Abahlali:** Advanced search filters, priority notifications for new matching listings, enhanced profile features to build trust.</li>
-                    <li><i class="fas fa-star-half-alt text-orange-400 mr-2"></i>Full access to the comprehensive rating and review system.</li>
-                    <li><i class="fas fa-comments-dollar text-orange-400 mr-2"></i>Advanced communication and document sharing features.</li>
-                    <li><i class="fas fa-book-reader text-orange-400 mr-2"></i>Access to exclusive premium content, workshops, and webinars in the Knowledge Hub.</li>
-                    <li><i class="fas fa-headset text-orange-400 mr-2"></i>Priority customer support.</li>
-                    <li><i class="fas fa-tags text-orange-400 mr-2"></i>Potential discounts on partner services (e.g., screening, insurance - future).</li>
-                </ul>
-                <p class="text-xs text-orange-700 mt-2">Our subscription plans will be designed to be affordable and offer exceptional value. Stay tuned for details!</p>
-            </div>
-             <p class="text-center mt-6 text-sm text-gray-500">eKhaya is committed to growing with our community. We value your participation and feedback as we build a platform for everyone!</p>
-        </div>
-    </div>
-
-    <div id="addPropertyModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('addPropertyModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-home-lg-alt mr-2"></i>List Your Property/Space</h3>
-            <div class="modal-body">
-                <p class="text-sm text-gray-600 mb-4">Share details about your eKhaya to attract the right Abahlali (Tenants) or Bandwendwe (Guests). The more information you provide, the better!</p>
-                <form id="addPropertyForm">
-                    <div class="mb-4">
-                        <label for="propertyTitle" class="block text-gray-700 text-sm font-bold mb-1">Property Title <span class="text-red-500">*</span></label>
-                        <input type="text" id="propertyTitle" class="form-input" placeholder="e.g., Cozy 2-Bedroom Rural Cottage with Mountain Views" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="propertyDescription" class="block text-gray-700 text-sm font-bold mb-1">Detailed Description <span class="text-red-500">*</span></label>
-                        <textarea id="propertyDescription" class="form-input" rows="4" placeholder="Describe your property, its unique features, the surrounding area, and what makes it special."></textarea>
-                    </div>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="mb-4">
-                            <label for="propertyType" class="block text-gray-700 text-sm font-bold mb-1">Property Type <span class="text-red-500">*</span></label>
-                            <select id="propertyType" class="form-input">
-                                <option value="">Select Type</option>
-                                <option value="room_in_house">Room in a House</option>
-                                <option value="backyard_room">Backyard Room/Cottage</option>
-                                <option value="flat_apartment">Flat/Apartment</option>
-                                <option value="house_full">Full House</option>
-                                <option value="rondavel_traditional">Traditional Home / Rondavel</option>
-                                <option value="farm_stay">Farm Stay</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label for="rentalType" class="block text-gray-700 text-sm font-bold mb-1">Rental Type <span class="text-red-500">*</span></label>
-                            <select id="rentalType" class="form-input">
-                                <option value="long_term">Long-Term Rental</option>
-                                <option value="short_term">Short-Term Stay (Guest/Undwendwe)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="propertyAddress" class="block text-gray-700 text-sm font-bold mb-1">Full Address or General Location <span class="text-red-500">*</span></label>
-                        <input type="text" id="propertyAddress" class="form-input" placeholder="e.g., 123 Main Road, Coffee Bay or 'Near the Spaza Shop, Village X'">
-                        <p class="text-xs text-gray-500">For rural areas, a clear description of the location is helpful.</p>
-                    </div>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="mb-4">
-                            <label for="propertyBedrooms" class="block text-gray-700 text-sm font-bold mb-1">Bedrooms <span class="text-red-500">*</span></label>
-                            <input type="number" id="propertyBedrooms" class="form-input" min="0" placeholder="e.g., 2">
-                        </div>
-                        <div class="mb-4">
-                            <label for="propertyBathrooms" class="block text-gray-700 text-sm font-bold mb-1">Bathrooms <span class="text-red-500">*</span></label>
-                            <input type="number" id="propertyBathrooms" class="form-input" min="0" step="0.5" placeholder="e.g., 1.5">
-                        </div>
-                    </div>
-                     <div class="mb-4">
-                        <label for="propertyRent" class="block text-gray-700 text-sm font-bold mb-1">Rent per Month (ZAR) <span class="text-red-500">*</span></label>
-                        <input type="number" id="propertyRent" class="form-input" min="0" placeholder="e.g., 3500">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-1">Key Amenities (Select all that apply):</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                            <div><input type="checkbox" id="amenity_wifi" class="mr-1"><label for="amenity_wifi">Wi-Fi</label></div>
-                            <div><input type="checkbox" id="amenity_parking" class="mr-1"><label for="amenity_parking">Parking</label></div>
-                            <div><input type="checkbox" id="amenity_kitchen" class="mr-1"><label for="amenity_kitchen">Kitchen</label></div>
-                            <div><input type="checkbox" id="amenity_laundry" class="mr-1"><label for="amenity_laundry">Laundry</label></div>
-                            <div><input type="checkbox" id="amenity_pet_friendly" class="mr-1"><label for="amenity_pet_friendly">Pet-Friendly</label></div>
-                            <div><input type="checkbox" id="amenity_furnished" class="mr-1"><label for="amenity_furnished">Furnished</label></div>
-                        </div>
-                    </div>
-                     <div class="mb-4">
-                        <label for="propertyPhotos" class="block text-gray-700 text-sm font-bold mb-1">Upload Photos (Coming Soon)</label>
-                        <input type="file" id="propertyPhotos" class="form-input" multiple disabled>
-                        <p class="text-xs text-gray-500">Photo upload functionality will be available soon.</p>
-                    </div>
-                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-1">Visibility:</label>
-                        <select id="propertyVisibility" class="form-input">
-                            <option value="public">Public (Visible to everyone)</option>
-                            <option value="members">Members Only (Visible to registered eKhaya users)</option>
-                            <option value="private">Private (Only for your records for now)</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="form-button mt-4">Save Property (Coming Soon)</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="searchPropertiesModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('searchPropertiesModal')">&times;</span>
-            <h3 class="modal-title">Find Your Ideal eKhaya</h3>
-            <div class="modal-body">
-                <p>Our comprehensive search is coming soon! You'll be able to filter by location, price, property type, amenities, and more.</p>
-                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFwYXJ0bWVudCUyMHNlYXJjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Searching for a home" class="mx-auto my-4 rounded-lg shadow-md">
-                <p>For now, browse our showcased regions and imagine the possibilities!</p>
-                 <button class="form-button mt-4" onclick="closeModal('searchPropertiesModal')">Got it!</button>
-            </div>
-        </div>
-    </div>
-
-
-    <script type="module">
+<li>Building a strong, positive landlord-tenant or host-guest relationship.</li>
+</li></ul>
+<p class="text-center mt-6 text-sm text-gray-500">Our Knowledge Hub is a living resource, continually updated to serve you better. Registered members will gain access to even more detailed guides and tools!</p>
+</div>
+</div>
+<div class="modal" id="whyEkhayaModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('whyEkhayaModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-question-circle mr-2 text-orange-500"></i>Why Choose eKhaya?</h3>
+<img alt="Community support and connection" class="modal-image" src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tbXVuaXR5JTIwc3VwcG9ydHxlbnwwfHwwfHx8MA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"/>
+<p>eKhaya is more than just a platform for finding or listing a room or home. We are building a trusted space where the values of community, respect, and mutual support – the essence of <strong>Ubuntu</strong> – are at the forefront of every interaction. We are especially dedicated to uplifting and providing opportunities within South Africa's vibrant rural and informal housing sectors.</p>
+<h4>What Makes eKhaya Different?</h4>
+<ul>
+<li><i class="fas fa-hand-holding-heart text-red-500 mr-2"></i> <strong>Ubuntu-Driven:</strong> We prioritize human connection and fairness, aiming to reduce conflict and build positive relationships between Abamkeli (Landlords/Hosts) and Abahlali/Bandwendwe (Tenants/Guests).</li>
+<li><i class="fas fa-graduation-cap text-blue-500 mr-2"></i> <strong>Empowerment Through Knowledge:</strong> Our free and comprehensive Resource Hub provides clear, practical information on rights, responsibilities, and best practices for everyone.</li>
+<li><i class="fas fa-map-marked-alt text-green-500 mr-2"></i> <strong>Focus on Underserved Communities:</strong> We are passionate about showcasing the unique charm and potential of rural and informal areas, helping local economies grow and providing diverse housing options.</li>
+<li><i class="fas fa-tools text-purple-500 mr-2"></i> <strong>Simplified &amp; Accessible Tools:</strong> We are committed to making the rental process easier and more transparent with user-friendly tools for listing, searching, communication, and (in the future) lease management.</li>
+<li><i class="fas fa-shield-alt text-teal-500 mr-2"></i> **Building a Trusted Network:** Through verified profiles (coming soon) and a fair review system, we aim to create a secure and reliable environment for all users.</li>
+</ul>
+<p>Join eKhaya to be part of a platform that values you, supports your journey, and believes in the power of community to create better housing experiences for all South Africans.</p>
+</div>
+</div>
+<div class="modal" id="membershipPerksModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('membershipPerksModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-medal mr-2 text-yellow-400"></i>Unlock More with eKhaya</h3>
+<p class="text-center mb-6">eKhaya offers value at every level. See how you can benefit:</p>
+<div class="mb-6 p-4 border rounded-lg bg-gray-50 shadow-sm">
+<h4 class="font-semibold text-lg text-gray-700 mb-2"><i class="fas fa-eye mr-2 text-gray-500"></i>Guest (No Registration Needed)</h4>
+<ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+<li><i class="fas fa-book-open text-gray-400 mr-2"></i>Access our extensive **Knowledge Hub**: Learn about rental rights, responsibilities, and best practices in South Africa.</li>
+<li><i class="fas fa-search-location text-gray-400 mr-2"></i>Browse publicly showcased properties and discover unique stays.</li>
+<li><i class="fas fa-users text-gray-400 mr-2"></i>Understand the eKhaya community values and our commitment to Ubuntu.</li>
+</ul>
+</div>
+<div class="mb-6 p-4 border rounded-lg bg-blue-50 shadow-sm">
+<h4 class="font-semibold text-lg text-blue-700 mb-2"><i class="fas fa-user-plus mr-2"></i>Registered eKhaya Member (Free)</h4>
+<ul class="list-disc list-inside text-sm text-blue-600 space-y-1">
+<li>All Guest benefits, PLUS:</li>
+<li><i class="fas fa-id-card text-blue-400 mr-2"></i>Create and manage your eKhaya Profile (choose Tenant, Landlord/Umamkeli, or both).</li>
+<li><i class="fas fa-home text-blue-400 mr-2"></i>**Landlords/Abamkeli:** List one property for free to showcase your space. Control its visibility (public, members-only, or private).</li>
+<li><i class="fas fa-user-check text-blue-400 mr-2"></i>**Tenants/Abahlali:** Create a basic tenant profile to present to potential landlords (with your consent).</li>
+<li><i class="fas fa-heart text-blue-400 mr-2"></i>Save property searches and favorite listings (feature coming soon).</li>
+<li><i class="fas fa-comments text-blue-400 mr-2"></i>Basic in-platform communication tools (feature coming soon).</li>
+<li><i class="fas fa-file-alt text-blue-400 mr-2"></i>Access to additional member-only resources and downloadable templates.</li>
+<li><i class="fas fa-envelope text-blue-400 mr-2"></i>Receive eKhaya community updates and helpful tips.</li>
+<li><strong class="text-orange-500"><i class="fas fa-gift mr-1"></i>Special Launch Offer:</strong> Enjoy a trial of all Subscriber features for the first 30 days after registration!</li>
+</ul>
+</div>
+<div class="p-4 border rounded-lg bg-orange-50 shadow-sm">
+<h4 class="font-semibold text-lg text-orange-700 mb-2"><i class="fas fa-crown mr-2"></i>eKhaya Subscriber (Premium - Future)</h4>
+<ul class="list-disc list-inside text-sm text-orange-600 space-y-1">
+<li>All Registered Member benefits, PLUS:</li>
+<li><i class="fas fa-layer-group text-orange-400 mr-2"></i>**Landlords/Abamkeli:** List multiple properties, get enhanced listing visibility, access advanced property management tools (e.g., lease generation, simplified invoicing).</li>
+<li><i class="fas fa-filter text-orange-400 mr-2"></i>**Tenants/Abahlali:** Advanced search filters, priority notifications for new matching listings, enhanced profile features to build trust.</li>
+<li><i class="fas fa-star-half-alt text-orange-400 mr-2"></i>Full access to the comprehensive rating and review system.</li>
+<li><i class="fas fa-comments-dollar text-orange-400 mr-2"></i>Advanced communication and document sharing features.</li>
+<li><i class="fas fa-book-reader text-orange-400 mr-2"></i>Access to exclusive premium content, workshops, and webinars in the Knowledge Hub.</li>
+<li><i class="fas fa-headset text-orange-400 mr-2"></i>Priority customer support.</li>
+<li><i class="fas fa-tags text-orange-400 mr-2"></i>Potential discounts on partner services (e.g., screening, insurance - future).</li>
+</ul>
+<p class="text-xs text-orange-700 mt-2">Our subscription plans will be designed to be affordable and offer exceptional value. Stay tuned for details!</p>
+</div>
+<p class="text-center mt-6 text-sm text-gray-500">eKhaya is committed to growing with our community. We value your participation and feedback as we build a platform for everyone!</p>
+</div>
+</div>
+<div class="modal" id="addPropertyModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('addPropertyModal')">×</span>
+<h3 class="modal-title"><i class="fas fa-home-lg-alt mr-2"></i>List Your Property/Space</h3>
+<div class="modal-body">
+<p class="text-sm text-gray-600 mb-4">Share details about your eKhaya to attract the right Abahlali (Tenants) or Bandwendwe (Guests). The more information you provide, the better!</p>
+<form id="addPropertyForm">
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyTitle">Property Title <span class="text-red-500">*</span></label>
+<input class="form-input" id="propertyTitle" placeholder="e.g., Cozy 2-Bedroom Rural Cottage with Mountain Views" required="" type="text"/>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyDescription">Detailed Description <span class="text-red-500">*</span></label>
+<textarea class="form-input" id="propertyDescription" placeholder="Describe your property, its unique features, the surrounding area, and what makes it special." rows="4"></textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyType">Property Type <span class="text-red-500">*</span></label>
+<select class="form-input" id="propertyType">
+<option value="">Select Type</option>
+<option value="room_in_house">Room in a House</option>
+<option value="backyard_room">Backyard Room/Cottage</option>
+<option value="flat_apartment">Flat/Apartment</option>
+<option value="house_full">Full House</option>
+<option value="rondavel_traditional">Traditional Home / Rondavel</option>
+<option value="farm_stay">Farm Stay</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="rentalType">Rental Type <span class="text-red-500">*</span></label>
+<select class="form-input" id="rentalType">
+<option value="long_term">Long-Term Rental</option>
+<option value="short_term">Short-Term Stay (Guest/Undwendwe)</option>
+</select>
+</div>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyAddress">Full Address or General Location <span class="text-red-500">*</span></label>
+<input class="form-input" id="propertyAddress" placeholder="e.g., 123 Main Road, Coffee Bay or 'Near the Spaza Shop, Village X'" type="text"/>
+<p class="text-xs text-gray-500">For rural areas, a clear description of the location is helpful.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyBedrooms">Bedrooms <span class="text-red-500">*</span></label>
+<input class="form-input" id="propertyBedrooms" min="0" placeholder="e.g., 2" type="number"/>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyBathrooms">Bathrooms <span class="text-red-500">*</span></label>
+<input class="form-input" id="propertyBathrooms" min="0" placeholder="e.g., 1.5" step="0.5" type="number"/>
+</div>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyRent">Rent per Month (ZAR) <span class="text-red-500">*</span></label>
+<input class="form-input" id="propertyRent" min="0" placeholder="e.g., 3500" type="number"/>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1">Key Amenities (Select all that apply):</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+<div><input class="mr-1" id="amenity_wifi" type="checkbox"/><label for="amenity_wifi">Wi-Fi</label></div>
+<div><input class="mr-1" id="amenity_parking" type="checkbox"/><label for="amenity_parking">Parking</label></div>
+<div><input class="mr-1" id="amenity_kitchen" type="checkbox"/><label for="amenity_kitchen">Kitchen</label></div>
+<div><input class="mr-1" id="amenity_laundry" type="checkbox"/><label for="amenity_laundry">Laundry</label></div>
+<div><input class="mr-1" id="amenity_pet_friendly" type="checkbox"/><label for="amenity_pet_friendly">Pet-Friendly</label></div>
+<div><input class="mr-1" id="amenity_furnished" type="checkbox"/><label for="amenity_furnished">Furnished</label></div>
+</div>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1" for="propertyPhotos">Upload Photos (Coming Soon)</label>
+<input class="form-input" disabled="" id="propertyPhotos" multiple="" type="file"/>
+<p class="text-xs text-gray-500">Photo upload functionality will be available soon.</p>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 text-sm font-bold mb-1">Visibility:</label>
+<select class="form-input" id="propertyVisibility">
+<option value="public">Public (Visible to everyone)</option>
+<option value="members">Members Only (Visible to registered eKhaya users)</option>
+<option value="private">Private (Only for your records for now)</option>
+</select>
+</div>
+<button class="form-button mt-4" type="submit">Save Property (Coming Soon)</button>
+</form>
+</div>
+</div>
+</div>
+<div class="modal" id="searchPropertiesModal">
+<div class="modal-content">
+<span class="close-button" onclick="closeModal('searchPropertiesModal')">×</span>
+<h3 class="modal-title">Find Your Ideal eKhaya</h3>
+<div class="modal-body">
+<p>Our comprehensive search is coming soon! You'll be able to filter by location, price, property type, amenities, and more.</p>
+<img alt="Searching for a home" class="mx-auto my-4 rounded-lg shadow-md" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFwYXJ0bWVudCUyMHNlYXJjaHxlbnwwfHwwfHx8MA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"/>
+<p>For now, browse our showcased regions and imagine the possibilities!</p>
+<button class="form-button mt-4" onclick="closeModal('searchPropertiesModal')">Got it!</button>
+</div>
+</div>
+</div>
+<script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
