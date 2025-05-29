@@ -9,144 +9,487 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛖</text></svg>">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #FDF8F0; /* Warm, inviting off-white */
             color: #4A3B31; /* Deep, earthy brown for text */
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll, allow vertical for dashboard */
             min-height: 100vh;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
         }
+
         .african-pattern-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('https://www.transparenttextures.com/patterns/aztec.png'); /* Subtle geometric pattern */
-            opacity: 0.03; z-index: -1;
+            opacity: 0.03;
+            z-index: -1;
         }
-        .top-bar {
-            background-color: rgba(212, 163, 115, 0.9); /* Ochre */
-            backdrop-filter: blur(5px);
-            padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky; top: 0; z-index: 1001;
-        }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: #4A3B31; cursor: pointer; }
-        .logo .highlight { color: #E76F51; }
-        .auth-buttons button {
-            background-color: #E76F51; color: white; padding: 8px 16px; border-radius: 20px;
-            font-weight: 500; transition: background-color 0.3s; margin-left: 10px; font-size: 0.9rem;
-        }
-        .auth-buttons button:hover { background-color: #D95A3F; }
-        .auth-buttons .login-btn { background-color: transparent; color: #4A3B31; border: 1px solid #4A3B31; }
-        .auth-buttons .login-btn:hover { background-color: #f0e6d5; }
 
-        .main-content-area { /* Wrapper for homepage content (carousel & icon hub) */
-            display: flex; 
-            flex-direction: column;
-            flex-grow: 1;
+        .top-bar {
+            background-color: rgba(212, 163, 115, 0.9); /* Semi-transparent Ochre */
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky; /* Make top bar sticky */
+            top: 0;
+            z-index: 1001;
         }
-        .homepage-content { /* This div will be hidden when dashboard is shown */
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4A3B31;
+        }
+        .logo .highlight {
+            color: #E76F51; /* Vibrant accent */
+        }
+
+        .auth-buttons button {
+            background-color: #E76F51;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+        .auth-buttons button:hover {
+            background-color: #D95A3F;
+        }
+        .auth-buttons .login-btn {
+            background-color: transparent;
+            color: #4A3B31;
+            border: 1px solid #4A3B31;
+        }
+         .auth-buttons .login-btn:hover {
+            background-color: #f0e6d5;
+        }
+
+        .main-content-area { /* Wrapper for carousel and icon hub */
+            display: flex; /* Use flex to manage visibility */
+            flex-direction: column;
+            flex-grow: 1; 
+        }
+
+        .hero-carousel-container {
+            height: 55vh; /* Adjust height as needed */
+            width: 100%;
+            position: relative;
+        }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .swiper-slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+        }
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 20px;
+            max-width: 80%;
+        }
+        .slide-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+        .slide-content p {
+            font-size: clamp(0.9rem, 2vw, 1.125rem);
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+        }
+        .cta-button {
+            background-color: #E76F51; /* Vibrant accent */
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px; /* Added margin for better spacing on small screens */
+            font-size: 1rem;
+            border: 2px solid transparent;
+            display: inline-block; /* Ensure buttons behave well in flex layouts */
+        }
+        .cta-button:hover {
+            background-color: #D95A3F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .cta-button-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        .cta-button-secondary:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .icon-hub {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: #F0EFEB; /* Light stone color, slightly different from body */
+            min-height: 35vh; /* Ensure it takes up remaining space */
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .icon-item {
+            background-color: #FFFFFF;
+            border: 1px solid #D7CCC8; /* Light brown border */
+            border-radius: 16px; /* More rounded */
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px; /* Ensure consistent height */
+        }
+        .icon-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        .icon-item i { /* Font Awesome icons */
+            font-size: 2.2rem; /* Slightly smaller for balance */
+            margin-bottom: 12px;
+            color: #E76F51; /* Consistent accent color */
+        }
+        .icon-item-svg svg { /* For custom SVGs */
+             width: 38px;
+             height: 38px;
+             margin-bottom: 12px;
+             fill: #E76F51; /* Consistent accent color */
+        }
+        .icon-item span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4A3B31;
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1050; /* Ensure modals are above other content, including top bar */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if content overflows */
+            background-color: rgba(0,0,0,0.7); /* Dim background */
+            align-items: center;
+            justify-content: center;
+            padding: 20px; /* Padding for smaller screens */
         }
 
-        .hero-carousel-container { height: 55vh; width: 100%; position: relative; }
-        .swiper-container { width: 100%; height: 100%; }
-        .swiper-slide { display: flex; align-items: center; justify-content: center; text-align: center; background-size: cover; background-position: center; position: relative; }
-        .swiper-slide::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%); }
-        .slide-content { position: relative; z-index: 1; color: white; padding: 20px; max-width: 80%; }
-        .slide-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; margin-bottom: 0.5rem; text-shadow: 2px 2px 6px rgba(0,0,0,0.6); }
-        .slide-content p { font-size: clamp(0.85rem, 2vw, 1.1rem); margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); }
-        .cta-button { background-color: #E76F51; color: white; padding: 10px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; margin: 5px; font-size: 0.9rem; border: 2px solid transparent; display: inline-block; }
-        .cta-button:hover { background-color: #D95A3F; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .cta-button-secondary { background-color: transparent; border: 2px solid white; }
-        .cta-button-secondary:hover { background-color: rgba(255,255,255,0.2); }
+        .modal-content {
+            background-color: #FEFDFB; /* Light cream background for modal */
+            margin: auto; /* Center modal horizontally */
+            padding: 25px 30px;
+            border: 2px solid #D4A373; /* Ochre border, slightly thicker */
+            border-radius: 12px; /* Rounded corners */
+            width: 90%; /* Responsive width */
+            max-width: 550px; /* Max width for larger screens */
+            max-height: 90vh; /* Max height to prevent overflow on small screens */
+            overflow-y: auto; /* Scroll inside modal if content is too long */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative; /* For absolute positioning of close button */
+            animation: fadeInModal 0.3s ease-out;
+        }
 
-        .icon-hub { flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 20px 10px; background-color: #F0EFEB; min-height: 35vh; }
-        .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; max-width: 1000px; width: 100%; }
-        .icon-item { background-color: #FFFFFF; border: 1px solid #D7CCC8; border-radius: 16px; padding: 15px 10px; text-align: center; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 6px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: space-around; min-height: 130px; }
-        .icon-item:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 12px 20px rgba(0,0,0,0.1); }
-        .icon-item i { font-size: 2rem; margin-bottom: 10px; color: #E76F51; }
-        .icon-item-svg svg { width: 36px; height: 36px; margin-bottom: 10px; fill: #E76F51; }
-        .icon-item span { font-size: 0.85rem; font-weight: 600; color: #4A3B31; line-height: 1.2; }
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
-        .modal { display: none; position: fixed; z-index: 1050; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); align-items: center; justify-content: center; padding: 15px; }
-        .modal-content { background-color: #FEFDFB; margin: auto; padding: 20px 25px; border: 2px solid #D4A373; border-radius: 12px; width: 95%; max-width: 600px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; animation: fadeInModal 0.3s ease-out; }
-        @keyframes fadeInModal { from { opacity: 0; transform: translateY(-20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        .close-button { color: #aaa; position: absolute; top: 10px; right: 15px; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.2s; }
-        .close-button:hover, .close-button:focus { color: #4A3B31; text-decoration: none; }
-        .modal-title { color: #BF360C; font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 15px; text-align: center; }
-        .modal-body h4 { font-size: 1.1rem; font-weight: 600; color: #E76F51; margin-top: 15px; margin-bottom: 8px; }
-        .modal-body p, .modal-body ul li { margin-bottom: 10px; line-height: 1.6; color: #5D4037; font-size: 0.9rem; }
-        .modal-body ul { list-style-position: inside; padding-left: 5px; }
-        .modal-body img.modal-image { max-width: 100%; height: auto; max-height: 200px; object-fit: cover; border-radius: 8px; margin: 15px auto; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .modal-body .form-input, .modal-body textarea { width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #D4A373; border-radius: 8px; box-sizing: border-box; font-size: 0.9rem; }
-        .modal-body .form-input:focus, .modal-body textarea:focus { outline: none; border-color: #E76F51; box-shadow: 0 0 0 2px rgba(231, 111, 81, 0.2); }
-        .modal-body .form-button { background-color: #E76F51; color: white; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; width: 100%; font-size: 0.95rem; }
-        .modal-body .form-button:hover { background-color: #D95A3F; }
-        .modal-body .google-signin-btn { background-color: #4285F4; color: white; margin-top: 10px; }
-        .modal-body .google-signin-btn:hover { background-color: #357AE8; }
-        .modal-body .or-divider { text-align: center; margin: 15px 0; color: #8C7A6B; font-size: 0.85rem; position: relative; }
-        .modal-body .or-divider::before, .modal-body .or-divider::after { content: ""; display: block; width: 40%; height: 1px; background-color: #D7CCC8; position: absolute; top: 50%; }
-        .modal-body .or-divider::before { left: 0; } .modal-body .or-divider::after { right: 0; }
-        .modal-body .switch-auth-link { text-align: center; margin-top: 15px; font-size: 0.85rem; }
-        .modal-body .switch-auth-link a { color: #E76F51; text-decoration: none; font-weight: 500; }
-        .modal-body .switch-auth-link a:hover { text-decoration: underline; }
-        .error-message { color: #D32F2F; background-color: #FFCDD2; border: 1px solid #EF5350; padding: 8px; border-radius: 4px; font-size: 0.875rem; margin-bottom: 10px; text-align: center; }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #4A3B31; /* Darker brown on hover */
+            text-decoration: none;
+        }
 
-        .swiper-pagination-bullet-active { background-color: #E76F51 !important; }
-        .swiper-button-next, .swiper-button-prev { color: #E76F51 !important; --swiper-navigation-size: 28px; }
-        .swiper-button-next:after, .swiper-button-prev:after { filter: drop-shadow(0 0 3px rgba(0,0,0,0.5)); }
+        .modal-title {
+            color: #BF360C; /* Deep rust color for titles */
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; /* Slightly larger title */
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-body p, .modal-body ul li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #5D4037; /* Slightly darker brown for body text */
+            font-size: 0.95rem;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .modal-body .form-input {
+            width: 100%;
+            padding: 12px 15px; /* Increased padding */
+            margin-bottom: 15px;
+            border: 1px solid #D4A373; /* Ochre border */
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+        }
+        .modal-body .form-input:focus {
+            outline: none;
+            border-color: #E76F51; /* Accent color on focus */
+            box-shadow: 0 0 0 2px rgba(231, 111, 81, 0.2);
+        }
+
+        .modal-body .form-button {
+            background-color: #E76F51;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .modal-body .form-button:hover {
+            background-color: #D95A3F; /* Darker shade on hover */
+        }
+        .modal-body .google-signin-btn {
+            background-color: #4285F4; /* Google blue */
+            color: white;
+            margin-top: 10px;
+        }
+        .modal-body .google-signin-btn:hover {
+            background-color: #357AE8; /* Darker Google blue */
+        }
+        .modal-body .or-divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #8C7A6B; /* Earthy grey */
+            font-size: 0.9rem;
+            position: relative;
+        }
+        .modal-body .or-divider::before,
+        .modal-body .or-divider::after {
+            content: "";
+            display: block;
+            width: 40%;
+            height: 1px;
+            background-color: #D7CCC8; /* Light brown */
+            position: absolute;
+            top: 50%;
+        }
+        .modal-body .or-divider::before { left: 0; }
+        .modal-body .or-divider::after { right: 0; }
+
+        .modal-body .switch-auth-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .modal-body .switch-auth-link a {
+            color: #E76F51;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .modal-body .switch-auth-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #D32F2F; /* A standard error red */
+            background-color: #FFCDD2; /* Light red background for visibility */
+            border: 1px solid #EF5350;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #E76F51 !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: #E76F51 !important;
+            --swiper-navigation-size: 30px;
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            filter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+        }
         
-        .svg-pattern-1 { width: 36px; height: 36px; fill: none; stroke: #795548; stroke-width:2; }
-        .svg-pattern-2 { width: 36px; height: 36px; fill: #795548; }
-        .svg-pattern-3 { width: 36px; height: 36px; fill: #E76F51; }
+        /* Custom African Pattern SVGs - simple examples */
+        .svg-pattern-1 { /* Ndebele inspired simple diamond */
+            width: 40px; height: 40px;
+            fill: none; stroke: #795548; stroke-width:2;
+        }
+         .svg-pattern-2 { /* Simple Hut/Rondavel icon */
+            width: 40px; height: 40px;
+            fill: #795548;
+        }
+        .svg-pattern-3 { /* Simple sun/community icon */
+            width: 40px; height: 40px;
+            fill: #E76F51;
+        }
 
         /* Dashboard Styling */
-        #dashboardPage { /* This is the container for the dashboard view */
+        #dashboardPage {
             display: none; /* Initially hidden */
             flex-direction: column;
             align-items: center;
             padding: 20px;
             background-color: #F9F9F9; /* Light grey background for dashboard */
-            flex-grow: 1; /* Allow dashboard to take full height */
-            width: 100%;
-            overflow-y: auto; /* Allow dashboard to scroll if content overflows */
+            min-height: calc(100vh - 60px); /* Adjust based on top-bar height */
+            width: 100%; /* Ensure it takes full width when visible */
         }
         .dashboard-container {
-            background-color: white; padding: 20px; border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 900px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 900px; /* Max width for dashboard content */
         }
-        .dashboard-header { text-align: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .dashboard-header h2 { font-family: 'Playfair Display', serif; color: #4A3B31; font-size: 2rem; }
-        .dashboard-section { margin-bottom: 25px; padding: 15px; background-color: #fff; border-radius: 8px; border: 1px solid #e0e0e0; }
-        .dashboard-section h3 { font-size: 1.25rem; color: #E76F51; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .dashboard-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: #4A3B31;
+            font-size: 2rem;
+        }
+        .dashboard-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .dashboard-section h3 {
+            font-size: 1.25rem;
+            color: #E76F51;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
         .dashboard-button {
-            background-color: #4CAF50; color: white; padding: 10px 15px; border: none;
-            border-radius: 6px; cursor: pointer; font-weight: 500; transition: background-color 0.3s;
-            margin-right: 10px; margin-bottom: 10px;
+            background-color: #4CAF50; /* Green for primary actions */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px; /* Add margin for stacking on small screens */
         }
-        .dashboard-button:hover { background-color: #45a049; }
-        .dashboard-button-secondary { background-color: #007BFF; }
-        .dashboard-button-secondary:hover { background-color: #0056b3; }
+        .dashboard-button:hover {
+            background-color: #45a049;
+        }
+        .dashboard-button-secondary {
+            background-color: #007BFF; /* Blue for secondary actions */
+        }
+        .dashboard-button-secondary:hover {
+            background-color: #0056b3;
+        }
+        .role-selection-buttons button {
+            margin-bottom: 10px;
+        }
 
-        #editProfileModal .modal-body label { display: block; margin-bottom: 0.5rem; color: #4A3B31; font-weight: 500; }
-        #editProfileModal .modal-body input[type="checkbox"] { margin-right: 0.5rem; }
-        #editProfileModal .modal-body .checkbox-group label { display: inline-block; margin-right: 1rem; font-weight: normal; }
-        .hidden { display: none !important; }
-        .flex-container { display: flex; flex-direction: column; min-height: 100vh; }
+        /* Styling for profile form within modal */
+        #editProfileModal .modal-body label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4A3B31;
+            font-weight: 500;
+        }
+        #editProfileModal .modal-body input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        #editProfileModal .modal-body .checkbox-group label {
+            display: inline-block;
+            margin-right: 1rem;
+            font-weight: normal;
+        }
+
+        /* Ensure content below header is visible */
+        .content-wrapper {
+            flex-grow: 1; /* Allows this div to take up remaining space */
+            overflow-y: auto; /* Allows scrolling within this area if needed */
+        }
+
     </style>
 </head>
-<body class="flex-container">
+<body>
     <div class="african-pattern-bg"></div>
 
     <header class="top-bar">
-        <div class="logo" onclick="navigateToHome()">e<span class="highlight">K</span>haya</div>
+        <div class="logo">e<span class="highlight">K</span>haya</div>
         <div class="auth-buttons">
             <button class="login-btn" onclick="openModal('loginModal')">Login</button>
             <button onclick="openModal('registerModal')">Sign Up</button>
@@ -154,138 +497,93 @@
     </header>
 
     <div class="main-content-area">
-        <div class="homepage-content">
-            <div class="hero-carousel-container">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1589087471045-311998588959?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"> <div class="slide-content">
-                                <h2>Discover the Eastern Cape</h2>
-                                <p>Experience the raw beauty and rich Xhosa heritage of the Wild Coast, Amatola Mountains, and beyond. Authentic stays await in welcoming communities.</p>
-                                <div>
-                                    <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1603202662435-f5133c761416?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1618284210070-757277617475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZWFzdGVybiUyMGNhcGUlMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586494053092-597990133996?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a3dhenVsdSUyMG5hdGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');"> <div class="slide-content">
-                                <h2>Majestic KwaZulu-Natal</h2>
-                                <p>From the towering Drakensberg peaks to vibrant Zulu villages and sun-kissed coastlines, KZN offers unforgettable adventures.</p>
-                                 <div>
-                                    <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1604973573749-0669f9370415?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGt3YXp1bHUlMjBuYXRhbCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore KZN Stays</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1589983950357-519208915030?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8enVsdSUyMGN1bHR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1604814469827-3cc53a008559?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGltcG9wbyUyMHNvdXRoJTIwYWZyaWNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');"> <div class="slide-content">
-                                <h2>Ancient Limpopo</h2>
-                                <p>Land of baobabs, rich wildlife, and the mystical cultures of Venda and Tsonga. Your unique journey starts here.</p>
-                                 <div>
-                                    <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Limpopo', 'https://images.unsplash.com/photo-1547471080-78312f095004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFvYmFiJTIwdHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Limpopo</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Limpopo', 'https://images.unsplash.com/photo-1623350401185-36956115a821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmVuZGElMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');"> <div class="slide-content">
-                                <h2>eKhaya: Renting with Ubuntu</h2>
-                                <p>Connecting hearts and homes across South Africa. Your journey with us is built on trust, community, and shared prosperity.</p>
-                                 <div>
-                                    <a href="#" class="cta-button" onclick="openModal('ourStoryModal')">Our Story</a>
-                                    <a href="#" class="cta-button cta-button-secondary" onclick="openModal('resourceHubModal')">Get Resources</a>
-                                </div>
+        <div class="hero-carousel-container">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1589087471045-311998588959?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>Discover the Eastern Cape</h2>
+                            <p>Experience the raw beauty and rich Xhosa heritage of the Wild Coast and beyond. Authentic stays await.</p>
+                            <div>
+                                <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1603202662435-f5133c761416?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZWFzdGVybiUyMGNhcGV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Eastern Cape', 'https://images.unsplash.com/photo-1618284210070-757277617475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZWFzdGVybiUyMGNhcGUlMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
-
-            <div class="icon-hub">
-                <div class="icon-grid">
-                    <div class="icon-item" onclick="openModal('ourStoryModal')">
-                        <i class="fas fa-users"></i>
-                        <span>Our eKhaya Story</span>
+                    <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1586494053092-597990133996?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8a3dhenVsdSUyMG5hdGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>Majestic KwaZulu-Natal</h2>
+                            <p>From the towering Drakensberg peaks to vibrant Zulu villages and sun-kissed coastlines, KZN offers unforgettable adventures.</p>
+                             <div>
+                                <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1604973573749-0669f9370415?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGt3YXp1bHUlMjBuYXRhbCUyMGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'KwaZulu-Natal', 'https://images.unsplash.com/photo-1589983950357-519208915030?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8enVsdSUyMGN1bHR1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="icon-item" onclick="openModal('findHomeModal')">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <span>Find Your eKhaya</span>
+                    <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1604814469827-3cc53a008559?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGltcG9wbyUyMHNvdXRoJTIwYWZyaWNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>Ancient Limpopo</h2>
+                            <p>Land of baobabs, rich wildlife, and the mystical cultures of Venda and Tsonga. Your unique journey starts here.</p>
+                             <div>
+                                <a href="#" class="cta-button" onclick="openModalWithContent('exploreModal', 'Limpopo', 'https://images.unsplash.com/photo-1547471080-78312f095004?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFvYmFiJTIwdHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">Explore Stays</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModalWithContent('showcaseModal', 'Limpopo', 'https://images.unsplash.com/photo-1623350401185-36956115a821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmVuZGElMjBjdWx0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60')">Showcase This Region</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="icon-item" onclick="openModal('shareSpaceModal')">
-                        <i class="fas fa-home"></i>
-                        <span>Share Your Space</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('resourceHubModal')">
-                        <i class="fas fa-book-reader"></i>
-                        <span>Knowledge Hub</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('whyEkhayaModal')">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Why Choose eKhaya?</span>
-                    </div>
-                    <div class="icon-item" onclick="openModal('membershipPerksModal')">
-                        <i class="fas fa-medal"></i>
-                        <span>Membership Perks</span>
+                     <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29tbXVuaXR5JTIwZ2F0aGVyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=60');">
+                        <div class="slide-content">
+                            <h2>eKhaya: Renting with Ubuntu</h2>
+                            <p>Connecting hearts and homes across South Africa. Your journey with us is built on trust, community, and shared prosperity.</p>
+                             <div>
+                                <a href="#" class="cta-button" onclick="openModal('ourStoryModal')">Our Story</a>
+                                <a href="#" class="cta-button cta-button-secondary" onclick="openModal('resourceHubModal')">Get Resources</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div> <div id="dashboardPage" class="dashboard-page-container">
-            <div class="dashboard-container">
-                <div class="dashboard-header">
-                    <h2>My eKhaya Dashboard</h2>
-                    <p class="text-lg">Welcome, <span id="dashboardUserName" class="font-semibold">User</span>!</p>
-                    <p class="text-sm text-gray-600">User ID: <span id="dashboardUserId" class="font-mono"></span></p>
-                </div>
-
-                <div class="dashboard-section">
-                    <h3><i class="fas fa-user-circle mr-2"></i>Profile Management</h3>
-                    <p class="text-gray-600 mb-3">Keep your information up-to-date to make the most of eKhaya. Your profile helps build trust within our community.</p>
-                    <button class="dashboard-button bg-blue-500 hover:bg-blue-700 text-white" onclick="openModal('editProfileModal')">
-                        <i class="fas fa-user-edit mr-2"></i>Edit My Profile
-                    </button>
-                </div>
-
-                <div class="dashboard-section">
-                    <h3><i class="fas fa-id-badge mr-2"></i>My Roles on eKhaya</h3>
-                    <p class="text-gray-600 mb-3">Your current active roles determine the tools and features available to you. You can update these in your profile.</p>
-                    <div id="currentRolesDisplay" class="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 text-blue-700 rounded-md">
-                        Loading roles...
-                    </div>
-                </div>
-
-                <div id="landlordDashboardSection" class="dashboard-section hidden">
-                    <h3><i class="fas fa-house-user mr-2"></i>Landlord Space (Umamkeli)</h3>
-                    <p class="text-gray-600 mb-3">Manage your properties, connect with Abahlali (Tenants) & Bandwendwe (Guests), and access landlord-specific resources.</p>
-                    <button class="dashboard-button bg-green-500 hover:bg-green-700" onclick="openModal('addPropertyModal')">
-                        <i class="fas fa-plus-circle mr-2"></i>List a New Property
-                    </button>
-                    <button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
-                        <i class="fas fa-list-alt mr-2"></i>View My Listings (Coming Soon)
-                    </button>
-                    <button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
-                        <i class="fas fa-comments mr-2"></i>My Messages (Coming Soon)
-                    </button>
-                </div>
-
-                <div id="tenantDashboardSection" class="dashboard-section hidden">
-                    <h3><i class="fas fa-key mr-2"></i>Tenant Space (Umhlali)</h3>
-                    <p class="text-gray-600 mb-3">Find your next home, manage your rental applications, and communicate with Abanikazi Beendawo (Landlords).</p>
-                    <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700" onclick="openModal('searchPropertiesModal')">
-                        <i class="fas fa-search mr-2"></i>Search Properties (Coming Soon)
-                    </button>
-                    <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
-                        <i class="fas fa-heart mr-2"></i>My Saved Properties (Coming Soon)
-                    </button>
-                     <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
-                        <i class="fas fa-file-alt mr-2"></i>My Applications (Coming Soon)
-                    </button>
-                </div>
-                 <button class="dashboard-button bg-gray-700 hover:bg-gray-800 mt-6 w-full md:w-auto" onclick="navigateToHome()">
-                    <i class="fas fa-arrow-left mr-2"></i>Back to Homepage
-                </button>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
-    </div> <div id="registerModal" class="modal">
+
+        <div class="icon-hub">
+            <div class="icon-grid">
+                <div class="icon-item" onclick="openModal('ourStoryModal')">
+                    <div class="icon-item-svg">
+                        <svg class="svg-pattern-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L70 25 L50 45 L30 25 Z M50 55 L70 75 L50 95 L30 75 Z M25 50 L45 50 L50 45 L50 55 L45 50 Z M75 50 L55 50 L50 45 L50 55 L55 50 Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <span>Our Story</span>
+                </div>
+                <div class="icon-item" onclick="openModal('findHomeModal')">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Find Your eKhaya</span>
+                </div>
+                <div class="icon-item" onclick="openModal('shareSpaceModal')">
+                    <div class="icon-item-svg">
+                        <svg class="svg-pattern-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10 90 L10 50 A40 40 0 0 1 90 50 L90 90 Z M5 50 L95 50 M30 90 L30 60 A20 10 0 0 1 50 55 A20 10 0 0 1 70 60 L70 90 M40 90 L40 70 Q50 65 60 70 L60 90 "/></svg>
+                    </div>
+                    <span>Share Your Space</span>
+                </div>
+                <div class="icon-item" onclick="openModal('resourceHubModal')">
+                    <i class="fas fa-book-reader"></i>
+                    <span>Resource Hub</span>
+                </div>
+                <div class="icon-item" onclick="openModalWithContent('showcaseModal', 'Your Village', 'https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c291dGglMjBhZnJpY2FuJTIwdmlsbGFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60')">
+                    <i class="fas fa-camera-retro"></i>
+                    <span>Showcase Village</span>
+                </div>
+                <div class="icon-item" onclick="openModal('testimonialsModal')">
+                    <div class="icon-item-svg">
+                         <svg class="svg-pattern-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="20" fill="white"/><path d="M50 20 L50 80 M20 50 L80 50 M30 30 L70 70 M30 70 L70 30" stroke="currentColor" stroke-width="5"/></svg>
+                    </div>
+                    <span>Community Voices</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('registerModal')">&times;</span>
             <h3 class="modal-title">Create Your eKhaya Account</h3>
@@ -311,9 +609,9 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('loginModal')">&times;</span>
-            <h3 class="modal-title">Welcome Back to eKhaya!</h3>
+            <h3 class="modal-title">Welcome Back to eKhaya</h3>
             <div class="modal-body">
-                <p>Log in to access your dashboard, manage your profile, and continue your eKhaya journey.</p>
+                <p>Log in to access your profile, listings, and messages.</p>
                 <div id="loginError" class="error-message" style="display:none;"></div>
                 <form id="loginForm">
                     <input type="email" id="loginEmail" placeholder="Email Address" class="form-input" required>
@@ -328,86 +626,17 @@
             </div>
         </div>
     </div>
-    
-    <div id="editProfileModal" class="modal">
+
+    <div id="profileModal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('editProfileModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-user-edit mr-2"></i>Edit Your Profile</h3>
+            <span class="close-button" onclick="closeModal('profileModal')">&times;</span>
+            <h3 class="modal-title">My eKhaya Profile</h3>
             <div class="modal-body">
-                <p class="text-sm text-gray-600 mb-4">The more complete your profile, the better eKhaya can serve you and build trust within the community.</p>
-                <div id="profileUpdateError" class="error-message" style="display:none;"></div>
-                <form id="profileUpdateForm">
-                    <div class="mb-4">
-                        <label for="profileDisplayName" class="block text-gray-700 text-sm font-bold mb-1">Display Name:</label>
-                        <input type="text" id="profileDisplayName" class="form-input" placeholder="Your Name">
-                    </div>
-                    <div class="mb-4">
-                        <label for="profilePhoneNumber" class="block text-gray-700 text-sm font-bold mb-1">Phone Number (Optional):</label>
-                        <input type="tel" id="profilePhoneNumber" class="form-input" placeholder="e.g., 0821234567">
-                    </div>
-                    <div class="mb-4">
-                        <label for="profileBio" class="block text-gray-700 text-sm font-bold mb-1">Short Bio (Optional):</label>
-                        <textarea id="profileBio" class="form-input" rows="3" placeholder="Tell us a bit about yourself, your interests, or what you're looking for..."></textarea>
-                    </div>
-                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">I am a:</label>
-                        <div class="checkbox-group flex items-center mb-2">
-                            <input type="checkbox" id="roleTenant" name="userRole" value="tenant" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
-                            <label for="roleTenant" class="text-gray-700">Tenant / Umhlali (Looking for a place)</label>
-                        </div>
-                        <div class="checkbox-group flex items-center">
-                            <input type="checkbox" id="roleLandlord" name="userRole" value="landlord" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
-                            <label for="roleLandlord" class="text-gray-700">Landlord / Umamkeli (Sharing a space)</label>
-                        </div>
-                    </div>
-
-                    <div id="landlordSpecificFields" class="hidden mt-4 border-t pt-4">
-                        <h4 class="text-md font-semibold text-gray-700 mb-2">Landlord / Umamkeli Details:</h4>
-                        <div class="mb-3">
-                            <label for="landlordPropertiesCount" class="block text-gray-700 text-sm font-bold mb-1">Number of Properties/Units/Rooms you manage:</label>
-                            <input type="number" id="landlordPropertiesCount" class="form-input" min="0" placeholder="e.g., 1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="landlordExperienceYears" class="block text-gray-700 text-sm font-bold mb-1">Years of experience as a Landlord/Umamkeli:</label>
-                            <input type="number" id="landlordExperienceYears" class="form-input" min="0" placeholder="e.g., 5">
-                        </div>
-                         <div class="mb-3">
-                            <label for="landlordHostingStyle" class="block text-gray-700 text-sm font-bold mb-1">Describe your hosting/landlord style (Optional):</label>
-                            <textarea id="landlordHostingStyle" class="form-input" rows="2" placeholder="e.g., Friendly and hands-on, respectful of privacy..."></textarea>
-                        </div>
-                    </div>
-
-                    <div id="tenantSpecificFields" class="hidden mt-4 border-t pt-4">
-                        <h4 class="text-md font-semibold text-gray-700 mb-2">Tenant / Umhlali Details:</h4>
-                        <div class="mb-3">
-                            <label for="tenantLookingFor" class="block text-gray-700 text-sm font-bold mb-1">Type of place you're looking for:</label>
-                            <select id="tenantLookingFor" class="form-input">
-                                <option value="">Select type</option>
-                                <option value="Room">Room</option>
-                                <option value="Cottage / Back Room">Cottage / Back Room</option>
-                                <option value="Flat / Apartment">Flat / Apartment</option>
-                                <option value="House">House</option>
-                                <option value="Traditional Home / Rondavel">Traditional Home / Rondavel</option>
-                                <option value="Farm Stay">Farm Stay</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tenantBedrooms" class="block text-gray-700 text-sm font-bold mb-1">Preferred number of bedrooms:</label>
-                            <input type="number" id="tenantBedrooms" class="form-input" min="0" placeholder="e.g., 1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="tenantIdealSituation" class="block text-gray-700 text-sm font-bold mb-1">Describe your ideal rental situation (Optional):</label>
-                            <textarea id="tenantIdealSituation" class="form-input" rows="2" placeholder="e.g., Quiet, close to transport, pet-friendly..."></textarea>
-                        </div>
-                         <div class="mb-3">
-                            <label for="tenantRentalHistory" class="block text-gray-700 text-sm font-bold mb-1">Brief Rental History / Reason for Moving (Optional):</label>
-                            <textarea id="tenantRentalHistory" class="form-input" rows="2" placeholder="e.g., Relocating for work, seeking larger space..."></textarea>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-3 mb-3">You can always update these details later. Your privacy is important to us; you'll control what's shared.</p>
-                    <button type="submit" class="form-button">Save Profile Changes</button>
-                </form>
+                <p>Welcome, <span id="profileUserName" class="font-semibold">User</span>!</p>
+                <p>Email: <span id="profileUserEmail" class="font-mono"></span></p>
+                <p>User ID: <span id="profileUserId" class="font-mono text-sm bg-gray-100 p-1 rounded"></span></p>
+                <button class="form-button mt-6 bg-red-500 hover:bg-red-600" onclick="handleLogout()">Log Out</button>
+                <button class="form-button mt-4 bg-blue-500 hover:bg-blue-600" onclick="navigateToDashboard()">Go to My Dashboard</button>
             </div>
         </div>
     </div>
@@ -424,249 +653,229 @@
     <div id="ourStoryModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('ourStoryModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-heartbeat mr-2 text-red-500"></i>Our eKhaya Story: Rooted in Ubuntu</h3>
-            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c291dGglMjBhZnJpY2FuJTIwY29tbXVuaXR5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Diverse community hands together" class="modal-image">
-            <p>Welcome to eKhaya, which means "home" in isiXhosa and isiZulu. We're more than just a platform; we're building a community inspired by the profound African philosophy of <strong>Ubuntu</strong>: <em>"Umntu ngumntu ngabantu" – I am because you are.</em> This spirit of interconnectedness, compassion, and shared humanity is the heart of eKhaya.</p>
-            <p>In many South African communities, especially in our vibrant rural areas, the tradition of welcoming an Undwendwe (visitor) with an open heart, offering shelter and sustenance, is a cherished value. It’s about paying it forward, fostering a sense of belonging for everyone.</p>
-            <h4>Our Vision:</h4>
-            <p>eKhaya aims to weave this spirit into the digital age, creating a rental experience that is:</p>
-            <ul>
-                <li><i class="fas fa-users mr-2 text-green-600"></i> <strong>Empowering:</strong> Providing tools and knowledge, especially for those in informal settlements and rural areas, to confidently navigate the rental market.</li>
-                <li><i class="fas fa-handshake mr-2 text-blue-600"></i> <strong>Connecting:</strong> Building bridges of understanding and trust between Abamkeli (Hosts/Landlords) and Abahlali (Tenants) or Bandwendwe (Guests).</li>
-                <li><i class="fas fa-leaf mr-2 text-teal-600"></i> <strong>Showcasing:</strong> Celebrating the unique beauty, culture, and hospitality of South Africa's diverse heartlands, particularly those often overlooked.</li>
-                <li><i class="fas fa-balance-scale mr-2 text-purple-600"></i> <strong>Simplifying:</strong> Making the rental process straightforward with accessible resources, clear guidance, and user-friendly technology.</li>
-            </ul>
-            <p>Join us in creating a rental ecosystem where everyone feels valued, respected, and truly at home. Siyanamukela eKhaya – Welcome to eKhaya!</p>
+            <h3 class="modal-title">The eKhaya Philosophy</h3>
+            <img src="https://images.unsplash.com/photo-1531300900929-673afa703570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWZyaWNhbiUyMGNvbW11bml0eXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Community Hands" class="mx-auto mb-4 rounded-lg shadow-lg">
+            <p>eKhaya is more than a platform; it's a movement rooted in the ancient African philosophy of 'Ubuntu' – "I am because we are." We are inspired by the timeless tradition of community, where every person is valued, and hospitality is a sacred duty. In many of our villages, if a traveller was stranded, they were given shelter, food, and sent safely on their way the next morning, not for money, but for the good of all. </p>
+            <p>We aim to translate this spirit into the digital age, fostering connections between those who have space and those who seek it. Our focus is on empowering rural and informal property owners, showcasing the beauty and warmth of their communities, and ensuring that both landlords and tenants are treated with fairness and respect. This is about building bridges, not just renting spaces.</p>
         </div>
     </div>
 
     <div id="findHomeModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('findHomeModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-map-signs mr-2 text-blue-500"></i>Find Your eKhaya: A Place to Belong</h3>
-            <img src="https://images.unsplash.com/photo-1588392382834-a891154bca4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cnVyYWwlMjBsYW5kc2NhcGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Serene rural landscape" class="modal-image">
-            <p>Embark on a journey to find your perfect home or a unique getaway. eKhaya is your trusted companion for discovering diverse properties across South Africa, with a special focus on the authentic charm and warmth of our rural communities and vibrant townships.</p>
-            <h4>Discover with eKhaya:</h4>
-            <ul>
-                <li><i class="fas fa-search-location mr-2 text-green-600"></i> <strong>Tailored Search (Coming Soon):</strong> Our intuitive search tools will soon help you find listings that match your exact needs – whether it's a cozy room with a view, a family home in a quiet village, or a unique cultural stay.</li>
-                <li><i class="fas fa-home mr-2 text-orange-500"></i> <strong>Authentic Experiences:</strong> We champion listings that offer a genuine taste of South African life, connecting you with real communities and their stories.</li>
-                <li><i class="fas fa-shield-alt mr-2 text-purple-500"></i> <strong>Informed Choices:</strong> Access clear, reliable information about properties and connect with Abamkeli (hosts/landlords) who are part of our value-driven community.</li>
-                <li><i class="fas fa-users mr-2 text-teal-500"></i> <strong>More Than a Bed:</strong> Find a place where you feel you belong, supported by a platform that cares about your well-being.</li>
-            </ul>
-            <p>Whether you're an Umhlali (tenant) seeking a long-term haven or an Undwendwe (traveller) looking for a memorable adventure, your journey to finding the perfect eKhaya starts here. Our full search and booking features are being built with care and will be available soon!</p>
+            <h3 class="modal-title">Discover Your Next eKhaya</h3>
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBhcnRtZW50JTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Cozy Home Interior" class="mx-auto mb-4 rounded-lg shadow-lg">
+            <p>Embark on a journey to find your perfect home or a unique getaway. Our search tools (coming soon!) will help you explore diverse listings across South Africa, with a special emphasis on authentic rural experiences and welcoming small-town properties.</p>
+            <p>Whether you're looking for a long-term rental or a short, memorable stay, eKhaya connects you with hosts who embody the spirit of Ubuntu.</p>
+            <div class="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                <h4 class="font-semibold text-orange-700">Coming Soon!</h4>
+                <p class="text-sm text-orange-600">Our advanced search and filtering options are under development. Soon you'll be able to find your ideal eKhaya with ease!</p>
+            </div>
         </div>
     </div>
     
     <div id="shareSpaceModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('shareSpaceModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-hands-helping mr-2 text-green-500"></i>Share Your Space: Become an Umamkeli</h3>
-            <img src="https://images.unsplash.com/photo-1560440021-33f9b867899d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHJ1cmFsJTIwaG91c2UlMjBzb3V0aCUyMGFmcmljYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="A welcoming rural home in South Africa" class="modal-image">
-            <p>Do you have an extra room, a charming garden cottage, a traditional rondavel, or a unique space in your rural homestead or town? eKhaya empowers you, the Umamkeli (Host/Landlord), to share your space with Abahlali (Tenants) and Bandwendwe (Guests) seeking authentic South African experiences.</p>
-            <h4>Why Share Your Space with eKhaya?</h4>
-            <ul>
-                <li><i class="fas fa-bullhorn mr-2 text-orange-500"></i> **Reach a Caring Audience:** Connect with respectful individuals who value community and are looking for genuine places like yours, especially those interested in rural and unique stays.</li>
-                <li><i class="fas fa-tools mr-2 text-blue-500"></i> **Simple & Supportive Listing Tools (Coming Soon):** We're building easy-to-use tools to help you create attractive listings, manage inquiries, and handle bookings with confidence and clarity.</li>
-                <li><i class="fas fa-shield-alt mr-2 text-purple-500"></i> **Guidance & Resources:** Access our Knowledge Hub for practical advice on being a great Umamkeli, understanding your rights and responsibilities, and navigating the rental process smoothly.</li>
-                <li><i class="fas fa-coins mr-2 text-green-500"></i> **Economic Empowerment & Community Growth:** Generate income from your property while contributing to the vitality and upliftment of your local community.</li>
-                <li><i class="fas fa-users mr-2 text-teal-500"></i> **Be Part of a Movement:** Join a platform that values fairness, transparency, and the spirit of Ubuntu in every interaction.</li>
-            </ul>
-            <p>Become an Umamkeli on eKhaya and open your doors to a world of opportunity. We're here to support you in creating positive and rewarding hosting experiences. Our full listing and management tools are being developed with you in mind!</p>
+            <h3 class="modal-title">Share Your Welcoming Space</h3>
+            <img src="https://images.unsplash.com/photo-1582694144915-52197b1f501d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFmcmljYW4lMjBob3NwaXRhbGl0eXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Welcoming Hands" class="mx-auto mb-4 rounded-lg shadow-lg">
+            <p>Do you have an extra room, a traditional hut, a garden cottage, or a unique space in your rural homestead or town? Open your doors and share the warmth of your eKhaya with travellers and tenants from near and far.</p>
+            <p>We provide the tools and support to make listing simple and secure, connecting you with respectful individuals seeking authentic experiences. Be part of a community that celebrates hospitality and mutual benefit.</p>
+             <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <h4 class="font-semibold text-green-700">Get Ready to Host!</h4>
+                <p class="text-sm text-green-600">Our landlord dashboard and listing tools are being crafted with care. Soon you'll be able to showcase your space to the world!</p>
+            </div>
         </div>
     </div>
 
     <div id="resourceHubModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('resourceHubModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-book-open mr-2 text-purple-500"></i>eKhaya Knowledge Hub</h3>
-            <p class="text-center mb-6">Knowledge is power. Our comprehensive Resource Hub is designed to empower Abamkeli (Landlords/Hosts), Abahlali (Tenants), and Bandwendwe (Guests) with essential information, practical tools, and clear guidance for a smoother, fairer, and more informed rental journey in South Africa.</p>
-            
-            <h4><i class="fas fa-balance-scale text-orange-500 mr-2"></i>Legal Ease & Your Rights</h4>
-            <p>Navigate the legal landscape with confidence. We simplify complex regulations:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>Understanding the Rental Housing Act (RHA): Key rights and obligations for both landlords and tenants.</li>
-                <li>Lease Agreements: Why they're important, what to include, and access to simple templates.</li>
-                <li>Deposits: Rules for handling security deposits, interest, and lawful deductions.</li>
-                <li>Eviction Process: Understanding lawful procedures and tenant protections under the PIE Act.</li>
-                <li>Consumer Protection Act (CPA): How it applies to rental agreements.</li>
-                <li>Dispute Resolution: Information on Rental Housing Tribunals (RHTs) and other mediation options.</li>
-            </ul>
+            <h3 class="modal-title">eKhaya Knowledge Hub</h3>
+            <p class="text-center mb-6">Empowering you with information. Our Resource Hub offers guides, templates, and advice for a smooth rental journey.</p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-orange-200">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-balance-scale text-3xl text-orange-500 mr-4"></i>
+                        <h4 class="font-semibold text-xl text-gray-700">Legal Ease</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Simplified guides to South African rental laws, your rights as a tenant or landlord, and fair practices. Understand leases, deposits, and eviction processes.</p>
+                </div>
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-green-200">
+                     <div class="flex items-center mb-3">
+                        <i class="fas fa-piggy-bank text-3xl text-green-500 mr-4"></i>
+                        <h4 class="font-semibold text-xl text-gray-700">Financial Fitness</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Tips for budgeting for rent, managing rental income, understanding costs, and planning for a secure financial future.</p>
+                </div>
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-blue-200">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-tools text-3xl text-blue-500 mr-4"></i> 
+                        <h4 class="font-semibold text-xl text-gray-700">Happy Homes</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Advice on property care, essential maintenance, creating welcoming spaces, and tips for harmonious co-living.</p>
+                </div>
+                <div class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-purple-200">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-users-cog text-3xl text-purple-500 mr-4"></i>
+                        <h4 class="font-semibold text-xl text-gray-700">Ubuntu Connect</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Learn about dispute resolution, community best practices, and how the spirit of Ubuntu can strengthen landlord-tenant relationships.</p>
+                </div>
+            </div>
+            <p class="text-center mt-6 text-sm text-gray-500">More resources and interactive tools coming soon!</p>
+        </div>
+    </div>
 
-            <h4><i class="fas fa-piggy-bank text-green-500 mr-2"></i>Financial Fitness & Management</h4>
-            <p>Manage your rental finances effectively:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>For Abahlali (Tenants): Budgeting for rent and utilities, understanding affordability, saving for a deposit.</li>
-                <li>For Abamkeli (Landlords): Basic income/expense tracking, understanding rental income, tips for managing finances.</li>
-                <li>Avoiding Rental Scams: Red flags and protective measures for everyone.</li>
-            </ul>
-
-            <h4><i class="fas fa-tools text-blue-500 mr-2"></i>Happy Homes & Property Care</h4>
-            <p>Creating and maintaining a positive living environment:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>Tenant responsibilities: Keeping the property clean and reporting issues promptly.</li>
-                <li>Landlord responsibilities: Ensuring the property is habitable and undertaking necessary repairs.</li>
-                <li>Move-in/Move-out Checklists: Templates and guidance for fair inspections.</li>
-                <li>Tips for creating a welcoming and safe eKhaya.</li>
-            </ul>
-
-            <h4><i class="fas fa-users-cog text-teal-500 mr-2"></i>Ubuntu Connect: Building Positive Relationships</h4>
-            <p>Fostering understanding and respect in the rental space:</p>
-            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>Effective and respectful communication strategies.</li>
-                <li>Tips for conflict resolution and mediation.
-                <li>Understanding different cultural perspectives in housing.</li>
-                <li>Building a strong, positive landlord-tenant or host-guest relationship.</li>
-            </ul>
-            <p class="text-center mt-6 text-sm text-gray-500">Our Knowledge Hub is a living resource, continually updated to serve you better. Registered members will gain access to even more detailed guides and tools!</p>
+    <div id="testimonialsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('testimonialsModal')">&times;</span>
+            <h3 class="modal-title">Voices from Our eKhaya</h3>
+            <p class="text-center mb-6">Real stories from our growing community:</p>
+            <div class="space-y-6">
+                <div class="p-5 bg-white rounded-lg shadow-md border border-gray-200">
+                    <div class="flex items-start mb-2">
+                        <img src="https://placehold.co/50x50/D4A373/4A3B31?text=ZM" alt="Zola M." class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Zola M. - Host, Transkei</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic text-gray-600">"eKhaya helped me share my traditional Xhosa homestay. It's wonderful to welcome guests and share our culture, just like my grandmother taught me. The platform feels like it truly understands our way of life."</p>
+                </div>
+                <div class="p-5 bg-white rounded-lg shadow-md border border-gray-200">
+                     <div class="flex items-start mb-2">
+                        <img src="https://placehold.co/50x50/A8D5BA/4A3B31?text=TN" alt="Thabo N." class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Thabo N. - Tenant, Gauteng Outskirts</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic text-gray-600">"Finding a room with a kind landlord was a blessing. The eKhaya resources on tenant rights were so helpful and easy to understand. I feel much more confident now."</p>
+                </div>
+                 <div class="p-5 bg-white rounded-lg shadow-md border border-gray-200">
+                     <div class="flex items-start mb-2">
+                        <img src="https://placehold.co/50x50/E76F51/FFFFFF?text=LS" alt="Lerato S." class="rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Lerato S. - Guest, Limpopo Village</h4>
+                             <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic text-gray-600">"My stay in a Limpopo village, arranged through a local host who learned about eKhaya, was incredible. It's more than just a bed; it's about connection. This platform has so much potential!"</p>
+                </div>
+            </div>
         </div>
     </div>
     
-    <div id="whyEkhayaModal" class="modal">
+    <div id="genericContentModal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('whyEkhayaModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-question-circle mr-2 text-orange-500"></i>Why Choose eKhaya?</h3>
-            <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tbXVuaXR5JTIwc3VwcG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Community support and connection" class="modal-image">
-            <p>eKhaya is more than just a platform for finding or listing a room or home. We are building a trusted space where the values of community, respect, and mutual support – the essence of <strong>Ubuntu</strong> – are at the forefront of every interaction. We are especially dedicated to uplifting and providing opportunities within South Africa's vibrant rural and informal housing sectors.</p>
-            <h4>What Makes eKhaya Different?</h4>
-            <ul>
-                <li><i class="fas fa-hand-holding-heart text-red-500 mr-2"></i> <strong>Ubuntu-Driven:</strong> We prioritize human connection and fairness, aiming to reduce conflict and build positive relationships between Abamkeli (Landlords/Hosts) and Abahlali/Bandwendwe (Tenants/Guests).</li>
-                <li><i class="fas fa-graduation-cap text-blue-500 mr-2"></i> <strong>Empowerment Through Knowledge:</strong> Our free and comprehensive Resource Hub provides clear, practical information on rights, responsibilities, and best practices for everyone.</li>
-                <li><i class="fas fa-map-marked-alt text-green-500 mr-2"></i> <strong>Focus on Underserved Communities:</strong> We are passionate about showcasing the unique charm and potential of rural and informal areas, helping local economies grow and providing diverse housing options.</li>
-                <li><i class="fas fa-tools text-purple-500 mr-2"></i> <strong>Simplified & Accessible Tools:</strong> We are committed to making the rental process easier and more transparent with user-friendly tools for listing, searching, communication, and (in the future) lease management.</li>
-                <li><i class="fas fa-shield-alt text-teal-500 mr-2"></i> **Building a Trusted Network:** Through verified profiles (coming soon) and a fair review system, we aim to create a secure and reliable environment for all users.</li>
-            </ul>
-            <p>Join eKhaya to be part of a platform that values you, supports your journey, and believes in the power of community to create better housing experiences for all South Africans.</p>
+            <span class="close-button" onclick="closeModal('genericContentModal')">&times;</span>
+            <h3 id="genericModalTitle" class="modal-title">Dynamic Title</h3>
+            <div id="genericModalBody" class="modal-body">
+                </div>
         </div>
     </div>
 
-    <div id="membershipPerksModal" class="modal">
+    <div id="dashboardPage" class="hidden flex-col items-center justify-start min-h-screen w-full p-4 md:p-8 bg-gray-100">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h2>My eKhaya Dashboard</h2>
+                <p class="text-lg">Welcome, <span id="dashboardUserName" class="font-semibold">User</span>!</p>
+                <p class="text-sm text-gray-600">User ID: <span id="dashboardUserId" class="font-mono"></span></p>
+            </div>
+
+            <div class="dashboard-section">
+                <h3 >Profile Management</h3>
+                <p class="text-gray-600 mb-3">Keep your information up-to-date and manage your roles on eKhaya.</p>
+                <button class="dashboard-button bg-blue-500 hover:bg-blue-700" onclick="openModal('editProfileModal')">
+                    <i class="fas fa-user-edit mr-2"></i>Edit My Profile
+                </button>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>My Roles</h3>
+                <p class="text-gray-600 mb-3">Your current active roles. You can change these in your profile settings.</p>
+                <div id="currentRolesDisplay" class="mb-3 p-3 bg-blue-50 border-l-4 border-blue-500 text-blue-700 rounded">
+                    Loading roles...
+                </div>
+            </div>
+
+            <div id="landlordDashboardSection" class="dashboard-section hidden">
+                <h3><i class="fas fa-house-user mr-2"></i>Landlord Dashboard</h3>
+                <p class="text-gray-600 mb-3">Manage your properties, view bookings, and connect with tenants.</p>
+                <button class="dashboard-button bg-green-500 hover:bg-green-700" onclick="openModal('addPropertyModal')">
+                    <i class="fas fa-plus-circle mr-2"></i>Add New Property
+                </button>
+                <button class="dashboard-button bg-green-500 hover:bg-green-700 mt-2 md:mt-0">
+                    <i class="fas fa-list-alt mr-2"></i>View My Listings (Coming Soon)
+                </button>
+            </div>
+
+            <div id="tenantDashboardSection" class="dashboard-section hidden">
+                <h3><i class="fas fa-bed mr-2"></i>Tenant Dashboard</h3>
+                <p class="text-gray-600 mb-3">Find your next home, manage your applications, and communicate with landlords.</p>
+                <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700" onclick="openModal('searchPropertiesModal')">
+                    <i class="fas fa-search mr-2"></i>Search Properties (Coming Soon)
+                </button>
+                <button class="dashboard-button bg-indigo-500 hover:bg-indigo-700 mt-2 md:mt-0">
+                    <i class="fas fa-heart mr-2"></i>My Saved Properties (Coming Soon)
+                </button>
+            </div>
+             <button class="dashboard-button bg-gray-700 hover:bg-gray-800 mt-6 w-full md:w-auto" onclick="navigateToHome()">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Home
+            </button>
+        </div>
+    </div>
+
+    <div id="editProfileModal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('membershipPerksModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-medal mr-2 text-yellow-400"></i>Unlock More with eKhaya</h3>
-            <p class="text-center mb-6">eKhaya offers value at every level. See how you can benefit:</p>
-
-            <div class="mb-6 p-4 border rounded-lg bg-gray-50 shadow-sm">
-                <h4 class="font-semibold text-lg text-gray-700 mb-2"><i class="fas fa-eye mr-2 text-gray-500"></i>Guest (No Registration Needed)</h4>
-                <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
-                    <li><i class="fas fa-book-open text-gray-400 mr-2"></i>Access our extensive **Knowledge Hub**: Learn about rental rights, responsibilities, and best practices in South Africa.</li>
-                    <li><i class="fas fa-search-location text-gray-400 mr-2"></i>Browse publicly showcased properties and discover unique stays.</li>
-                    <li><i class="fas fa-users text-gray-400 mr-2"></i>Understand the eKhaya community values and our commitment to Ubuntu.</li>
-                </ul>
+            <span class="close-button" onclick="closeModal('editProfileModal')">&times;</span>
+            <h3 class="modal-title">Edit Your Profile</h3>
+            <div class="modal-body">
+                <div id="profileUpdateError" class="error-message" style="display:none;"></div>
+                <form id="profileUpdateForm">
+                    <div class="mb-4">
+                        <label for="profileDisplayName" class="block text-gray-700 text-sm font-bold mb-2">Display Name:</label>
+                        <input type="text" id="profileDisplayName" class="form-input" placeholder="Your Name">
+                    </div>
+                    <div class="mb-4">
+                        <label for="profilePhoneNumber" class="block text-gray-700 text-sm font-bold mb-2">Phone Number (Optional):</label>
+                        <input type="tel" id="profilePhoneNumber" class="form-input" placeholder="e.g., 0821234567">
+                    </div>
+                    <div class="mb-4">
+                        <label for="profileBio" class="block text-gray-700 text-sm font-bold mb-2">Short Bio (Optional):</label>
+                        <textarea id="profileBio" class="form-input" rows="3" placeholder="Tell us a bit about yourself..."></textarea>
+                    </div>
+                     <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">I am a:</label>
+                        <div class="flex items-center mb-2 checkbox-group">
+                            <input type="checkbox" id="roleTenant" name="userRole" value="tenant" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                            <label for="roleTenant" class="text-gray-700">Tenant</label>
+                        </div>
+                        <div class="flex items-center checkbox-group">
+                            <input type="checkbox" id="roleLandlord" name="userRole" value="landlord" class="mr-2 h-5 w-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                            <label for="roleLandlord" class="text-gray-700">Landlord</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-button">Save Changes</button>
+                </form>
             </div>
-
-            <div class="mb-6 p-4 border rounded-lg bg-blue-50 shadow-sm">
-                <h4 class="font-semibold text-lg text-blue-700 mb-2"><i class="fas fa-user-plus mr-2"></i>Registered eKhaya Member (Free)</h4>
-                <ul class="list-disc list-inside text-sm text-blue-600 space-y-1">
-                    <li>All Guest benefits, PLUS:</li>
-                    <li><i class="fas fa-id-card text-blue-400 mr-2"></i>Create and manage your eKhaya Profile (choose Tenant, Landlord/Umamkeli, or both).</li>
-                    <li><i class="fas fa-home text-blue-400 mr-2"></i>**Landlords/Abamkeli:** List one property for free to showcase your space. Control its visibility (public, members-only, or private).</li>
-                    <li><i class="fas fa-user-check text-blue-400 mr-2"></i>**Tenants/Abahlali:** Create a basic tenant profile to present to potential landlords (with your consent).</li>
-                    <li><i class="fas fa-heart text-blue-400 mr-2"></i>Save property searches and favorite listings (feature coming soon).</li>
-                    <li><i class="fas fa-comments text-blue-400 mr-2"></i>Basic in-platform communication tools (feature coming soon).</li>
-                    <li><i class="fas fa-file-alt text-blue-400 mr-2"></i>Access to additional member-only resources and downloadable templates.</li>
-                    <li><i class="fas fa-envelope text-blue-400 mr-2"></i>Receive eKhaya community updates and helpful tips.</li>
-                    <li><strong class="text-orange-500"><i class="fas fa-gift mr-1"></i>Special Launch Offer:</strong> Enjoy a trial of all Subscriber features for the first 30 days after registration!</li>
-                </ul>
-            </div>
-
-            <div class="p-4 border rounded-lg bg-orange-50 shadow-sm">
-                <h4 class="font-semibold text-lg text-orange-700 mb-2"><i class="fas fa-crown mr-2"></i>eKhaya Subscriber (Premium - Future)</h4>
-                <ul class="list-disc list-inside text-sm text-orange-600 space-y-1">
-                    <li>All Registered Member benefits, PLUS:</li>
-                    <li><i class="fas fa-layer-group text-orange-400 mr-2"></i>**Landlords/Abamkeli:** List multiple properties, get enhanced listing visibility, access advanced property management tools (e.g., lease generation, simplified invoicing).</li>
-                    <li><i class="fas fa-filter text-orange-400 mr-2"></i>**Tenants/Abahlali:** Advanced search filters, priority notifications for new matching listings, enhanced profile features to build trust.</li>
-                    <li><i class="fas fa-star-half-alt text-orange-400 mr-2"></i>Full access to the comprehensive rating and review system.</li>
-                    <li><i class="fas fa-comments-dollar text-orange-400 mr-2"></i>Advanced communication and document sharing features.</li>
-                    <li><i class="fas fa-book-reader text-orange-400 mr-2"></i>Access to exclusive premium content, workshops, and webinars in the Knowledge Hub.</li>
-                    <li><i class="fas fa-headset text-orange-400 mr-2"></i>Priority customer support.</li>
-                    <li><i class="fas fa-tags text-orange-400 mr-2"></i>Potential discounts on partner services (e.g., screening, insurance - future).</li>
-                </ul>
-                <p class="text-xs text-orange-700 mt-2">Our subscription plans will be designed to be affordable and offer exceptional value. Stay tuned for details!</p>
-            </div>
-             <p class="text-center mt-6 text-sm text-gray-500">eKhaya is committed to growing with our community. We value your participation and feedback as we build a platform for everyone!</p>
         </div>
     </div>
 
     <div id="addPropertyModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('addPropertyModal')">&times;</span>
-            <h3 class="modal-title"><i class="fas fa-home-lg-alt mr-2"></i>List Your Property/Space</h3>
+            <h3 class="modal-title">Add New Property</h3>
             <div class="modal-body">
-                <p class="text-sm text-gray-600 mb-4">Share details about your eKhaya to attract the right Abahlali (Tenants) or Bandwendwe (Guests). The more information you provide, the better!</p>
+                <p>Property listing form will be here. This includes details like address, property type, rent, photos, amenities, etc.</p>
                 <form id="addPropertyForm">
-                    <div class="mb-4">
-                        <label for="propertyTitle" class="block text-gray-700 text-sm font-bold mb-1">Property Title <span class="text-red-500">*</span></label>
-                        <input type="text" id="propertyTitle" class="form-input" placeholder="e.g., Cozy 2-Bedroom Rural Cottage with Mountain Views" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="propertyDescription" class="block text-gray-700 text-sm font-bold mb-1">Detailed Description <span class="text-red-500">*</span></label>
-                        <textarea id="propertyDescription" class="form-input" rows="4" placeholder="Describe your property, its unique features, the surrounding area, and what makes it special."></textarea>
-                    </div>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="mb-4">
-                            <label for="propertyType" class="block text-gray-700 text-sm font-bold mb-1">Property Type <span class="text-red-500">*</span></label>
-                            <select id="propertyType" class="form-input">
-                                <option value="">Select Type</option>
-                                <option value="room_in_house">Room in a House</option>
-                                <option value="backyard_room">Backyard Room/Cottage</option>
-                                <option value="flat_apartment">Flat/Apartment</option>
-                                <option value="house_full">Full House</option>
-                                <option value="rondavel_traditional">Traditional Home / Rondavel</option>
-                                <option value="farm_stay">Farm Stay</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label for="rentalType" class="block text-gray-700 text-sm font-bold mb-1">Rental Type <span class="text-red-500">*</span></label>
-                            <select id="rentalType" class="form-input">
-                                <option value="long_term">Long-Term Rental</option>
-                                <option value="short_term">Short-Term Stay (Guest/Undwendwe)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="propertyAddress" class="block text-gray-700 text-sm font-bold mb-1">Full Address or General Location <span class="text-red-500">*</span></label>
-                        <input type="text" id="propertyAddress" class="form-input" placeholder="e.g., 123 Main Road, Coffee Bay or 'Near the Spaza Shop, Village X'">
-                        <p class="text-xs text-gray-500">For rural areas, a clear description of the location is helpful.</p>
-                    </div>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="mb-4">
-                            <label for="propertyBedrooms" class="block text-gray-700 text-sm font-bold mb-1">Bedrooms <span class="text-red-500">*</span></label>
-                            <input type="number" id="propertyBedrooms" class="form-input" min="0" placeholder="e.g., 2">
-                        </div>
-                        <div class="mb-4">
-                            <label for="propertyBathrooms" class="block text-gray-700 text-sm font-bold mb-1">Bathrooms <span class="text-red-500">*</span></label>
-                            <input type="number" id="propertyBathrooms" class="form-input" min="0" step="0.5" placeholder="e.g., 1.5">
-                        </div>
-                    </div>
-                     <div class="mb-4">
-                        <label for="propertyRent" class="block text-gray-700 text-sm font-bold mb-1">Rent per Month (ZAR) <span class="text-red-500">*</span></label>
-                        <input type="number" id="propertyRent" class="form-input" min="0" placeholder="e.g., 3500">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-1">Key Amenities (Select all that apply):</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                            <div><input type="checkbox" id="amenity_wifi" class="mr-1"><label for="amenity_wifi">Wi-Fi</label></div>
-                            <div><input type="checkbox" id="amenity_parking" class="mr-1"><label for="amenity_parking">Parking</label></div>
-                            <div><input type="checkbox" id="amenity_kitchen" class="mr-1"><label for="amenity_kitchen">Kitchen</label></div>
-                            <div><input type="checkbox" id="amenity_laundry" class="mr-1"><label for="amenity_laundry">Laundry</label></div>
-                            <div><input type="checkbox" id="amenity_pet_friendly" class="mr-1"><label for="amenity_pet_friendly">Pet-Friendly</label></div>
-                            <div><input type="checkbox" id="amenity_furnished" class="mr-1"><label for="amenity_furnished">Furnished</label></div>
-                        </div>
-                    </div>
-                     <div class="mb-4">
-                        <label for="propertyPhotos" class="block text-gray-700 text-sm font-bold mb-1">Upload Photos (Coming Soon)</label>
-                        <input type="file" id="propertyPhotos" class="form-input" multiple disabled>
-                        <p class="text-xs text-gray-500">Photo upload functionality will be available soon.</p>
-                    </div>
-                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-1">Visibility:</label>
-                        <select id="propertyVisibility" class="form-input">
-                            <option value="public">Public (Visible to everyone)</option>
-                            <option value="members">Members Only (Visible to registered eKhaya users)</option>
-                            <option value="private">Private (Only for your records for now)</option>
-                        </select>
-                    </div>
                     <button type="submit" class="form-button mt-4">Save Property (Coming Soon)</button>
                 </form>
             </div>
@@ -676,12 +885,10 @@
     <div id="searchPropertiesModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('searchPropertiesModal')">&times;</span>
-            <h3 class="modal-title">Find Your Ideal eKhaya</h3>
+            <h3 class="modal-title">Search for Properties</h3>
             <div class="modal-body">
-                <p>Our comprehensive search is coming soon! You'll be able to filter by location, price, property type, amenities, and more.</p>
-                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFwYXJ0bWVudCUyMHNlYXJjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Searching for a home" class="mx-auto my-4 rounded-lg shadow-md">
-                <p>For now, browse our showcased regions and imagine the possibilities!</p>
-                 <button class="form-button mt-4" onclick="closeModal('searchPropertiesModal')">Got it!</button>
+                <p>Search filters and results will be displayed here.</p>
+                <button class="form-button mt-4" onclick="closeModal('searchPropertiesModal')">Close</button>
             </div>
         </div>
     </div>
@@ -712,7 +919,7 @@
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY", //  REPLACE WITH YOUR ACTUAL API KEY
+            apiKey: "AIzaSyC_lv9ljxwjWTYZ0E94FTaoIljPKpRssto", // YOUR PROVIDED API KEY
             authDomain: "ekhaya-b6fdd.firebaseapp.com",
             projectId: "ekhaya-b6fdd",
             storageBucket: "ekhaya-b6fdd.appspot.com", // Corrected this line
@@ -728,8 +935,8 @@
         const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
 
-        let currentAuthUser = null; 
-        let userProfileData = null; 
+        let currentAuthUser = null; // Renamed to avoid confusion with userProfileData
+        let userProfileData = null; // To store user data from Firestore
 
         // --- UI Elements ---
         const authButtonsContainer = document.querySelector('.auth-buttons');
@@ -738,16 +945,12 @@
         const profileUserIdEl = document.getElementById('profileUserId');
         
         const dashboardPage = document.getElementById('dashboardPage');
-        const homepageContent = document.querySelector('.homepage-content'); 
+        const mainContentArea = document.querySelector('.main-content-area'); 
         const dashboardUserNameEl = document.getElementById('dashboardUserName');
         const dashboardUserIdEl = document.getElementById('dashboardUserId');
         const landlordDashboardSection = document.getElementById('landlordDashboardSection');
         const tenantDashboardSection = document.getElementById('tenantDashboardSection');
         const currentRolesDisplay = document.getElementById('currentRolesDisplay');
-        const landlordSpecificFieldsDiv = document.getElementById('landlordSpecificFields');
-        const tenantSpecificFieldsDiv = document.getElementById('tenantSpecificFields');
-        const roleTenantCheckbox = document.getElementById('roleTenant');
-        const roleLandlordCheckbox = document.getElementById('roleLandlord');
 
 
         // --- Modal Functions ---
@@ -793,19 +996,18 @@
             if (modalType === 'exploreModal') {
                 title = `Explore Beautiful ${topic}`;
                 bodyContent = `
-                    <img src="${imageUrl || 'https://placehold.co/550x300/a2c9aa/4A3B31?text=Rural+Beauty'}" alt="Explore ${topic}" class="modal-image">
-                    <p>Dive into the unique charm of ${topic}. Discover breathtaking landscapes, rich culture, and the warm hospitality that defines our communities.</p>
-                    <p>eKhaya aims to connect you with authentic living experiences, from serene countryside homestays to vibrant village life. Find a place where you can truly connect with the heart of South Africa.</p>
-                    <button class="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="closeModal('genericContentModal')">Browse ${topic} Stays (Coming Soon)</button>
+                    <img src="${imageUrl || 'https://placehold.co/550x300/777/FFF?text=Exploring...'}" alt="Explore ${topic}" class="mx-auto mb-4 rounded-lg shadow-md">
+                    <p>Dive into the unique charm of ${topic}. Discover breathtaking landscapes, rich culture, and warm hospitality.</p>
+                    <p>Our platform will soon feature detailed listings and travel guides for ${topic}. Imagine finding your perfect rural retreat or authentic homestay here!</p>
+                    <button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="closeModal('genericContentModal')">Explore Listings (Coming Soon)</button>
                 `;
             } else if (modalType === 'showcaseModal') {
-                title = `Showcase ${topic}`;
+                title = `Help Us Showcase ${topic}`;
                  bodyContent = `
-                    <img src="${imageUrl || 'https://placehold.co/550x300/f4a261/4A3B31?text=Share+Your+Story'}" alt="Showcase ${topic}" class="modal-image">
+                    <img src="${imageUrl || 'https://placehold.co/550x300/888/FFF?text=Showcasing...'}" alt="Showcase ${topic}" class="mx-auto mb-4 rounded-lg shadow-md">
                     <p>Do you have stories, photos, or insights about ${topic} that the world should know? We invite you to contribute to our community showcase!</p>
-                    <p>Help others discover the hidden gems, local traditions, community projects, and natural wonders that make your area special. Let's celebrate the diverse tapestry of South Africa together.</p>
-                    <p class="text-sm text-gray-600 mt-3">Registered members will soon be able to create and share showcases directly on eKhaya.</p>
-                    <button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="closeModal('genericContentModal')">Learn More (Coming Soon)</button>
+                    <p>Share what makes your village, town, or region special – from hidden gems, local traditions, to community projects and natural wonders. Let's celebrate the diversity of South Africa together.</p>
+                    <button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="closeModal('genericContentModal')">Contribute (Coming Soon)</button>
                 `;
             }
 
@@ -826,14 +1028,14 @@
         // --- Auth UI and State Management ---
         async function updateAuthUI(user) {
             if (user) {
-                currentAuthUser = user; 
-                await fetchUserProfile(user.uid); 
+                currentAuthUser = user; // Store the Firebase auth user object
+                await fetchUserProfile(user.uid); // Fetch profile data which includes roles
 
-                authButtonsContainer.innerHTML = \`
-                    <span class="text-sm mr-3 text-white">Hi, ${userProfileData?.displayName || user.displayName || user.email.split('@')[0]}!</span>
+                authButtonsContainer.innerHTML = `
+                    <span class="text-sm mr-3 text-white">Welcome, ${userProfileData?.displayName || user.displayName || user.email}!</span>
                     <button onclick="navigateToDashboard()" class="login-btn">Dashboard</button>
                     <button onclick="handleLogout()">Log Out</button>
-                \`;
+                `;
                 if (profileUserNameEl) profileUserNameEl.textContent = userProfileData?.displayName || user.displayName || user.email;
                 if (profileUserEmailEl) profileUserEmailEl.textContent = user.email;
                 if (profileUserIdEl) profileUserIdEl.textContent = user.uid;
@@ -846,12 +1048,12 @@
             } else {
                 currentAuthUser = null;
                 userProfileData = null;
-                authButtonsContainer.innerHTML = \`
+                authButtonsContainer.innerHTML = `
                     <button class="login-btn" onclick="openModal('loginModal')">Login</button>
                     <button onclick="openModal('registerModal')">Sign Up</button>
-                \`;
-                if (dashboardPage) dashboardPage.style.display = 'none';
-                if (homepageContent) homepageContent.style.display = 'flex'; 
+                `;
+                if (dashboardPage) dashboardPage.style.display = 'none'; // Hide dashboard
+                if (mainContentArea) mainContentArea.style.display = 'flex'; // Show homepage content
             }
         }
         
@@ -862,23 +1064,21 @@
                 const docSnap = await getDoc(userDocRef);
                 if (docSnap.exists()) {
                     userProfileData = docSnap.data();
-                    console.log("User profile data fetched:", userProfileData);
+                    console.log("User profile data:", userProfileData);
                 } else {
-                    console.log("No such user document for UID:", uid, "Creating a default one.");
-                    const authUser = auth.currentUser;
-                    if (authUser) {
-                        const defaultProfile = {
-                            uid: authUser.uid,
-                            displayName: authUser.displayName || authUser.email.split('@')[0],
-                            email: authUser.email,
-                            photoURL: authUser.photoURL || null,
-                            createdAt: serverTimestamp(),
-                            roles: ["guest"] 
+                    console.log("No such user document! This might be a new user or data not yet synced.");
+                    // For a new Google sign-in, the document might not exist yet if onAuthStateChanged runs before Firestore write.
+                    // We handle user doc creation in the sign-in/register functions.
+                    // If auth.currentUser exists, use its details as a temporary fallback
+                    if(auth.currentUser) {
+                        userProfileData = { 
+                            displayName: auth.currentUser.displayName, 
+                            email: auth.currentUser.email, 
+                            uid: auth.currentUser.uid, 
+                            roles: ['guest'] // Default if not found, or could be an empty array
                         };
-                        await setDoc(userDocRef, defaultProfile);
-                        userProfileData = defaultProfile;
                     } else {
-                         userProfileData = null; 
+                        userProfileData = null; // No user, no profile data
                     }
                 }
             } catch (error) {
@@ -887,9 +1087,9 @@
                     userProfileData = { 
                         displayName: auth.currentUser.displayName, 
                         email: auth.currentUser.email, 
-                        uid: uid, 
+                        uid: auth.currentUser.uid, 
                         roles: ['guest'] 
-                    };
+                    }; // Fallback on error
                 } else {
                     userProfileData = null;
                 }
@@ -897,62 +1097,53 @@
         }
 
         function updateDashboardBasedOnRole() {
-            if (!userProfileData || !dashboardPage || dashboardPage.style.display === 'none') { 
-                if (currentRolesDisplay) currentRolesDisplay.textContent = "Roles: Not available";
-                if (landlordDashboardSection) landlordDashboardSection.classList.add('hidden');
-                if (tenantDashboardSection) tenantDashboardSection.classList.add('hidden');
+            if (!userProfileData) {
+                currentRolesDisplay.textContent = "Roles: Not available";
+                landlordDashboardSection.classList.add('hidden');
+                tenantDashboardSection.classList.add('hidden');
                 return;
             }
 
-            const roles = userProfileData.roles || ['guest']; 
-            if (currentRolesDisplay) currentRolesDisplay.textContent = \`Current Roles: \${roles.map(r => r.charAt(0).toUpperCase() + r.slice(1)).join(', ')}\`;
+            const roles = userProfileData.roles || ['guest']; // Default to guest if roles undefined
+            currentRolesDisplay.textContent = `Current Roles: ${roles.join(', ')}`;
 
             if (roles.includes('landlord')) {
-                if (landlordDashboardSection) landlordDashboardSection.classList.remove('hidden');
+                landlordDashboardSection.classList.remove('hidden');
             } else {
-                if (landlordDashboardSection) landlordDashboardSection.classList.add('hidden');
+                landlordDashboardSection.classList.add('hidden');
             }
 
             if (roles.includes('tenant')) {
-                if (tenantDashboardSection) tenantDashboardSection.classList.remove('hidden');
+                tenantDashboardSection.classList.remove('hidden');
             } else {
-                if (tenantDashboardSection) tenantDashboardSection.classList.add('hidden');
+                tenantDashboardSection.classList.add('hidden');
             }
         }
         
         window.navigateToDashboard = async () => {
             if (!currentAuthUser) {
-                openModal('loginModal'); 
+                openModal('loginModal'); // Prompt login if not authenticated
                 return;
             }
-            if (homepageContent) homepageContent.style.display = 'none'; 
-            if (dashboardPage) dashboardPage.style.display = 'flex'; 
+            if (mainContentArea) mainContentArea.style.display = 'none'; // Hide homepage content
+            if (dashboardPage) dashboardPage.style.display = 'flex'; // Show dashboard
             
-            closeModal('profileModal'); 
+            closeModal('profileModal'); // Close profile modal if open
             
-            await fetchUserProfile(currentAuthUser.uid); 
-            updateDashboardBasedOnRole();
+            await fetchUserProfile(currentAuthUser.uid); // Ensure userProfileData is fresh
+            updateDashboardBasedOnRole(); // Update dashboard sections based on roles
         }
 
         window.navigateToHome = function() {
-            if (dashboardPage) dashboardPage.style.display = 'none';
-            if (homepageContent) homepageContent.style.display = 'flex';
+            if (dashboardPage) dashboardPage.style.display = 'none'; // Hide dashboard
+            if (mainContentArea) mainContentArea.style.display = 'flex'; // Show homepage content
         }
-        
-        document.querySelector('.logo').addEventListener('click', navigateToHome);
 
-
-        onAuthStateChanged(auth, async (user) => {
-            await updateAuthUI(user); // Update UI first
+        onAuthStateChanged(auth, async (user) => { // Made async to await fetchUserProfile
             if (user) {
-                // If user is logged in and currently on the homepage content, navigate to dashboard
-                // This check ensures that if they manually navigate "home" via logo, they stay there.
-                // But on initial login/refresh, they go to dashboard.
-                // This might need refinement based on desired UX for subsequent visits.
-                if (homepageContent.style.display !== 'none' && dashboardPage.style.display === 'none') {
-                   // navigateToDashboard(); // Consider if this auto-navigation is always desired
-                }
+                await updateAuthUI(user); // Ensure profile data is loaded before UI updates fully
             } else {
+                updateAuthUI(null);
                 navigateToHome(); 
             }
         });
@@ -977,11 +1168,24 @@
                 const password = document.getElementById('registerPassword').value;
                 const confirmPassword = document.getElementById('registerConfirmPassword').value;
                 const errorDiv = document.getElementById('registerError');
-                errorDiv.style.display = 'none'; errorDiv.textContent = '';
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
 
-                if (!name) { errorDiv.textContent = "Please enter your full name."; errorDiv.style.display = 'block'; return; }
-                if (password !== confirmPassword) { errorDiv.textContent = "Passwords do not match!"; errorDiv.style.display = 'block'; return; }
-                if (password.length < 6) { errorDiv.textContent = "Password should be at least 6 characters."; errorDiv.style.display = 'block'; return; }
+                if (!name) {
+                    errorDiv.textContent = "Please enter your full name.";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    errorDiv.textContent = "Passwords do not match!";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+                if (password.length < 6) {
+                    errorDiv.textContent = "Password should be at least 6 characters.";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
 
                 try {
                     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -991,25 +1195,20 @@
 
                     const userDocRef = doc(db, "users", user.uid);
                     await setDoc(userDocRef, {
-                        uid: user.uid, displayName: name, email: user.email, photoURL: user.photoURL || null,
-                        createdAt: serverTimestamp(), roles: ["guest"] // Default role
+                        uid: user.uid,
+                        displayName: name,
+                        email: user.email,
+                        createdAt: serverTimestamp(),
+                        roles: ["guest"] // Start as guest, can update profile later
                     });
 
                     console.log("User registered:", user);
-                    showInfoModal("Registration Successful!", \`Welcome, \${name}! You can now complete your profile in the dashboard.\`);
+                    showInfoModal("Registration Successful!", `Welcome, ${name}! Your account has been created. Please complete your profile on the dashboard.`);
                     closeModal('registerModal');
-                    navigateToDashboard(); // Navigate to dashboard after registration
+                    // onAuthStateChanged will handle UI update and navigation
                 } catch (error) {
-                    console.error("Registration error:", error.code, error.message);
-                    let friendlyMessage = "Registration failed. Please try again.";
-                    if (error.code === 'auth/email-already-in-use') {
-                        friendlyMessage = "This email address is already registered. Please try logging in.";
-                    } else if (error.code === 'auth/weak-password') {
-                        friendlyMessage = "Password is too weak. Please choose a stronger password.";
-                    } else if (error.code === 'auth/invalid-email') {
-                        friendlyMessage = "The email address is not valid.";
-                    }
-                    errorDiv.textContent = friendlyMessage;
+                    console.error("Registration error:", error);
+                    errorDiv.textContent = error.message.replace('Firebase: ', '');
                     errorDiv.style.display = 'block';
                 }
             });
@@ -1022,21 +1221,17 @@
                 const email = document.getElementById('loginEmail').value.trim();
                 const password = document.getElementById('loginPassword').value;
                 const errorDiv = document.getElementById('loginError');
-                errorDiv.style.display = 'none'; errorDiv.textContent = '';
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
 
                 try {
                     const userCredential = await signInWithEmailAndPassword(auth, email, password);
                     console.log("User logged in:", userCredential.user);
                     closeModal('loginModal');
-                    navigateToDashboard(); // Navigate to dashboard after login
+                    // onAuthStateChanged will handle UI update and navigation
                 } catch (error) {
-                    console.error("Login error:", error.code, error.message);
-                    errorDiv.textContent = "Login failed. Please check your email and password.";
-                    if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-                         errorDiv.textContent = "Invalid email or password. Please try again.";
-                    } else if (error.code === 'auth/too-many-requests') {
-                        errorDiv.textContent = "Access to this account has been temporarily disabled due to many failed login attempts. You can reset your password or try again later.";
-                    }
+                    console.error("Login error:", error);
+                    errorDiv.textContent = "Invalid email or password. Please try again.";
                     errorDiv.style.display = 'block';
                 }
             });
@@ -1052,23 +1247,32 @@
 
                 if (!userDocSnap.exists()) {
                     await setDoc(userDocRef, {
-                        uid: user.uid, displayName: user.displayName, email: user.email,
-                        photoURL: user.photoURL || null, createdAt: serverTimestamp(), roles: ["guest"]
+                        uid: user.uid,
+                        displayName: user.displayName,
+                        email: user.email,
+                        photoURL: user.photoURL || null,
+                        createdAt: serverTimestamp(),
+                        roles: ["guest"] // Default role
                     });
                     console.log("New Google user created in Firestore:", user);
-                    showInfoModal("Welcome to eKhaya!", \`Account created for \${user.displayName}. Please complete your profile.\`);
+                    showInfoModal("Welcome to eKhaya!", `Account created for ${user.displayName}. Please complete your profile on the dashboard.`);
                 } else {
                     console.log("Google Sign-In successful:", user);
-                    showInfoModal("Login Successful!", \`Welcome back, \${user.displayName}!\`);
+                     showInfoModal("Login Successful!", `Welcome back, ${user.displayName}!`);
                 }
-                closeModal('loginModal'); closeModal('registerModal');
-                navigateToDashboard();
+                
+                closeModal('loginModal');
+                closeModal('registerModal');
+                // onAuthStateChanged will handle UI update and navigation
             } catch (error) {
-                console.error("Google Sign-In error:", error.code, error.message);
-                let friendlyMessage = "Google Sign-In failed. Please try again.";
-                if (error.code === 'auth/popup-closed-by-user') friendlyMessage = "Google Sign-In cancelled.";
-                if (error.code === 'auth/network-request-failed') friendlyMessage = "Network error. Please check connection.";
-                showInfoModal("Google Sign-In Error", friendlyMessage, true);
+                console.error("Google Sign-In error:", error);
+                let errorMessage = "Google Sign-In failed. Please try again.";
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorMessage = "Google Sign-In cancelled.";
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = "Network error. Please check your connection and try again.";
+                }
+                showInfoModal("Google Sign-In Error", errorMessage, true);
             }
         }
         window.handleGoogleSignUp = window.handleGoogleSignIn;
@@ -1079,33 +1283,25 @@
                 console.log("User logged out");
                 showInfoModal("Logged Out", "You have been successfully logged out.");
                 closeModal('profileModal');
-                // onAuthStateChanged will handle navigating to home
+                // onAuthStateChanged will handle UI update and navigation to home
             } catch (error) {
                 console.error("Logout error:", error);
                 showInfoModal("Logout Error", error.message, true);
             }
         }
 
-        // --- Profile Management & Role Specific Fields ---
-        if(roleTenantCheckbox && roleLandlordCheckbox) {
-            roleTenantCheckbox.addEventListener('change', () => {
-                tenantSpecificFieldsDiv.classList.toggle('hidden', !roleTenantCheckbox.checked);
-            });
-            roleLandlordCheckbox.addEventListener('change', () => {
-                landlordSpecificFieldsDiv.classList.toggle('hidden', !roleLandlordCheckbox.checked);
-            });
-        }
-
+        // --- Profile Management ---
         const profileUpdateForm = document.getElementById('profileUpdateForm');
         if (profileUpdateForm) {
             profileUpdateForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                if (!currentAuthUser) {
+                if (!currentUser) {
                     showInfoModal("Error", "You must be logged in to update your profile.", true);
                     return;
                 }
                 const errorDiv = document.getElementById('profileUpdateError');
-                errorDiv.style.display = 'none'; errorDiv.textContent = '';
+                errorDiv.style.display = 'none';
+                errorDiv.textContent = '';
 
                 const displayName = document.getElementById('profileDisplayName').value.trim();
                 const phoneNumber = document.getElementById('profilePhoneNumber').value.trim();
@@ -1116,62 +1312,32 @@
                 let roles = [];
                 if (isTenant) roles.push('tenant');
                 if (isLandlord) roles.push('landlord');
-                if (roles.length === 0) { 
-                    roles.push('guest'); // Default to guest if nothing is selected
+                if (roles.length === 0) { // If no role is selected, keep existing or default to guest
+                    roles = userProfileData && userProfileData.roles && userProfileData.roles.length > 0 ? userProfileData.roles : ['guest'];
                 }
-
-                const landlordPropertiesCount = document.getElementById('landlordPropertiesCount').value;
-                const landlordExperienceYears = document.getElementById('landlordExperienceYears').value;
-                const landlordHostingStyle = document.getElementById('landlordHostingStyle').value.trim();
-                const tenantLookingFor = document.getElementById('tenantLookingFor').value;
-                const tenantBedrooms = document.getElementById('tenantBedrooms').value;
-                const tenantIdealSituation = document.getElementById('tenantIdealSituation').value.trim();
-                const tenantRentalHistory = document.getElementById('tenantRentalHistory').value.trim();
 
 
                 try {
-                    const userDocRef = doc(db, "users", currentAuthUser.uid);
+                    const userDocRef = doc(db, "users", currentUser.uid);
                     const updateData = {
-                        displayName: displayName || currentAuthUser.displayName, 
+                        displayName: displayName || currentUser.displayName, // Keep existing if blank
                         phoneNumber: phoneNumber || null,
                         bio: bio || null,
                         roles: roles,
                         updatedAt: serverTimestamp()
                     };
 
-                    if (roles.includes('landlord')) {
-                        updateData.landlordProfile = {
-                            propertiesCount: landlordPropertiesCount ? parseInt(landlordPropertiesCount) : 0,
-                            experienceYears: landlordExperienceYears ? parseInt(landlordExperienceYears) : 0,
-                            hostingStyle: landlordHostingStyle || ""
-                        };
-                    } else {
-                        updateData.landlordProfile = null; // Remove landlord profile if role deselected
-                    }
-
-                    if (roles.includes('tenant')) {
-                        updateData.tenantProfile = {
-                            lookingFor: tenantLookingFor || "",
-                            bedrooms: tenantBedrooms ? parseInt(tenantBedrooms) : 0,
-                            idealSituation: tenantIdealSituation || "",
-                            rentalHistory: tenantRentalHistory || ""
-                        };
-                    } else {
-                        updateData.tenantProfile = null; // Remove tenant profile if role deselected
-                    }
-                    
-                    // Use updateDoc to only change specified fields, or setDoc with merge:true
                     await setDoc(userDocRef, updateData, { merge: true }); 
 
                     // Update Firebase Auth profile if display name changed
-                    if (displayName && displayName !== currentAuthUser.displayName) {
-                        await firebaseUpdateProfile(currentAuthUser, { displayName: displayName });
+                    if (displayName && displayName !== currentUser.displayName) {
+                        await firebaseUpdateProfile(currentUser, { displayName: displayName });
                     }
                     
                     showInfoModal("Profile Updated", "Your profile has been successfully updated.");
                     closeModal('editProfileModal');
-                    await fetchUserProfile(currentAuthUser.uid); // Refresh profile data
-                    updateAuthUI(currentAuthUser); // Re-render auth UI elements
+                    await fetchUserProfile(currentUser.uid); // Refresh profile data
+                    updateAuthUI(currentUser); // Re-render auth UI elements like welcome message
                     updateDashboardBasedOnRole(); // Explicitly update dashboard view
                 } catch (error) {
                     console.error("Error updating profile:", error);
@@ -1182,58 +1348,28 @@
         }
 
         window.populateProfileForm = function() {
-            if (currentAuthUser && userProfileData) {
-                document.getElementById('profileDisplayName').value = userProfileData.displayName || currentAuthUser.displayName || '';
+            if (userProfileData) {
+                document.getElementById('profileDisplayName').value = userProfileData.displayName || currentUser?.displayName || '';
                 document.getElementById('profilePhoneNumber').value = userProfileData.phoneNumber || '';
                 document.getElementById('profileBio').value = userProfileData.bio || '';
-                
-                const isTenant = userProfileData.roles?.includes('tenant') || false;
-                const isLandlord = userProfileData.roles?.includes('landlord') || false;
-                document.getElementById('roleTenant').checked = isTenant;
-                document.getElementById('roleLandlord').checked = isLandlord;
-
-                tenantSpecificFieldsDiv.style.display = isTenant ? 'block' : 'none';
-                landlordSpecificFieldsDiv.style.display = isLandlord ? 'block' : 'none';
-
-                if (isLandlord && userProfileData.landlordProfile) {
-                    document.getElementById('landlordPropertiesCount').value = userProfileData.landlordProfile.propertiesCount || '';
-                    document.getElementById('landlordExperienceYears').value = userProfileData.landlordProfile.experienceYears || '';
-                    document.getElementById('landlordHostingStyle').value = userProfileData.landlordProfile.hostingStyle || '';
-                } else {
-                    document.getElementById('landlordPropertiesCount').value = '';
-                    document.getElementById('landlordExperienceYears').value = '';
-                    document.getElementById('landlordHostingStyle').value = '';
-                }
-                if (isTenant && userProfileData.tenantProfile) {
-                    document.getElementById('tenantLookingFor').value = userProfileData.tenantProfile.lookingFor || '';
-                    document.getElementById('tenantBedrooms').value = userProfileData.tenantProfile.bedrooms || '';
-                    document.getElementById('tenantIdealSituation').value = userProfileData.tenantProfile.idealSituation || '';
-                    document.getElementById('tenantRentalHistory').value = userProfileData.tenantProfile.rentalHistory || '';
-                } else {
-                    document.getElementById('tenantLookingFor').value = '';
-                    document.getElementById('tenantBedrooms').value = '';
-                    document.getElementById('tenantIdealSituation').value = '';
-                    document.getElementById('tenantRentalHistory').value = '';
-                }
-
-            } else if (currentAuthUser) { 
-                 document.getElementById('profileDisplayName').value = currentAuthUser.displayName || '';
+                document.getElementById('roleTenant').checked = userProfileData.roles?.includes('tenant') || false;
+                document.getElementById('roleLandlord').checked = userProfileData.roles?.includes('landlord') || false;
+            } else if (currentUser) { 
+                 document.getElementById('profileDisplayName').value = currentUser.displayName || '';
                  document.getElementById('profilePhoneNumber').value = '';
                  document.getElementById('profileBio').value = '';
-                 document.getElementById('roleTenant').checked = true; 
+                 document.getElementById('roleTenant').checked = true; // Default to tenant if no profile data
                  document.getElementById('roleLandlord').checked = false;
-                 tenantSpecificFieldsDiv.style.display = 'block';
-                 landlordSpecificFieldsDiv.style.display = 'none';
             }
         }
         
         const editProfileModal = document.getElementById('editProfileModal');
-        if (editProfileModal) { 
+        if (editProfileModal) { // Ensure the element exists
             const observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
-                    if (mutation.attributeName === "style" && editProfileModal.style.display === "flex" && currentAuthUser) {
-                        if (!userProfileData || userProfileData.uid !== currentAuthUser.uid) {
-                            fetchUserProfile(currentAuthUser.uid).then(() => {
+                    if (mutation.attributeName === "style" && editProfileModal.style.display === "flex" && currentUser) {
+                        if (!userProfileData || userProfileData.uid !== currentUser.uid) {
+                            fetchUserProfile(currentUser.uid).then(() => {
                                 populateProfileForm();
                             });
                         } else {
@@ -1245,31 +1381,28 @@
             observer.observe(editProfileModal, { attributes: true });
         }
 
+
         // Initialize Swiper
         var swiper = new Swiper('.swiper-container', {
             loop: true,
-            autoplay: { delay: 7000, disableOnInteraction: false, },
-            pagination: { el: '.swiper-pagination', clickable: true, },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev', },
-            effect: 'fade', fadeEffect: { crossFade: true },
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
         });
-
-        // Initial check for auth state
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                currentAuthUser = user;
-                updateAuthUI(user); // Update UI based on logged-in user
-                // If you want to automatically navigate to dashboard on page load if logged in:
-                // navigateToDashboard(); 
-            } else {
-                // User is signed out
-                updateAuthUI(null);
-                navigateToHome(); // Ensure homepage is shown if not logged in
-            }
-        });
-
     </script>
 </body>
 </html>
+```
